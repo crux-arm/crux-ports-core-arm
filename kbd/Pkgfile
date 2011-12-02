@@ -2,6 +2,7 @@
 # URL: ftp://ftp.win.tue.nl/pub/linux-local/utils/kbd/
 # Maintainer: CRUX System Team, core-ports at crux dot nu
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
+# Depends on:
 
 name=kbd
 version=1.15.3
