@@ -1,7 +1,8 @@
 # Description: The GNU Binutils are a collection of binary tools
-# URL:         http://sources.redhat.com/binutils/
-# Maintainer:  CRUX System Team, core-ports at crux dot nu
-# Depends on:  zlib
+# URL: http://sources.redhat.com/binutils/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
+# Depends on: zlib
 
 name=binutils
 version=2.20.1
