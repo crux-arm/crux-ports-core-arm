@@ -1,0 +1,10 @@
+
+README for udev
+
+
+  Udev requires certain versions of the linux kernel to work.
+  If you're in troubles with the current udev port in the core
+  collection, consideer the fact of downgrade it.
+
+  Please read http://git.kernel.org/?p=linux/hotplug/udev.git;a=summary
+  to get more information.
