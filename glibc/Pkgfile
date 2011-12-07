@@ -1,0 +1,59 @@
+# Description: The C library used in the GNU system
+# URL: http://www.gnu.org/software/libc/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
+# Depends on:
+
+name=glibc
+version=2.13
+release=1
+source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
+        ftp://ftp.gnu.org/gnu/$name/$name-ports-$version.tar.bz2 \
+        ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.35.6.tar.gz \
+        glibc-ignore_origin.patch \
+        Optimize-__getpagesize-a-bit.patch \
+        $name-$version-gnueabihf.patch \
+        $name-$version-prelink.patch \
+        hosts resolv.conf nsswitch.conf host.conf ld.so.conf)
+
+build() {
+  # install build kernel headers
+  cd linux-2.6.35.6
+  make mrproper
+  make ARCH=arm headers_check
+  make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
+
+  cd $SRC
+  mv $name-ports-$version $name-$version/ports
+
+  pushd $name-$version
+  patch -p1 -i $SRC/$name-$version-gnueabihf.patch
+  patch -p1 -i $SRC/$name-$version-prelink.patch
+  patch -R -p1 -i $SRC/Optimize-__getpagesize-a-bit.patch
+  patch -p1 -i $SRC/$name-ignore_origin.patch
+  popd
+
+  mkdir build
+  cd build
+
+  ../$name-$version/configure --prefix=/usr \
+                              --build=$MACHTYPE \
+                              --libexecdir=/usr/lib \
+                              --with-headers=$PKG/usr/include \
+                              --with-tls \
+                              --enable-kernel=2.6.0 \
+                              --enable-add-ons \
+                              --disable-profile \
+                              --without-gd \
+                              --with-__thread 
+
+  make 
+  #make check
+  make install_root=$PKG install
+
+  cp $SRC/{hosts,resolv.conf,nsswitch.conf,host.conf,ld.so.conf} $PKG/etc
+  ln -sf ../usr/share/zoneinfo/UTC $PKG/etc/localtime
+  mkdir -p $PKG/etc/ld.so.conf.d $PKG/usr/lib/locale
+
+  rm -rf $PKG/usr/share/{info,locale}
+}
