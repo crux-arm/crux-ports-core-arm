@@ -1,21 +1,24 @@
 # Description: The GNU Compiler Collection
-# URL: http://gcc.gnu.org
+# URL: http://gcc.gnu.org/
 # Maintainer: CRUX System Team, core-ports at crux dot nu
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
-# Depends on: zlib libmpc
+# Depends on: libmpc zlib
 
 name=gcc
-version=4.5.3
-release=2
-source=(http://ftp.gnu.org/gnu/gcc/$name-$version/$name-{core,g++,objc}-$version.tar.bz2
-        $name-nocheck-fixincludes.patch $name-$version-preprocessor_symbol.patch)
+version=4.6.2
+release=1
+
+source=(http://ftp.gnu.org/gnu/gcc/$name-$version/$name-$version.tar.bz2
+        $name-nocheck-fixincludes.patch gcc-4.6-gnueabihf.patch)
 
 build() {
-  patch -p0 -i $SRC/$name-$version-preprocessor_symbol.patch
+  patch -d $name-$version -p1 -i $SRC/$name-4.6-gnueabihf.patch
   patch -d $name-$version -p1 -i $SRC/$name-nocheck-fixincludes.patch
+
   mkdir build
   cd build
   ../$name-$version/configure --prefix=/usr \
+                              --build=$MACHTYPE \
                               --mandir=/usr/man \
                               --libexecdir=/usr/lib \
                               --enable-languages=c,c++,objc \
@@ -23,6 +26,7 @@ build() {
                               --enable-__cxa_atexit \
                               --enable-clocale=gnu \
                               --enable-shared \
+                              --with-float=hard \
                               --disable-nls \
                               --with-x=no \
                               --with-system-zlib \
@@ -37,9 +41,9 @@ build() {
 
   mv $PKG/usr/lib/gcc/*/$version/include-fixed/{limits.h,syslimits.h} $PKG/usr/lib/gcc/*/$version/include/
 
-  rm $PKG/usr/lib/{libiberty.a,libstdc++.so.6.0.14-gdb.py}
+  rm $PKG/usr/lib/{libiberty.a,libstdc++.so.*-gdb.py}
   rm -r $PKG/usr/share 
-  rm -r $PKG/usr/bin/*-linux-gnu*
+  rm -r $PKG/usr/bin/*-linux-gnueabi*
   rm -r $PKG/usr/lib/gcc/*/$version/{install-tools,include-fixed} 
 
   sed -i "s|-L$SRC[^ ]* ||g" $PKG/usr/lib/{libstdc++.la,libsupc++.la}
