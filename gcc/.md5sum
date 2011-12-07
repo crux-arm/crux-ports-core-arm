@@ -1,5 +1,3 @@
-0861bfdbd495b38c9d25690ffe620e0d  gcc-4.5.3-preprocessor_symbol.patch
-98be5094b5b5a7b9087494291bc7f522  gcc-core-4.5.3.tar.bz2
-2c78bf1d5f08a0b116f280de88d3ffe7  gcc-g++-4.5.3.tar.bz2
+64ee689bd362c360471f7b3366c74d11  gcc-4.6-gnueabihf.patch
+028115c4fbfb6cfd75d6369f4a90d87e  gcc-4.6.2.tar.bz2
 a617c4d3fa11e0c9410ac213eb061677  gcc-nocheck-fixincludes.patch
-9bb53e37e589515ba55979a19be9c036  gcc-objc-4.5.3.tar.bz2
