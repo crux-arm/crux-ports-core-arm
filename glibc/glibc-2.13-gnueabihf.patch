@@ -1,0 +1,22 @@
+--- glibc-2.13/ports/sysdeps/arm/preconfigure	2010-12-06 20:43:02.000000000 +0000
++++ glibc-2.13.armhf//ports/sysdeps/arm/preconfigure	2011-05-06 15:57:15.087298361 +0000
+@@ -2,7 +2,7 @@
+ arm*)
+ 	base_machine=arm
+ 	case $config_os in
+-	linux-gnueabi)
++	linux-gnueabi*)
+ 		machine=arm/eabi/$machine
+ 		if [ "${CFLAGS+set}" != "set" ]; then
+ 		  CFLAGS="-g -O2"
+diff -ruN eglibc-2.13/ports/sysdeps/arm/shlib-versions eglibc-2.13.armhf//ports/sysdeps/arm/shlib-versions
+--- eglibc-2.13/ports/sysdeps/arm/shlib-versions	2006-08-17 01:23:58.000000000 +0000
++++ eglibc-2.13.armhf//ports/sysdeps/arm/shlib-versions	2011-05-06 15:57:27.067299108 +0000
+@@ -1,4 +1,4 @@
+-arm.*-.*-linux-gnueabi	DEFAULT			GLIBC_2.4
++arm.*-.*-linux-gnueabi*	DEFAULT			GLIBC_2.4
+ 
+-arm.*-.*-linux-gnueabi	ld=ld-linux.so.3
++arm.*-.*-linux-gnueabi*	ld=ld-linux.so.3
+ arm.*-.*-linux.*	ld=ld-linux.so.2
+
