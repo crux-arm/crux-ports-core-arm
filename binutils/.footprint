@@ -4,8 +4,10 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/ar
 -rwxr-xr-x	root/root	usr/bin/as
 -rwxr-xr-x	root/root	usr/bin/c++filt
+-rwxr-xr-x	root/root	usr/bin/elfedit
 -rwxr-xr-x	root/root	usr/bin/gprof
 -rwxr-xr-x	root/root	usr/bin/ld
+-rwxr-xr-x	root/root	usr/bin/ld.bfd
 -rwxr-xr-x	root/root	usr/bin/nm
 -rwxr-xr-x	root/root	usr/bin/objcopy
 -rwxr-xr-x	root/root	usr/bin/objdump
@@ -49,15 +51,15 @@ drwxr-xr-x	root/root	usr/lib/ldscripts/
 -rw-r--r--	root/root	usr/lib/ldscripts/armelfb_linux_eabi.xsw
 -rw-r--r--	root/root	usr/lib/ldscripts/armelfb_linux_eabi.xu
 -rw-r--r--	root/root	usr/lib/ldscripts/armelfb_linux_eabi.xw
--rwxr-xr-x	root/root	usr/lib/libbfd-2.20.1.so
+-rwxr-xr-x	root/root	usr/lib/libbfd-2.22.so
 -rw-r--r--	root/root	usr/lib/libbfd.a
 -rwxr-xr-x	root/root	usr/lib/libbfd.la
-lrwxrwxrwx	root/root	usr/lib/libbfd.so -> libbfd-2.20.1.so
+lrwxrwxrwx	root/root	usr/lib/libbfd.so -> libbfd-2.22.so
 -rw-r--r--	root/root	usr/lib/libiberty.a
--rwxr-xr-x	root/root	usr/lib/libopcodes-2.20.1.so
+-rwxr-xr-x	root/root	usr/lib/libopcodes-2.22.so
 -rw-r--r--	root/root	usr/lib/libopcodes.a
 -rwxr-xr-x	root/root	usr/lib/libopcodes.la
-lrwxrwxrwx	root/root	usr/lib/libopcodes.so -> libopcodes-2.20.1.so
+lrwxrwxrwx	root/root	usr/lib/libopcodes.so -> libopcodes-2.22.so
 drwxr-xr-x	root/root	usr/man/
 drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/addr2line.1.gz
@@ -65,6 +67,7 @@ drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/as.1.gz
 -rw-r--r--	root/root	usr/man/man1/c++filt.1.gz
 -rw-r--r--	root/root	usr/man/man1/dlltool.1.gz
+-rw-r--r--	root/root	usr/man/man1/elfedit.1.gz
 -rw-r--r--	root/root	usr/man/man1/gprof.1.gz
 -rw-r--r--	root/root	usr/man/man1/ld.1.gz
 -rw-r--r--	root/root	usr/man/man1/nlmconv.1.gz
