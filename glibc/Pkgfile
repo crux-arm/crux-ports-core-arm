@@ -1,0 +1,49 @@
+# Description: The C library used in the GNU system
+# URL:         http://www.gnu.org/software/libc/
+# Maintainer:  CRUX System Team, core-ports at crux dot nu
+
+name=glibc
+version=2.12.2
+release=2
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz \
+	http://ftp.gnu.org/gnu/$name/$name-ports-2.12.1.tar.bz2 \
+        http://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.35.tar.gz \
+        glibc-ignore_origin.patch \
+        Optimize-__getpagesize-a-bit.patch \
+        hosts resolv.conf nsswitch.conf host.conf ld.so.conf)
+
+build() {
+    # install kernel headers
+    cd linux-2.6.35
+    make mrproper
+    make ARCH=arm headers_check
+    make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
+
+    mv $SRC/$name-ports-2.12.1 $SRC/$name-$version/ports
+
+    patch -d $SRC/$name-$version -R -p1 -i $SRC/Optimize-__getpagesize-a-bit.patch
+    patch -d $SRC/$name-$version -p1 -i $SRC/$name-ignore_origin.patch
+
+    mkdir $SRC/build
+    cd $SRC/build
+
+    ../$name-$version/configure --prefix=/usr \
+                                --build=arm-crux-linux-gnueabi \
+                                --libexecdir=/usr/lib \
+                                --with-headers=$PKG/usr/include \
+                                --with-tls \
+                                --enable-kernel=2.6.0 \
+                                --enable-add-ons \
+                                --disable-profile \
+                                --without-gd
+
+    make CFLAGS="$CFLAGS -msoft-float"
+    make install_root=$PKG install
+
+    cp $SRC/{hosts,resolv.conf,nsswitch.conf,host.conf,ld.so.conf} $PKG/etc
+    ln -sf ../usr/share/zoneinfo/UTC $PKG/etc/localtime
+    mkdir -p $PKG/etc/ld.so.conf.d $PKG/usr/lib/locale
+    touch $PKG/etc/ld.so.cache
+
+    rm -rf $PKG/usr/share/{info,locale}
+}

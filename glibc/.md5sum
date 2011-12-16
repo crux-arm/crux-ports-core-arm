@@ -1,0 +1,10 @@
+6c8b3f5c56d80eba760cc896e7462b0e  Optimize-__getpagesize-a-bit.patch
+e0043f4f8e1aa61acc62fdf0f4d6133d  glibc-2.12.2.tar.xz
+e9da82fa084dff26de7c484ce0c89a9a  glibc-ignore_origin.patch
+cb01ab976180e98287cef5079e35359e  glibc-ports-2.12.1.tar.bz2
+96156bec8e05de67384dc93e72bdc313  host.conf
+fbbc215a9b15ba4846f326cc88108057  hosts
+f7fefce570a3c776e26e778c5e401490  ld.so.conf
+62001687bd94d1c0dd9a3654c64257d6  linux-2.6.35.tar.gz
+75931315bf9bc9be15a5e25e4ddd5f0d  nsswitch.conf
+acf9daad1ee85de5efd3543965596a63  resolv.conf
