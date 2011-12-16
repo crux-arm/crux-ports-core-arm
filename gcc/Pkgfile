@@ -11,11 +11,13 @@ source=(http://ftp.gnu.org/gnu/gcc/$name-$version/$name-{core,g++,objc}-$version
         $name-nocheck-fixincludes.patch $name-$version-preprocessor_symbol.patch)
 
 build() {
-  patch -p0 -i $SRC/$name-$version-preprocessor_symbol.patch
+  patch -d $name-$version -p1 -i $SRC/$name-$version-preprocessor_symbol.patch
   patch -d $name-$version -p1 -i $SRC/$name-nocheck-fixincludes.patch
+
   mkdir build
   cd build
   ../$name-$version/configure --prefix=/usr \
+                              --build=arm-crux-linux-gnueabi \
                               --mandir=/usr/man \
                               --libexecdir=/usr/lib \
                               --enable-languages=c,c++,objc \
@@ -27,6 +29,7 @@ build() {
                               --with-x=no \
                               --with-system-zlib \
                               --with-pkgversion="CRUX"
+
   make bootstrap
   make -j1 DESTDIR=$PKG install
 
