@@ -1,6 +1,8 @@
 # Description: The C library used in the GNU system
-# URL:         http://www.gnu.org/software/libc/
-# Maintainer:  CRUX System Team, core-ports at crux dot nu
+# URL: http://www.gnu.org/software/libc/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
+# Depends on:
 
 name=glibc
 version=2.12.2
