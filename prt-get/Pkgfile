@@ -1,10 +1,12 @@
 # Description: A utility to simplify ports searching/installing
-# URL:         http://jw.smts.ch/files/crux/prt-get_quickstart.html
-# Maintainer:  CRUX System Team, core-ports at crux dot nu
+# URL: http://jw.smts.ch/files/crux/prt-get_quickstart.html
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
+# Depends on:
 
 name=prt-get
 version=5.18
-release=3
+release=4
 source=(http://jw.smts.ch/files/crux/prt-get-$version.tar.gz
         prt-get.conf prt-get.aliases prt-get.diff)
 
