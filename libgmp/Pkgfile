@@ -13,7 +13,7 @@ build() {
   cd gmp-$version
   ./configure --prefix=/usr \
               --enable-cxx \
-              --build=$MACHTYPE
+              --build=arm-unknown-linux-gnueabihf
   make
   make DESTDIR=$PKG install
   rm -r $PKG/usr/share
