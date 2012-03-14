@@ -37,7 +37,7 @@ build() {
   cd build
 
   ../$name-$version/configure --prefix=/usr \
-                              --build=arm-crux-linux-gnueabihf \
+                              --build=arm-unknown-linux-gnueabihf \
                               --libexecdir=/usr/lib \
                               --with-headers=$PKG/usr/include \
                               --with-tls \
