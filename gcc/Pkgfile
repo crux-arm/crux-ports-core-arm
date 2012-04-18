@@ -17,7 +17,7 @@ build() {
   mkdir build
   cd build
   ../$name-$version/configure --prefix=/usr \
-                              --build=arm-crux-linux-gnueabi \
+                              --build=arm-unknown-linux-gnueabi \
                               --mandir=/usr/man \
                               --libexecdir=/usr/lib \
                               --enable-languages=c,c++,objc \
