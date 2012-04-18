@@ -30,11 +30,11 @@ build() {
     cd $SRC/build
 
     ../$name-$version/configure --prefix=/usr \
-                                --build=arm-crux-linux-gnueabi \
+                                --build=arm-unknown-linux-gnueabi \
                                 --libexecdir=/usr/lib \
                                 --with-headers=$PKG/usr/include \
                                 --with-tls \
-                                --enable-kernel=2.6.0 \
+                                --enable-kernel=2.6.27 \
                                 --enable-add-ons \
                                 --disable-profile \
                                 --without-gd
