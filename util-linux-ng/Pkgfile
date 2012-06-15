@@ -5,9 +5,9 @@
 # Depends on: ncurses zlib
 
 name=util-linux-ng
-version=2.20
+version=2.21.2
 release=1
-source=(http://ftp.kernel.org/pub/linux/utils/util-linux/v2.20/util-linux-$version.tar.bz2)
+source=(http://ftp.kernel.org/pub/linux/utils/util-linux/v2.21/util-linux-$version.tar.xz)
 
 build() {
   cd util-linux-$version
