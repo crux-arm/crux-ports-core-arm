@@ -20,6 +20,7 @@ drwxr-xr-x	root/root	sbin/
 -rwxr-xr-x	root/root	sbin/blkid
 -rwxr-xr-x	root/root	sbin/blockdev
 -rwxr-xr-x	root/root	sbin/cfdisk
+-rwxr-xr-x	root/root	sbin/chcpu
 -rwxr-xr-x	root/root	sbin/ctrlaltdel
 -rwxr-xr-x	root/root	sbin/fdisk
 -rwxr-xr-x	root/root	sbin/findfs
@@ -129,7 +130,6 @@ drwxr-xr-x	root/root	usr/man/man1/
 -rw-r--r--	root/root	usr/man/man1/more.1.gz
 -rw-r--r--	root/root	usr/man/man1/namei.1.gz
 -rw-r--r--	root/root	usr/man/man1/pg.1.gz
--rw-r--r--	root/root	usr/man/man1/readprofile.1.gz
 -rw-r--r--	root/root	usr/man/man1/rename.1.gz
 -rw-r--r--	root/root	usr/man/man1/renice.1.gz
 -rw-r--r--	root/root	usr/man/man1/rev.1.gz
@@ -166,6 +166,7 @@ drwxr-xr-x	root/root	usr/man/man8/
 -rw-r--r--	root/root	usr/man/man8/blkid.8.gz
 -rw-r--r--	root/root	usr/man/man8/blockdev.8.gz
 -rw-r--r--	root/root	usr/man/man8/cfdisk.8.gz
+-rw-r--r--	root/root	usr/man/man8/chcpu.8.gz
 -rw-r--r--	root/root	usr/man/man8/ctrlaltdel.8.gz
 -rw-r--r--	root/root	usr/man/man8/cytune.8.gz
 -rw-r--r--	root/root	usr/man/man8/delpart.8.gz
@@ -189,6 +190,7 @@ drwxr-xr-x	root/root	usr/man/man8/
 -rw-r--r--	root/root	usr/man/man8/partx.8.gz
 -rw-r--r--	root/root	usr/man/man8/pivot_root.8.gz
 -rw-r--r--	root/root	usr/man/man8/raw.8.gz
+-rw-r--r--	root/root	usr/man/man8/readprofile.8.gz
 -rw-r--r--	root/root	usr/man/man8/rtcwake.8.gz
 -rw-r--r--	root/root	usr/man/man8/setarch.8.gz
 -rw-r--r--	root/root	usr/man/man8/sfdisk.8.gz
