@@ -4,17 +4,18 @@
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 # Depends on: ncurses zlib
 
-name=util-linux-ng
-version=2.21.2
+name=util-linux
+version=2.22.1
 release=1
-source=(http://ftp.kernel.org/pub/linux/utils/util-linux/v2.21/util-linux-$version.tar.xz)
+source=(http://ftp.kernel.org/pub/linux/utils/$name/v2.22/$name-$version.tar.xz)
 
 build() {
-  cd util-linux-$version
+  cd $name-$version
 
   ./configure --prefix=/usr \
               --mandir=/usr/man \
-              --disable-{nls,wall,mountpoint} \
+              --disable-{nls,wall} \
+              --disable-{login,su,sulogin,runuser} \
               --enable-{write,raw,kill}
   make
   make DESTDIR=$PKG install
@@ -22,7 +23,7 @@ build() {
   install -d $PKG/{etc,var/{lib/libuuid,run/uuidd}}
   touch $PKG/etc/adjtime
 
-  rm -r $PKG/usr/{share,man/ru}
+  rm -r $PKG/usr/share
   rm $PKG/sbin/{mkfs.bfs,mkfs.minix,fsck.minix}
   rm $PKG/usr/man/man8/{fsck.minix,mkfs.bfs,mkfs.minix}.8
 }
