@@ -5,17 +5,17 @@
 # Depends on: zlib libmpc
 
 name=gcc
-version=4.5.3
-release=2
-source=(http://ftp.gnu.org/gnu/gcc/$name-$version/$name-{core,g++,objc}-$version.tar.bz2
-        $name-nocheck-fixincludes.patch $name-$version-preprocessor_symbol.patch)
+version=4.7.2
+release=1
+source=(ftp://gcc.gnu.org/pub/gcc/releases/$name-$version/$name-$version.tar.bz2
+        $name-nocheck-fixincludes.patch)
 
 build() {
-  patch -d $name-$version -p1 -i $SRC/$name-$version-preprocessor_symbol.patch
   patch -d $name-$version -p1 -i $SRC/$name-nocheck-fixincludes.patch
 
   mkdir build
   cd build
+
   ../$name-$version/configure --prefix=/usr \
                               --build=arm-unknown-linux-gnueabi \
                               --mandir=/usr/man \
@@ -28,8 +28,7 @@ build() {
                               --disable-nls \
                               --with-x=no \
                               --with-system-zlib \
-                              --with-pkgversion="CRUX"
-
+                              --with-pkgversion="CRUX-ARM"
   make bootstrap
   make -j1 DESTDIR=$PKG install
 
@@ -38,12 +37,12 @@ build() {
   ln -sf gcc $PKG/usr/bin/cc
   ln -sf g++ $PKG/usr/bin/c++
 
-  mv $PKG/usr/lib/gcc/*/$version/include-fixed/{limits.h,syslimits.h} $PKG/usr/lib/gcc/*/$version/include/
+  mv $PKG/usr/lib/gcc/*/4.7.2/include-fixed/{limits.h,syslimits.h} $PKG/usr/lib/gcc/*/4.7.2/include/
 
-  rm $PKG/usr/lib/{libiberty.a,libstdc++.so.6.0.14-gdb.py}
-  rm -r $PKG/usr/share 
+  rm -f $PKG/usr/lib/{libiberty.a,libstdc++.so.6.0.17-gdb.py}
+  rm -r $PKG/usr/share
   rm -r $PKG/usr/bin/*-linux-gnu*
-  rm -r $PKG/usr/lib/gcc/*/$version/{install-tools,include-fixed} 
+  rm -r $PKG/usr/lib/gcc/*/4.7.2/{install-tools,include-fixed}
 
   sed -i "s|-L$SRC[^ ]* ||g" $PKG/usr/lib/{libstdc++.la,libsupc++.la}
 }
