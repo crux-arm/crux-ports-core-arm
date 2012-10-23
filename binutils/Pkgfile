@@ -5,9 +5,9 @@
 # Depends on: zlib
 
 name=binutils
-version=2.20.1
+version=2.22
 release=1
-source=(ftp://ftp.gnu.org/gnu/$name/$name-${version}a.tar.bz2)
+source=(ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2)
 
 build() {
     sed -i '/^SUBDIRS/s/doc//' $name-$version/bfd/Makefile.in
