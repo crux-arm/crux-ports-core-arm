@@ -6,7 +6,7 @@
 
 name=glibc
 version=2.16.0
-release=1
+release=2
 source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
         ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.4.11.tar.bz2 \
         http://ftp.gnu.org/gnu/$name/$name-ports-$version.tar.bz2 \
