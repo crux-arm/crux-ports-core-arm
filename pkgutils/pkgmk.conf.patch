@@ -6,9 +6,9 @@
  
 -export CFLAGS="-O2 -march=i686 -pipe"
 -export CXXFLAGS="-O2 -march=i686 -pipe"
-+export CFLAGS="-O2 -pipe -mfloat-abi=hard"   # -march=armv4t, -march=arm5vte, etc.
++export CFLAGS="-O2 -pipe -mno-unaligned-access -mfloat-abi=hard"
 +export CXXFLAGS="$CFLAGS"
-+export MAKEFLAGS=""         # -j2, -j3, -j4, -j5, etc.
++export MAKEFLAGS=""
  
  # PKGMK_SOURCE_MIRRORS=()
  # PKGMK_SOURCE_DIR="$PWD"
