@@ -1,12 +1,10 @@
-6c8b3f5c56d80eba760cc896e7462b0e  Optimize-__getpagesize-a-bit.patch
-62656d7d630781adb8f0186f201127cd  glibc-2.13-gnueabihf.patch
-24dfab6fd244f3773523412588ecc52c  glibc-2.13-prelink.patch
-cc5d8b1b994fb3b870222565c79853ca  glibc-2.13.tar.xz
-e9da82fa084dff26de7c484ce0c89a9a  glibc-ignore_origin.patch
-483f37cfdd619e81d8ca9e9d713944b5  glibc-ports-2.13.tar.bz2
+80b181b02ab249524ec92822c0174cf7  glibc-2.16.0.tar.xz
+668bcd584718ff0c6aa2f14b668595b6  glibc-ports-2.16.0.tar.bz2
+7e6a5a13c37f93213db9803d9790b7de  glibc-resolv_assert.patch
+8be5a4516a896a4cd589134ccf113575  glibc-strtod_integer_overflow.patch
 96156bec8e05de67384dc93e72bdc313  host.conf
 fbbc215a9b15ba4846f326cc88108057  hosts
 f7fefce570a3c776e26e778c5e401490  ld.so.conf
-55b944af9b96651cf8a34e4a7fa38a1b  linux-2.6.35.6.tar.gz
+1852723ae452204ea9eaf0c01864130d  linux-3.4.11.tar.bz2
 75931315bf9bc9be15a5e25e4ddd5f0d  nsswitch.conf
 acf9daad1ee85de5efd3543965596a63  resolv.conf
