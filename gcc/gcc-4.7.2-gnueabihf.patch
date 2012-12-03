@@ -1,69 +1,26 @@
-http://gcc.gnu.org/ml/gcc/2011-02/msg00390.html
-
-Triplet for ARM Linux HardFP ABI, again
-
-    * From: Guillem Jover <guillem at debian dot org>
-    * To: gcc at gcc dot gnu dot org
-    * Date: Mon, 21 Feb 2011 11:12:09 +0100
-    * Subject: Triplet for ARM Linux HardFP ABI, again
-
-
-diff --git a/configure b/configure
-index 501c6ff..43ff04f 100755
---- a/configure
-+++ b/configure
-diff --git a/configure b/configure
-index 501c6ff..43ff04f 100755
---- a/configure
-+++ b/configure
-@@ -3236,7 +3236,7 @@ case "${target}" in
-     noconfigdirs="$noconfigdirs target-libffi target-qthreads"
-     libgloss_dir=arm
-     ;;
--  arm*-*-linux-gnueabi)
-+  arm*-*-linux-*eabi*)
-     noconfigdirs="$noconfigdirs target-qthreads"
-     case ${with_newlib} in
-       no) noconfigdirs="$noconfigdirs target-newlib target-libgloss"
-diff --git a/configure.ac b/configure.ac
-index 9121d65..e1a42e0 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -682,7 +682,7 @@ case "${target}" in
-     noconfigdirs="$noconfigdirs target-libffi target-qthreads"
-     libgloss_dir=arm
-     ;;
--  arm*-*-linux-gnueabi)
-+  arm*-*-linux-*eabi*)
-     noconfigdirs="$noconfigdirs target-qthreads"
-     case ${with_newlib} in
-       no) noconfigdirs="$noconfigdirs target-newlib target-libgloss"
-diff --git a/gcc/ada/gcc-interface/Makefile.in b/gcc/ada/gcc-interface/Makefile.in
-index b64ba55..cbe6b70 100644
---- a/gcc/ada/gcc-interface/Makefile.in
-+++ b/gcc/ada/gcc-interface/Makefile.in
-@@ -1841,7 +1841,7 @@ ifeq ($(strip $(filter-out powerpc% linux%,$(arch) $(osys))),)
+diff -pruN gcc-4.7.2.orig/gcc/ada/gcc-interface/Makefile.in gcc-4.7.2/gcc/ada/gcc-interface/Makefile.in
+--- gcc-4.7.2.orig/gcc/ada/gcc-interface/Makefile.in	2012-08-06 14:34:27.000000000 +0000
++++ gcc-4.7.2/gcc/ada/gcc-interface/Makefile.in	2012-11-06 14:25:52.708613671 +0000
+@@ -1867,7 +1867,7 @@ ifeq ($(strip $(filter-out powerpc% linu
    LIBRARY_VERSION := $(LIB_VERSION)
  endif
  
 -ifeq ($(strip $(filter-out arm% linux-gnueabi,$(arch) $(osys)-$(word 4,$(targ)))),)
-+ifeq ($(strip $(filter-out arm% linux%,$(arch) $(osys))),)
++ifeq ($(strip $(filter-out arm% linux-gnueabi%,$(arch) $(osys)-$(word 4,$(targ)))),)
    LIBGNAT_TARGET_PAIRS = \
    a-intnam.ads<a-intnam-linux.ads \
    s-inmaop.adb<s-inmaop-posix.adb \
-diff --git a/gcc/config.gcc b/gcc/config.gcc
-index 54b822e..1a47343 100644
---- a/gcc/config.gcc
-+++ b/gcc/config.gcc
-@@ -820,13 +820,13 @@ arm*-*-linux*)			# ARM GNU/Linux with ELF
+diff -pruN gcc-4.7.2.orig/gcc/config.gcc gcc-4.7.2/gcc/config.gcc
+--- gcc-4.7.2.orig/gcc/config.gcc	2012-09-12 09:03:54.000000000 +0000
++++ gcc-4.7.2/gcc/config.gcc	2012-11-06 14:28:12.212618421 +0000
+@@ -850,12 +850,12 @@ arm*-*-linux*)			# ARM GNU/Linux with EL
  	esac
- 	tmake_file="${tmake_file} t-linux arm/t-arm"
+ 	tmake_file="${tmake_file} arm/t-arm"
  	case ${target} in
 -	arm*-*-linux-*eabi)
 +	arm*-*-linux-*eabi*)
  	    tm_file="$tm_file arm/bpabi.h arm/linux-eabi.h"
- 	    tm_file="$tm_file ../../libgcc/config/arm/bpabi-lib.h"
- 	    tmake_file="$tmake_file arm/t-arm-elf arm/t-bpabi arm/t-linux-eabi t-slibgcc-libgcc"
+ 	    tmake_file="$tmake_file arm/t-arm-elf arm/t-bpabi arm/t-linux-eabi"
  	    # Define multilib configuration for arm-linux-androideabi.
  	    case ${target} in
 -	    *-androideabi)
@@ -71,68 +28,103 @@ index 54b822e..1a47343 100644
  		tmake_file="$tmake_file arm/t-linux-androideabi"
  		;;
  	    esac
-@@ -848,7 +848,7 @@ arm*-*-uclinux*)		# ARM ucLinux
+@@ -877,7 +877,7 @@ arm*-*-uclinux*)		# ARM ucLinux
  	tm_file="dbxelf.h elfos.h arm/unknown-elf.h arm/elf.h arm/linux-gas.h arm/uclinux-elf.h glibc-stdint.h"
  	tmake_file="arm/t-arm arm/t-arm-elf"
  	case ${target} in
 -	arm*-*-uclinux*eabi)
 +	arm*-*-uclinux*eabi*)
  	    tm_file="$tm_file arm/bpabi.h arm/uclinux-eabi.h"
- 	    tm_file="$tm_file ../../libgcc/config/arm/bpabi-lib.h"
  	    tmake_file="$tmake_file arm/t-bpabi"
-diff --git a/gcc/testsuite/lib/target-supports.exp b/gcc/testsuite/lib/target-supports.exp
-index 02cb7ac..885c0e0 100644
---- a/gcc/testsuite/lib/target-supports.exp
-+++ b/gcc/testsuite/lib/target-supports.exp
-@@ -3219,7 +3219,7 @@ proc check_effective_target_sync_int_long { } {
+   	    # The BPABI long long divmod functions return a 128-bit value in
+diff -pruN gcc-4.7.2.orig/gcc/testsuite/lib/target-supports.exp gcc-4.7.2/gcc/testsuite/lib/target-supports.exp
+--- gcc-4.7.2.orig/gcc/testsuite/lib/target-supports.exp	2012-08-10 13:21:31.000000000 +0000
++++ gcc-4.7.2/gcc/testsuite/lib/target-supports.exp	2012-11-06 14:34:38.076631560 +0000
+@@ -509,7 +509,7 @@ proc check_profiling_available { test_wh
+ 	# Some targets don't have any implementation of __bb_init_func or are
+ 	# missing other needed machinery.
+ 	if {    [istarget am3*-*-linux*]
+-	     || [istarget arm*-*-eabi*]
++	     || [istarget arm*-*-*eabi*]
+ 	     || [istarget arm*-*-elf]
+ 	     || [istarget arm*-*-symbianelf*]
+ 	     || [istarget avr-*-*]
+@@ -528,7 +528,7 @@ proc check_profiling_available { test_wh
+ 	     || [istarget mn10300-*-elf*]
+ 	     || [istarget moxie-*-elf*]
+ 	     || [istarget picochip-*-*]
+-	     || [istarget powerpc-*-eabi*]
++	     || [istarget powerpc-*-eabi]
+ 	     || [istarget powerpc-*-elf]
+ 	     || [istarget rx-*-*]	
+ 	     || [istarget tic6x-*-elf]
+@@ -3860,7 +3860,7 @@ proc check_effective_target_sync_int_lon
  	     || [istarget i?86-*-*]
  	     || [istarget x86_64-*-*]
  	     || [istarget alpha*-*-*] 
 -	     || [istarget arm*-*-linux-gnueabi] 
-+	     || [istarget arm*-*-linux-*eabi*]
++	     || [istarget arm*-*-linux-*eabi*] 
  	     || [istarget bfin*-*linux*]
  	     || [istarget hppa*-*linux*]
  	     || [istarget s390*-*-*] 
-@@ -3250,7 +3250,7 @@ proc check_effective_target_sync_char_short { } {
+@@ -3890,7 +3890,7 @@ proc check_effective_target_sync_char_sh
  	     || [istarget i?86-*-*]
  	     || [istarget x86_64-*-*]
  	     || [istarget alpha*-*-*] 
 -	     || [istarget arm*-*-linux-gnueabi] 
-+	     || [istarget arm*-*-linux-*eabi*]
++	     || [istarget arm*-*-linux-*eabi*] 
  	     || [istarget hppa*-*linux*]
  	     || [istarget s390*-*-*] 
  	     || [istarget powerpc*-*-*]
-diff --git a/libjava/configure b/libjava/configure
-index f79e53b..47e3f23 100755
---- a/libjava/configure
-+++ b/libjava/configure
-@@ -20527,7 +20527,7 @@ case "${host}" in
+diff -pruN gcc-4.7.2.orig/libgcc/config.host gcc-4.7.2/libgcc/config.host
+--- gcc-4.7.2.orig/libgcc/config.host	2012-09-05 12:19:47.000000000 +0000
++++ gcc-4.7.2/libgcc/config.host	2012-11-06 14:29:57.164621996 +0000
+@@ -327,7 +327,7 @@ arm*-*-netbsdelf*)
+ arm*-*-linux*)			# ARM GNU/Linux with ELF
+ 	tmake_file="${tmake_file} arm/t-arm t-fixedpoint-gnu-prefix"
+ 	case ${host} in
+-	arm*-*-linux-*eabi)
++	arm*-*-linux-*eabi*)
+ 	  tmake_file="${tmake_file} arm/t-elf arm/t-bpabi arm/t-linux-eabi t-slibgcc-libgcc"
+ 	  tm_file="$tm_file arm/bpabi-lib.h"
+ 	  unwind_header=config/arm/unwind-arm.h
+@@ -341,7 +341,7 @@ arm*-*-linux*)			# ARM GNU/Linux with EL
+ arm*-*-uclinux*)		# ARM ucLinux
+ 	tmake_file="${tmake_file} t-fixedpoint-gnu-prefix"
+ 	case ${host} in
+-	arm*-*-uclinux*eabi)
++	arm*-*-uclinux*eabi*)
+ 	  tmake_file="${tmake_file} arm/t-bpabi"
+ 	  tm_file="$tm_file arm/bpabi-lib.h"
+ 	  unwind_header=config/arm/unwind-arm.h
+diff -pruN gcc-4.7.2.orig/libjava/configure gcc-4.7.2/libjava/configure
+--- gcc-4.7.2.orig/libjava/configure	2012-09-20 07:23:55.000000000 +0000
++++ gcc-4.7.2/libjava/configure	2012-11-06 14:30:44.400623603 +0000
+@@ -20542,7 +20542,7 @@ case "${host}" in
      # on Darwin -single_module speeds up loading of the dynamic libraries.
      extra_ldflags_libjava=-Wl,-single_module
      ;;
 -arm*linux*eabi)
-+arm*-*-linux-*eabi*)
++arm*linux*eabi*)
      # Some of the ARM unwinder code is actually in libstdc++.  We
      # could in principle replicate it in libgcj, but it's better to
      # have a dependency on libstdc++.
-diff --git a/libjava/configure.ac b/libjava/configure.ac
-index 8187eec..b59abb3 100644
---- a/libjava/configure.ac
-+++ b/libjava/configure.ac
-@@ -919,7 +919,7 @@ case "${host}" in
+diff -pruN gcc-4.7.2.orig/libjava/configure.ac gcc-4.7.2/libjava/configure.ac
+--- gcc-4.7.2.orig/libjava/configure.ac	2012-05-21 18:14:01.000000000 +0000
++++ gcc-4.7.2/libjava/configure.ac	2012-11-06 14:31:02.548624223 +0000
+@@ -931,7 +931,7 @@ case "${host}" in
      # on Darwin -single_module speeds up loading of the dynamic libraries.
      extra_ldflags_libjava=-Wl,-single_module
      ;;
 -arm*linux*eabi)
-+arm*-*-linux-*eabi*)
++arm*linux*eabi*)
      # Some of the ARM unwinder code is actually in libstdc++.  We
      # could in principle replicate it in libgcj, but it's better to
      # have a dependency on libstdc++.
-diff --git a/libstdc++-v3/configure.host b/libstdc++-v3/configure.host
-index e29404c..a2e58a9 100644
---- a/libstdc++-v3/configure.host
-+++ b/libstdc++-v3/configure.host
-@@ -322,7 +322,7 @@ case "${host}" in
+diff -pruN gcc-4.7.2.orig/libstdc++-v3/configure.host gcc-4.7.2/libstdc++-v3/configure.host
+--- gcc-4.7.2.orig/libstdc++-v3/configure.host	2012-02-10 18:10:12.000000000 +0000
++++ gcc-4.7.2/libstdc++-v3/configure.host	2012-11-06 14:32:00.692626201 +0000
+@@ -340,7 +340,7 @@ case "${host}" in
          fi
      esac
      case "${host}" in
@@ -141,26 +133,19 @@ index e29404c..a2e58a9 100644
  	port_specific_symbol_files="\$(srcdir)/../config/os/gnu-linux/arm-eabi-extra.ver"
  	;;
      esac
-diff --git a/libstdc++-v3/testsuite/20_util/make_signed/requirements/typedefs-2.cc b/libstdc++-v3/testsuite/20_util/make_signed/requirements/typedefs-2.cc
-index cb40b7b..6147d66 100644
---- a/libstdc++-v3/testsuite/20_util/make_signed/requirements/typedefs-2.cc
-+++ b/libstdc++-v3/testsuite/20_util/make_signed/requirements/typedefs-2.cc
-@@ -1,5 +1,5 @@
- // { dg-options "-std=gnu++0x -funsigned-char -fshort-enums" }
--// { dg-options "-std=gnu++0x -funsigned-char -fshort-enums -Wl,--no-enum-size-warning" { target arm*-*-linux*eabi } }
-+// { dg-options "-std=gnu++0x -funsigned-char -fshort-enums -Wl,--no-enum-size-warning" { target arm*-*-linux-*eabi* } }
- 
- // 2007-05-03  Benjamin Kosnik  <bkoz@redhat.com>
- //
-diff --git a/libstdc++-v3/testsuite/20_util/make_unsigned/requirements/typedefs-2.cc b/libstdc++-v3/testsuite/20_util/make_unsigned/requirements/typedefs-2.cc
-index d71c012..1086a18 100644
---- a/libstdc++-v3/testsuite/20_util/make_unsigned/requirements/typedefs-2.cc
-+++ b/libstdc++-v3/testsuite/20_util/make_unsigned/requirements/typedefs-2.cc
-@@ -1,5 +1,5 @@
- // { dg-options "-std=gnu++0x -funsigned-char -fshort-enums" }
--// { dg-options "-std=gnu++0x -funsigned-char -fshort-enums -Wl,--no-enum-size-warning" { target arm*-*-linux*eabi } }
-+// { dg-options "-std=gnu++0x -funsigned-char -fshort-enums -Wl,--no-enum-size-warning" { target arm*-*-linux-*eabi* } }
- 
- // 2007-05-03  Benjamin Kosnik  <bkoz@redhat.com>
- //
+diff -pruN gcc-4.7.2.orig/gcc/config/arm/linux-eabi.h gcc-4.7.2/gcc/config/arm/linux-eabi.h
+--- gcc-4.7.2.orig/gcc/config/arm/linux-eabi.h 2012-11-26 14:44:44.335493878 +0000
++++ gcc-4.7.2/gcc/config/arm/linux-eabi.h      2012-11-26 14:55:06.599515067 +0000
+@@ -62,7 +62,11 @@
+ /* Use ld-linux.so.3 so that it will be possible to run "classic"
+    GNU/Linux binaries on an EABI system.  */
+ #undef  GLIBC_DYNAMIC_LINKER
+-#define GLIBC_DYNAMIC_LINKER "/lib/ld-linux.so.3"
++#define GLIBC_DYNAMIC_LINKER_SOFT_FLOAT "/lib/ld-linux.so.3"
++#define GLIBC_DYNAMIC_LINKER_HARD_FLOAT "/lib/ld-linux-armhf.so.3"
++#define GLIBC_DYNAMIC_LINKER \
++   "%{mfloat-abi=hard:" GLIBC_DYNAMIC_LINKER_HARD_FLOAT "} \
++    %{!mfloat-abi=hard:" GLIBC_DYNAMIC_LINKER_SOFT_FLOAT "}"
 
+ /* At this point, bpabi.h will have clobbered LINK_SPEC.  We want to
+    use the GNU/Linux version, not the generic BPABI version.  */
