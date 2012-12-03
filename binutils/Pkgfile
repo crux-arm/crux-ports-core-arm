@@ -7,7 +7,7 @@
 name=binutils
 version=2.22
 release=1
-source=(ftp://ftp.gnu.org/gnu/$name/$name-${version}.tar.bz2)
+source=(ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2)
 
 build() {
   sed -i '/^SUBDIRS/s/doc//' $name-$version/bfd/Makefile.in
@@ -20,6 +20,7 @@ build() {
                               --enable-shared \
                               --disable-nls
   make tooldir=/usr
+  make check
   make tooldir=/usr DESTDIR=$PKG install
   install -m 0644  ../$name-$version/include/libiberty.h $PKG/usr/include
   rm -r $PKG/usr/share
