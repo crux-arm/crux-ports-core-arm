@@ -6,8 +6,5 @@ efeb3ce474a4a0c67ecb62c0eaaf4e34  xorg.rsync
 dfdf2ba604cbec59f3442b4738700200  Pkgfile
 c79603d71569837b6848c5cb320c44bd  contrib.rsync.inactive
 ea6b5d166ce6446e78ab8b7df2fdb80b  core-armhf.rsync
-8cb8a1539dd74bb566c166877ac16856  core.rsync
 4e5adb9453c7fedce96e3d205a3cb9b9  opt-armhf.rsync
-541d0991ecf5f96ae52d1e13f481e123  opt.rsync
 a94ea8ef1ab69993ab555004b0c85f63  xorg-armhf.rsync
-efeb3ce474a4a0c67ecb62c0eaaf4e34  xorg.rsync
