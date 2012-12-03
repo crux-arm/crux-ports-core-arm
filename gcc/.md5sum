@@ -1,3 +1,3 @@
-64ee689bd362c360471f7b3366c74d11  gcc-4.6-gnueabihf.patch
-028115c4fbfb6cfd75d6369f4a90d87e  gcc-4.6.2.tar.bz2
+2842d72b2e41e19a082cb73681dc5e41  gcc-4.7.2-gnueabihf.patch
+cc308a0891e778cfda7a151ab8a6e762  gcc-4.7.2.tar.bz2
 a617c4d3fa11e0c9410ac213eb061677  gcc-nocheck-fixincludes.patch
