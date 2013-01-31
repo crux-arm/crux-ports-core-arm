@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 c79603d71569837b6848c5cb320c44bd  contrib.rsync.inactive
 ea6b5d166ce6446e78ab8b7df2fdb80b  core-armhf.rsync
+=======
+49132c847c2d14ed0dbb61c6f53b0e1a  contrib.rsync.inactive
+6f0a576cbe0bcbb89b2ae5c9423025c5  core-arm.rsync
+>>>>>>> 38a9764... ports: fixed issue with contrib.rsync.inactive
 8cb8a1539dd74bb566c166877ac16856  core.rsync
 4e5adb9453c7fedce96e3d205a3cb9b9  opt-armhf.rsync
 541d0991ecf5f96ae52d1e13f481e123  opt.rsync
