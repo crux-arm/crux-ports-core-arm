@@ -5,7 +5,7 @@
 # Depends on:
 
 name=kbd
-version=1.15.3
+version=1.15.5
 release=1
 source=(ftp://ftp.altlinux.org/pub/people/legion/kbd/$name-$version.tar.gz)
 
@@ -15,6 +15,7 @@ build() {
   ./configure --prefix=/usr \
               --mandir=/usr/man \
               --datadir=/usr/share/kbd \
+              --disable-vlock \
               --disable-nls
   make
   make DESTDIR=$PKG install
