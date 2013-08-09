@@ -6,7 +6,7 @@
 
 name=gcc
 version=4.7.2
-release=1
+release=2
 source=(ftp://gcc.gnu.org/pub/gcc/releases/$name-$version/$name-$version.tar.bz2
         $name-nocheck-fixincludes.patch
         $name-$version-gnueabihf.patch)
@@ -42,6 +42,8 @@ build() {
   ln -sf g++ $PKG/usr/bin/c++
 
   mv $PKG/usr/lib/gcc/*/4.7.2/include-fixed/{limits.h,syslimits.h} $PKG/usr/lib/gcc/*/4.7.2/include/
+  cp ../$name-$version/gcc/config/arm/arm-cores.def $PKG/usr/lib/gcc/arm-unknown-linux-gnueabihf/$version/plugin/include/config/arm/
+  cp ../$name-$version/gcc/config/vxworks-dummy.h $PKG/usr/lib/gcc/arm-unknown-linux-gnueabihf/$version/plugin/include/config/
 
   rm -f $PKG/usr/lib/{libiberty.a,libstdc++.so.6.0.17-gdb.py}
   rm -r $PKG/usr/share

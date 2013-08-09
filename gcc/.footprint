@@ -805,6 +805,7 @@ drwxr-xr-x	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/includ
 drwxr-xr-x	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/config/
 drwxr-xr-x	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/config/arm/
 -rw-r--r--	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/config/arm/aout.h
+-rw-r--r--	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/config/arm/arm-cores.def
 -rw-r--r--	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/config/arm/arm-opts.h
 -rw-r--r--	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/config/arm/arm-protos.h
 -rw-r--r--	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/config/arm/arm.h
@@ -820,6 +821,7 @@ drwxr-xr-x	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/includ
 -rw-r--r--	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/config/initfini-array.h
 -rw-r--r--	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/config/linux-android.h
 -rw-r--r--	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/config/linux.h
+-rw-r--r--	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/config/vxworks-dummy.h
 -rw-r--r--	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/configargs.h
 -rw-r--r--	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/coretypes.h
 drwxr-xr-x	root/root	usr/lib/gcc/arm-unknown-linux-gnueabihf/4.7.2/plugin/include/cp/
