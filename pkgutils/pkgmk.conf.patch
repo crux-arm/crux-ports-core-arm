@@ -1,15 +1,13 @@
---- pkgutils-5.32.0/pkgmk.conf-orig 2008-09-07 12:25:57.831216608 +0200
-+++ pkgutils-5.32.0/pkgmk.conf  2008-09-07 12:26:50.821337115 +0200
+--- pkgutils-5.35.3/pkgmk.conf.orig	2013-09-18 11:23:48.856285249 +0200
++++ pkgutils-5.35.3/pkgmk.conf	2013-09-18 11:27:02.616284373 +0200
 @@ -2,8 +2,9 @@
  # /etc/pkgmk.conf: pkgmk(8) configuration
  #
  
--export CFLAGS="-O2 -march=i686 -pipe"
--export CXXFLAGS="-O2 -march=i686 -pipe"
-+export CFLAGS="-O2 -pipe -mno-unaligned-access -mfloat-abi=hard"
-+export CXXFLAGS="$CFLAGS"
+-export CFLAGS="-O2 -march=x86-64 -pipe"
++export CFLAGS="-O2 -pipe -mfloat-abi=hard"
+ export CXXFLAGS="${CFLAGS}"
 +export MAKEFLAGS=""
  
- # PKGMK_SOURCE_MIRRORS=()
- # PKGMK_SOURCE_DIR="$PWD"
-
+ case ${PKGMK_ARCH} in
+ 	"64")
