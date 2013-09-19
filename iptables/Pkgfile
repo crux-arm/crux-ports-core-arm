@@ -1,0 +1,23 @@
+# Description: A Linux kernel packet filter control tool
+# URL: http://www.iptables.org/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
+
+name=iptables
+version=1.4.17
+release=1
+source=(ftp://ftp.netfilter.org/pub/iptables/$name-$version.tar.bz2) 
+
+build () {
+  cd $name-$version
+
+  # Fix "cannot find -lip6tc" FS#57
+  export LDFLAGS="-L$PWD/libiptc/.libs"  
+
+  ./configure --prefix=/usr \
+              --mandir=/usr/man \
+              --libexecdir=/usr/lib \
+              --enable-libipq
+  make
+  make DESTDIR=$PKG install
+}
