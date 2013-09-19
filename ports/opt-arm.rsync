@@ -1,3 +1,3 @@
 host=crux-arm.nu
-collection=ports/crux-2.8/opt-armhf/
+collection=ports/crux-3.0/opt-armhf/
 destination=/usr/ports/opt-armhf
