@@ -6,13 +6,15 @@
 
 name=glibc
 version=2.16.0
-release=2
+release=5
 source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
         ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.4.11.tar.bz2 \
         http://ftp.gnu.org/gnu/$name/$name-ports-$version.tar.bz2 \
         hosts resolv.conf nsswitch.conf host.conf ld.so.conf \
         $name-resolv_assert.patch \
-        $name-strtod_integer_overflow.patch)
+        $name-strtod_integer_overflow.patch \
+        $name-regexp_buffer_overrun.patch \
+        $name-CVE-2013-4332.patch)
 
 build() {
   # install kernel headers
@@ -24,10 +26,10 @@ build() {
   cd $SRC
   mv $name-ports-$version $name-$version/ports
 
-  pushd $name-$version
-  patch -p1 -i $SRC/$name-resolv_assert.patch
-  patch -p1 -i $SRC/$name-strtod_integer_overflow.patch
-  popd
+  patch -p1 -d $name-$version -i $SRC/$name-resolv_assert.patch
+  patch -p1 -d $name-$version -i $SRC/$name-strtod_integer_overflow.patch
+  patch -p1 -d $name-$version -i $SRC/$name-regexp_buffer_overrun.patch
+  patch -p1 -d $name-$version -i $SRC/$name-CVE-2013-4332.patch
 
   mkdir $SRC/build
   cd $SRC/build
