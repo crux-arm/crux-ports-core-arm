@@ -5,31 +5,20 @@
 # Depends on:
 
 name=glibc
-version=2.16.0
-release=5
+version=2.19
+release=2
 source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
-        ftp://ftp.kernel.org/pub/linux/kernel/v3.x/linux-3.4.11.tar.bz2 \
-        http://ftp.gnu.org/gnu/$name/$name-ports-$version.tar.bz2 \
-        hosts resolv.conf nsswitch.conf host.conf ld.so.conf \
-        $name-resolv_assert.patch \
-        $name-strtod_integer_overflow.patch \
-        $name-regexp_buffer_overrun.patch \
-        $name-CVE-2013-4332.patch)
+        ftp://ftp.kernel.org/pub/linux/kernel/v3.0/linux-3.12.tar.xz \
+        hosts resolv.conf nsswitch.conf host.conf ld.so.conf)
 
 build() {
   # install kernel headers
-  cd linux-3.4.11
+  cd linux-3.12
   make mrproper
   make ARCH=arm headers_check
   make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
 
   cd $SRC
-  mv $name-ports-$version $name-$version/ports
-
-  patch -p1 -d $name-$version -i $SRC/$name-resolv_assert.patch
-  patch -p1 -d $name-$version -i $SRC/$name-strtod_integer_overflow.patch
-  patch -p1 -d $name-$version -i $SRC/$name-regexp_buffer_overrun.patch
-  patch -p1 -d $name-$version -i $SRC/$name-CVE-2013-4332.patch
 
   mkdir $SRC/build
   cd $SRC/build
