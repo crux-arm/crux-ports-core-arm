@@ -1,0 +1,13 @@
+Binary files gcc-4.8.3.orig/gcc/ada/gcc-interface/.Makefile.in.un~ and gcc-4.8.3/gcc/ada/gcc-interface/.Makefile.in.un~ differ
+diff -pruN gcc-4.8.3.orig/gcc/ada/gcc-interface/Makefile.in gcc-4.8.3/gcc/ada/gcc-interface/Makefile.in
+--- gcc-4.8.3.orig/gcc/ada/gcc-interface/Makefile.in    2014-08-28 12:00:40.838855906 +0000
++++ gcc-4.8.3/gcc/ada/gcc-interface/Makefile.in 2014-08-28 13:38:14.428930303 +0000
+@@ -1888,7 +1888,7 @@ ifeq ($(strip $(filter-out powerpc% e500
+   LIBRARY_VERSION := $(LIB_VERSION)
+ endif
+ 
+-ifeq ($(strip $(filter-out arm%-linux,$(arch)-$(osys)) $(if $(findstring eabi,$(word 4,$(targ))),,$(word 4,$(targ)))),)
++ifeq ($(strip $(filter-out arm%-linux,$(arch)-$(osys)) $(if $(findstring eabi%,$(word 4,$(targ))),,$(word 4,$(targ)))),)
+   LIBGNAT_TARGET_PAIRS = \
+   a-intnam.ads<a-intnam-linux.ads \
+   s-inmaop.adb<s-inmaop-posix.adb \
