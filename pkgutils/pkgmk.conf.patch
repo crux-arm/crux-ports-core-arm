@@ -1,13 +1,14 @@
---- pkgutils-5.35.3/pkgmk.conf.orig	2013-09-18 11:23:48.856285249 +0200
-+++ pkgutils-5.35.3/pkgmk.conf	2013-09-18 11:27:02.616284373 +0200
-@@ -2,8 +2,9 @@
+--- pkgmk.conf.orig	2014-10-16 15:59:34.057394811 +0000
++++ pkgmk.conf	2014-10-16 16:00:18.437371591 +0000
+@@ -2,9 +2,8 @@
  # /etc/pkgmk.conf: pkgmk(8) configuration
  #
  
 -export CFLAGS="-O2 -march=x86-64 -pipe"
+-export CXXFLAGS="${CFLAGS}"
+-
 +export CFLAGS="-O2 -pipe -mfloat-abi=hard"
- export CXXFLAGS="${CFLAGS}"
-+export MAKEFLAGS=""
++export CXXFLAGS="$CFLAGS"
+ # export MAKEFLAGS="-j2"
  
  case ${PKGMK_ARCH} in
- 	"64")
