@@ -16,7 +16,6 @@ build() {
               --mandir=/usr/man \
               --disable-nls \
               --disable-{login,su,sulogin,nologin} \
-              --disable-{last,mesg,wall} \
               --enable-{write,raw,kill}
 
   make
