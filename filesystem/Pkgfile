@@ -4,7 +4,7 @@
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=filesystem
-version=3.0
+version=3.1
 release=2
 source=(issue motd shells group passwd shadow securetty fstab mime.types)
 
