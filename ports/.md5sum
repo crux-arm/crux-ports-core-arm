@@ -1,8 +1,8 @@
-1235031f24a2a6b4fcc790ebd879c973  contrib.rsync.inactive
-258abb4a71b4492775491ff9b794ebc2  core-arm.rsync
-d7ede8cfe6da977021f4217363c07d6d  core.rsync
-43fa89c9e106f774f02b25c47c66c164  opt-arm.rsync
-ba2755e20ca669275ee837ee9cd18c50  opt.rsync
+248f59fb9120aabcb6ead69c06dae8a4  contrib.rsync.inactive
+515e805921e25195b5d3495a6a678ffe  core-arm.rsync
+cab6bff69ef9b24a349a21dba1e63a45  core.rsync
+a8cc9bf8bb79609f63c8e421b3417c74  opt-arm.rsync
+59b2cc8ed2e11a829c463fa85836a27c  opt.rsync
 1f178e2bb1beab9782993931c9832280  ports-1.5.tar.gz
-9f71ef6b0b381828629858fbb9eff78a  xorg-arm.rsync
-3bb81f15783c470e116e41a2fabece90  xorg.rsync
+ab485150e051e48f4d8396dc0655303a  xorg-arm.rsync
+7793260dca3f2c31f96fd70a98ff49fd  xorg.rsync
