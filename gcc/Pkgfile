@@ -45,7 +45,7 @@ build() {
 
   rm $PKG/usr/lib/libstdc++.so.6.0.19-gdb.py
   rm -r $PKG/usr/share
-  rm -r $PKG/usr/bin/*-linux-gnu-*
+  rm -r $PKG/usr/bin/*-linux-gnu*
   rm -r $PKG/usr/lib/gcc/*/$version/{install-tools,include-fixed}
 
   sed -i "s|-L$SRC[^ ]* ||g" $PKG/usr/lib/{libstdc++.la,libsupc++.la}
