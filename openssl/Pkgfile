@@ -4,7 +4,7 @@
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=openssl
-version=1.0.1k
+version=1.0.2
 release=1
 source=(http://www.openssl.org/source/$name-$version.tar.gz \
         mksslcert.sh)
@@ -18,7 +18,7 @@ build() {
            --openssldir=/etc/ssl \
            shared
 
-  sed -i "s|-O3|$CFLAGS|" Makefile
+  sed -e "s|-O3|$CFLAGS|" -e "s|\-mcpu=cortex-a7||" -i Makefile
 
   make depend
   make INSTALL_PREFIX=$PKG LIBDIR=lib MANDIR=/usr/man MANSUFFIX=ssl install
