@@ -5,9 +5,9 @@
 # Depends on: ncurses zlib
 
 name=util-linux
-version=2.24.2
+version=2.26
 release=1
-source=(http://ftp.kernel.org/pub/linux/utils/$name/v2.24/$name-$version.tar.xz)
+source=(http://ftp.kernel.org/pub/linux/utils/$name/v2.26/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
@@ -15,8 +15,9 @@ build() {
   ./configure --prefix=/usr \
               --mandir=/usr/man \
               --disable-nls \
-              --disable-{login,su,sulogin,nologin} \
-              --enable-{write,raw,kill}
+              --disable-{login,su,sulogin,nologin,runuser} \
+              --enable-{write,raw,kill} \
+              --without-python
 
   make
   make DESTDIR=$PKG install
