@@ -6,9 +6,14 @@
 
 name=glibc
 version=2.19
-release=2
+release=5
 source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
         ftp://ftp.kernel.org/pub/linux/kernel/v3.0/linux-3.12.tar.xz \
+        CVE-2014-0475.patch iconv-gconv_trans.c.patch \
+        CVE-2012-3406-Stack-overflow-in-vfprintf-BZ-16617.patch \
+        CVE-2014-7817-wordexp-fails-to-honour-WRDE_NOCMD.patch \
+        CVE-2014-9402-Avoid-infinite-loop-in-nss_dns-getnetbyname.patch \
+        CVE-2015-1472-wscanf-allocates-too-little-memory.patch \
         hosts resolv.conf nsswitch.conf host.conf ld.so.conf)
 
 build() {
@@ -18,11 +23,15 @@ build() {
   make ARCH=arm headers_check
   make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
 
-  cd $SRC
+  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2014-0475.patch
+  patch -p1 -d $SRC/$name-$version -i $SRC/iconv-gconv_trans.c.patch
+  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2012-3406-Stack-overflow-in-vfprintf-BZ-16617.patch
+  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2014-7817-wordexp-fails-to-honour-WRDE_NOCMD.patch
+  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2014-9402-Avoid-infinite-loop-in-nss_dns-getnetbyname.patch
+  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2015-1472-wscanf-allocates-too-little-memory.patch
 
   mkdir $SRC/build
   cd $SRC/build
-
   ../$name-$version/configure --prefix=/usr \
                               --build=arm-unknown-linux-gnueabihf \
                               --libexecdir=/usr/lib \
