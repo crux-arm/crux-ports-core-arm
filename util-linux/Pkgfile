@@ -5,7 +5,7 @@
 # Depends on: ncurses zlib
 
 name=util-linux
-version=2.27
+version=2.27.1
 release=1
 source=(http://ftp.kernel.org/pub/linux/utils/$name/v2.27/$name-$version.tar.xz)
 
