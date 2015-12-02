@@ -5,30 +5,18 @@
 # Depends on:
 
 name=glibc
-version=2.19
-release=5
+version=2.22
+release=1
 source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
-        ftp://ftp.kernel.org/pub/linux/kernel/v3.0/linux-3.12.tar.xz \
-        CVE-2014-0475.patch iconv-gconv_trans.c.patch \
-        CVE-2012-3406-Stack-overflow-in-vfprintf-BZ-16617.patch \
-        CVE-2014-7817-wordexp-fails-to-honour-WRDE_NOCMD.patch \
-        CVE-2014-9402-Avoid-infinite-loop-in-nss_dns-getnetbyname.patch \
-        CVE-2015-1472-wscanf-allocates-too-little-memory.patch \
+        http://ftp.kernel.org/pub/linux/kernel/v4.x/linux-4.1.13.tar.xz \
         hosts resolv.conf nsswitch.conf host.conf ld.so.conf)
 
 build() {
   # install kernel headers
-  cd linux-3.12
+  cd linux-4.1.13
   make mrproper
   make ARCH=arm headers_check
   make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
-
-  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2014-0475.patch
-  patch -p1 -d $SRC/$name-$version -i $SRC/iconv-gconv_trans.c.patch
-  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2012-3406-Stack-overflow-in-vfprintf-BZ-16617.patch
-  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2014-7817-wordexp-fails-to-honour-WRDE_NOCMD.patch
-  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2014-9402-Avoid-infinite-loop-in-nss_dns-getnetbyname.patch
-  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2015-1472-wscanf-allocates-too-little-memory.patch
 
   mkdir $SRC/build
   cd $SRC/build
@@ -36,22 +24,28 @@ build() {
                               --build=arm-unknown-linux-gnueabihf \
                               --libexecdir=/usr/lib \
                               --with-headers=$PKG/usr/include \
-                              --with-tls \
                               --enable-kernel=2.6.25 \
                               --enable-add-ons \
+                              --enable-static-nss \
                               --disable-profile \
+                              --disable-werror \
                               --without-gd \
                               --enable-obsolete-rpc
 
   make
   make install_root=$PKG install
 
-  cp $SRC/{hosts,resolv.conf,nsswitch.conf,host.conf,ld.so.conf} $PKG/etc
+  install -m 0644 $SRC/$name-$version/nscd/nscd.conf $PKG/etc
+  install -d $PKG/var/{db,run}/nscd
+
+  install -m 0644 $SRC/{hosts,resolv.conf,nsswitch.conf,host.conf,ld.so.conf} $PKG/etc
+
   ln -sf ../usr/share/zoneinfo/UTC $PKG/etc/localtime
-  mkdir -p $PKG/etc/ld.so.conf.d $PKG/usr/lib/locale
+	ln -s stubs-hard.h $PKG/usr/include/gnu/stubs-soft.h
+  install -d $PKG/etc/ld.so.conf.d $PKG/usr/lib/locale
   touch $PKG/etc/ld.so.cache
 
   rm -rf $PKG/usr/share/{info,locale} \
-  $PKG/usr/bin/tzselect \
-  $PKG/usr/sbin/z{dump,ic}
+        $PKG/usr/bin/tzselect \
+        $PKG/usr/sbin/z{dump,ic}
 }
