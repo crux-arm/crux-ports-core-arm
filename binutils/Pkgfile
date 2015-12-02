@@ -2,10 +2,10 @@
 # URL: http://sources.redhat.com/binutils/
 # Maintainer: CRUX System Team, core-ports at crux dot nu
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
-# Depends on: zlib
+# Depends on: zlib flex
 
 name=binutils
-version=2.24
+version=2.25.1
 release=2
 source=(ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2)
 
@@ -14,15 +14,22 @@ build() {
 
   mkdir build
   cd build
+
   ../$name-$version/configure --prefix=/usr \
                               --build=arm-unknown-linux-gnueabihf \
-                              --mandir=/usr/man \
                               --enable-shared \
-                              --disable-nls
+                              --disable-nls \
+                              --enable-ld=default \
+                              --enable-gold=yes \
+                              --enable-plugins \
+                              --disable-werror
+
   make tooldir=/usr
-  make check
   make tooldir=/usr DESTDIR=$PKG install
+
   install -m 0644  ../$name-$version/include/libiberty.h $PKG/usr/include
-  rm -r $PKG/usr/share
+
+  rm -r $PKG/usr/share/info
+  rm $PKG/usr/share/man/man1/{dlltool,nlmconv,windres,windmc}.1
   sed -i "s|-L$SRC[^ ]* ||g" $PKG/usr/lib/lib{bfd,opcodes}.la
 }
