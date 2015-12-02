@@ -6,15 +6,14 @@
 
 name=prt-get
 version=5.19
-release=2
-source=(http://jw.smts.ch/files/crux/prt-get-$version.tar.gz
+release=3
+source=(http://crux.nu/files/prt-get-$version.tar.gz
         prt-get.conf prt-get.aliases)
 
 build() {
   cd ${name}-${version}
 
-  ./configure --prefix=/usr \
-              --mandir=/usr/man
+  ./configure --prefix=/usr
   make
   make DESTDIR=$PKG install
 
