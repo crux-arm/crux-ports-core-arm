@@ -7,7 +7,7 @@
 -export CFLAGS="-O2 -march=x86-64 -pipe"
 -export CXXFLAGS="${CFLAGS}"
 -
-+export CFLAGS="-O2 -pipe -mfloat-abi=hard"
++export CFLAGS="-O2 -pipe -mfloat-abi=hard -march=native"
 +export CXXFLAGS="$CFLAGS"
  # export MAKEFLAGS="-j2"
  

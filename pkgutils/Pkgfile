@@ -14,5 +14,5 @@ build () {
   cd $name-$version
   patch -p0 -i $SRC/pkgmk.conf.patch
   sed -i -e "s|\--static||g" -e "s|\-static||g" Makefile
-  make DESTDIR=$PKG install
+  make DESTDIR=$PKG install MANDIR=/usr/share/man
 }
