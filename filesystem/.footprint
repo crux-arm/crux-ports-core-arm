@@ -18,7 +18,6 @@ lrwxrwxrwx	root/root	etc/mtab -> /proc/self/mounts
 drwxr-xr-x	root/root	home/
 drwxr-xr-x	root/root	lib/
 drwxr-xr-x	root/root	lib/modules/
-drwxr-xr-x	root/root	lib32/
 drwxr-xr-x	root/root	mnt/
 drwxr-xr-x	root/root	opt/
 drwxr-xr-x	root/root	opt/bin/
