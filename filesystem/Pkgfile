@@ -20,7 +20,7 @@ build() {
   install -d $PKG/etc
   install -d $PKG/mnt
   install -d $PKG/run
-  install -d $PKG/lib{,32}
+  install -d $PKG/lib
   install -d $PKG/lib/modules
   install -d $PKG/opt
   install -d $PKG/opt/bin
