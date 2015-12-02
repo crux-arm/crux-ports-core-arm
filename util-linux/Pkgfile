@@ -2,7 +2,7 @@
 # URL: http://userweb.kernel.org/~kzak/util-linux/
 # Maintainer: CRUX System Team, core-ports at crux dot nu
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
-# Depends on: ncurses zlib
+# Depends on: eudev ncurses zlib
 
 name=util-linux
 version=2.27.1
@@ -13,7 +13,6 @@ build() {
   cd $name-$version
 
   ./configure --prefix=/usr \
-              --mandir=/usr/man \
               --disable-nls \
               --disable-{login,su,sulogin,nologin,runuser} \
               --enable-{write,raw,kill} \
@@ -27,5 +26,4 @@ build() {
 
   rm -r $PKG/usr/share
   rm $PKG/sbin/{mkfs.bfs,mkfs.minix,fsck.minix}
-  rm $PKG/usr/man/man8/{fsck.minix,mkfs.bfs,mkfs.minix}.8
 }
