@@ -1,0 +1,12 @@
+If you are experiencing problems while building, getting out of memmory:
+
+[230049.374808] lowmemorykiller: Killing 'genautomata' (9796), adj 0,
+[230049.374816]    to free 899056kB on behalf of 'kswapd0' (27) because
+[230049.374823]    cache 5912kB is below limit 6144kB for oom_score_adj 0
+[230049.374829]    Free memory is -1276kB above reserved
+
+we need to "disable" lowmemmorykiller:
+
+echo '9999' > /sys/module/lowmemorykiller/parameters/adj
+echo '1' > /sys/module/lowmemorykiller/parameters/minfree
+

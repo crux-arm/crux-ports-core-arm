@@ -5,14 +5,13 @@
 # Depends on: zlib libmpc
 
 name=gcc
-version=4.8.5
+version=5.2.0
 release=1
-source=(ftp://gcc.gnu.org/pub/gcc/releases/$name-$version/$name-$version.tar.bz2
-        $name-nocheck-fixincludes.patch $name-$version-gnueabihf.patch)
+source=(http://gcc.gnu.org/pub/gcc/releases/$name-$version/$name-$version.tar.bz2
+        $name-nocheck-fixincludes.patch)
 
 build() {
   patch -d $name-$version -p1 -i $SRC/$name-nocheck-fixincludes.patch
-  patch -d $name-$version -p1 -i $SRC/$name-$version-gnueabihf.patch
 
   mkdir build
   cd build
@@ -21,7 +20,6 @@ build() {
                               --build=arm-unknown-linux-gnueabihf \
                               --with-abi=aapcs-linux --with-mode=arm \
                               --with-float=hard \
-                              --mandir=/usr/man \
                               --libexecdir=/usr/lib \
                               --enable-languages=c,c++,objc \
                               --enable-threads=posix \
@@ -42,9 +40,8 @@ build() {
   ln -sf g++ $PKG/usr/bin/c++
 
   mv $PKG/usr/lib/gcc/*/$version/include-fixed/{limits.h,syslimits.h} $PKG/usr/lib/gcc/*/$version/include/
-
-  rm $PKG/usr/lib/libstdc++.so.6.0.19-gdb.py
-  rm -r $PKG/usr/share
+  rm $PKG/usr/lib/libstdc++.so.6.0.21-gdb.py
+  rm -r $PKG/usr/share/{info,$name-$version}
   rm -r $PKG/usr/bin/*-linux-gnu*
   rm -r $PKG/usr/lib/gcc/*/$version/{install-tools,include-fixed}
 
