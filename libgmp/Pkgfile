@@ -5,12 +5,12 @@
 # Depends on:
 
 name=libgmp
-version=6.0.0a
+version=6.1.0
 release=1
-source=(ftp://ftp.gmplib.org/pub/gmp-${version%a}/gmp-$version.tar.xz)
+source=(http://gmplib.org/download/gmp/gmp-$version.tar.xz)
 
 build() {
-  cd gmp-${version%a}
+  cd gmp-$version
   ./configure --prefix=/usr \
               --enable-cxx \
               --build=arm-unknown-linux-gnueabihf
