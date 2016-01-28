@@ -5,14 +5,13 @@
 # Depends on: libarchive
 
 name=pkgutils
-version=5.35.6
-release=1
-source=(http://crux.nu/files/$name-$version.tar.gz \
+version=5.36
+release=2
+source=(http://crux.nu/files/$name-$version.tar.xz \
         pkgmk.conf.patch)
 
 build () {
   cd $name-$version
   patch -p0 -i $SRC/pkgmk.conf.patch
-  sed -i -e "s|\--static||g" -e "s|\-static||g" Makefile
   make DESTDIR=$PKG install MANDIR=/usr/share/man
 }
