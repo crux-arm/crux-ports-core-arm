@@ -6,10 +6,11 @@
 
 name=glibc
 version=2.22
-release=2
+release=3
 source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
         http://ftp.kernel.org/pub/linux/kernel/v4.x/linux-4.1.13.tar.xz \
-        CVE-2015-8779.patch CVE-2015-8778.patch CVE-2015-8777.patch CVE-2015-8776.patch \
+        CVE-2015-8779.patch CVE-2015-8778.patch CVE-2015-8777.patch \
+        CVE-2015-8776.patch CVE-2015-7547.patch glibc-rh1252570.patch
         hosts resolv.conf nsswitch.conf host.conf ld.so.conf)
 
 build() {
@@ -19,10 +20,11 @@ build() {
   make ARCH=arm headers_check
   make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
 
-  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2015-8779.patch
   patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2015-8778.patch
   patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2015-8777.patch
   patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2015-8776.patch
+  patch -p1 -d $SRC/$name-$version -i $SRC/glibc-rh1252570.patch
+  patch -p1 -d $SRC/$name-$version -i $SRC/CVE-2015-7547.patch
 
   mkdir $SRC/build
   cd $SRC/build
