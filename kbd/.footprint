@@ -319,6 +319,9 @@ drwxr-xr-x	root/root	usr/share/kbd/keymaps/i386/azerty/
 drwxr-xr-x	root/root	usr/share/kbd/keymaps/i386/bepo/
 -rw-r--r--	root/root	usr/share/kbd/keymaps/i386/bepo/fr-bepo-latin9.map.gz
 -rw-r--r--	root/root	usr/share/kbd/keymaps/i386/bepo/fr-bepo.map.gz
+drwxr-xr-x	root/root	usr/share/kbd/keymaps/i386/carpalx/
+-rw-r--r--	root/root	usr/share/kbd/keymaps/i386/carpalx/carpalx-full.map.gz
+-rw-r--r--	root/root	usr/share/kbd/keymaps/i386/carpalx/carpalx.map.gz
 drwxr-xr-x	root/root	usr/share/kbd/keymaps/i386/colemak/
 -rw-r--r--	root/root	usr/share/kbd/keymaps/i386/colemak/en-latin9.map.gz
 drwxr-xr-x	root/root	usr/share/kbd/keymaps/i386/dvorak/

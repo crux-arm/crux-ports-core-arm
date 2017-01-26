@@ -5,17 +5,12 @@
 # Depends on:
 
 name=kbd
-version=2.0.3
+version=2.0.4
 release=2
 source=(http://ftp.kernel.org/pub/linux/utils/$name/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
-
-  # we don't want a dependency to 'check'
-  sed -i '/^SUBDIR/s/tests//' Makefile.am
-  sed -i '/\[check >= 0.9.4\]/s/^/#/' configure.ac
-  autoreconf --install
 
   ./configure --prefix=/usr \
               --datadir=/usr/share/kbd \
