@@ -5,13 +5,15 @@
 # Depends on: ncurses readline
 
 name=bash
-version=4.4
+version=4.4.12
 release=1
 source=(http://ftp.gnu.org/gnu/$name/$name-${version:0:3}.tar.gz \
-        profile)
+        $name-$version.patch.gz profile)
 
 build() {
   cd $name-${version:0:3}
+
+  gunzip -c $SRC/$name-$version.patch.gz | patch -p0
 
   ./configure --prefix=/usr \
               --build=arm-unknown-linux-gnueabihf \
