@@ -52,6 +52,7 @@ drwxr-xr-x	root/root	sbin/
 drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/cal
+-rwxr-xr-x	root/root	usr/bin/chmem
 -rwxr-xr-x	root/root	usr/bin/chrt
 -rwxr-xr-x	root/root	usr/bin/col
 -rwxr-xr-x	root/root	usr/bin/colcrt
@@ -59,6 +60,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/column
 -rwxr-xr-x	root/root	usr/bin/eject
 -rwxr-xr-x	root/root	usr/bin/fallocate
+-rwxr-xr-x	root/root	usr/bin/fincore
 -rwxr-xr-x	root/root	usr/bin/flock
 -rwxr-xr-x	root/root	usr/bin/getopt
 -rwxr-xr-x	root/root	usr/bin/hexdump
@@ -77,6 +79,7 @@ lrwxrwxrwx	root/root	usr/bin/linux64 -> setarch
 -rwxr-xr-x	root/root	usr/bin/lsipc
 -rwxr-xr-x	root/root	usr/bin/lslocks
 -rwxr-xr-x	root/root	usr/bin/lslogins
+-rwxr-xr-x	root/root	usr/bin/lsmem
 -rwxr-xr-x	root/root	usr/bin/lsns
 -rwxr-xr-x	root/root	usr/bin/mcookie
 -rwxr-xr-x	root/root	usr/bin/mesg
@@ -91,7 +94,6 @@ lrwxrwxrwx	root/root	usr/bin/linux64 -> setarch
 -rwxr-xr-x	root/root	usr/bin/setarch
 -rwxr-xr-x	root/root	usr/bin/setsid
 -rwxr-xr-x	root/root	usr/bin/setterm
--rwxr-xr-x	root/root	usr/bin/tailf
 -rwxr-xr-x	root/root	usr/bin/taskset
 -rwxr-xr-x	root/root	usr/bin/ul
 lrwxrwxrwx	root/root	usr/bin/uname26 -> setarch
