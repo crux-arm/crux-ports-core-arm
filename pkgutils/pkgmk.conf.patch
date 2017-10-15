@@ -1,14 +1,13 @@
---- pkgmk.conf.orig	2014-10-16 15:59:34.057394811 +0000
-+++ pkgmk.conf	2014-10-16 16:00:18.437371591 +0000
-@@ -2,9 +2,8 @@
+--- pkgutils-5.40.5/pkgmk.conf	2017-09-20 17:49:39.000000000 +0200
++++ pkgmk.conf	2017-10-15 23:45:54.000000000 +0200
+@@ -2,8 +2,8 @@
  # /etc/pkgmk.conf: pkgmk(8) configuration
  #
  
 -export CFLAGS="-O2 -march=x86-64 -pipe"
 -export CXXFLAGS="${CFLAGS}"
--
 +export CFLAGS="-O2 -pipe -mfloat-abi=hard -march=native"
 +export CXXFLAGS="$CFLAGS"
- # export MAKEFLAGS="-j2"
  
- case ${PKGMK_ARCH} in
+ # export JOBS=$(nproc)
+ # export MAKEFLAGS="-j $JOBS"
