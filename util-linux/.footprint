@@ -89,7 +89,6 @@ lrwxrwxrwx	root/root	usr/bin/linux64 -> setarch
 -rwxr-xr-x	root/root	usr/bin/rename
 -rwxr-xr-x	root/root	usr/bin/renice
 -rwxr-xr-x	root/root	usr/bin/rev
--rwxr-xr-x	root/root	usr/bin/rfkill
 -rwxr-xr-x	root/root	usr/bin/script
 -rwxr-xr-x	root/root	usr/bin/scriptreplay
 -rwxr-xr-x	root/root	usr/bin/setarch
@@ -146,6 +145,7 @@ drwxr-xr-x	root/root	usr/sbin/
 -rwxr-xr-x	root/root	usr/sbin/partx
 -rwxr-xr-x	root/root	usr/sbin/readprofile
 -rwxr-xr-x	root/root	usr/sbin/resizepart
+-rwxr-xr-x	root/root	usr/sbin/rfkill
 -rwxr-xr-x	root/root	usr/sbin/rtcwake
 -rwxr-xr-x	root/root	usr/sbin/uuidd
 drwxr-xr-x	root/root	var/
