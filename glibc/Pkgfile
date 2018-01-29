@@ -6,10 +6,11 @@
 
 name=glibc
 version=2.24
-release=3
-source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
-        http://ftp.kernel.org/pub/linux/kernel/v4.x/linux-4.1.13.tar.xz \
-        hosts resolv.conf nsswitch.conf host.conf ld.so.conf)
+release=10
+source=(http://ftpmirror.gnu.org/gnu/glibc/glibc-2.24.tar.xz \
+        http://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.13.tar.xz \
+        hosts resolv.conf nsswitch.conf host.conf ld.so.conf \
+        glibc-2.24-10.patch)
 
 build() {
   # install kernel headers
@@ -18,9 +19,11 @@ build() {
   make ARCH=arm headers_check
   make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
 
+  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/glibc-2.24-10.patch
+
   mkdir $SRC/build
   cd $SRC/build
-  ../$name-$version/configure --prefix=/usr \
+  ../$name-${version:0:4}/configure --prefix=/usr \
                               --build=arm-unknown-linux-gnueabihf \
                               --libexecdir=/usr/lib \
                               --with-headers=$PKG/usr/include \
@@ -33,6 +36,7 @@ build() {
                               --enable-obsolete-rpc
 
   make
+  #make check
   make install_root=$PKG install
 
   install -m 0644 $SRC/$name-$version/nscd/nscd.conf $PKG/etc
