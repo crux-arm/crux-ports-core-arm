@@ -8,13 +8,13 @@ name=glibc
 version=2.24
 release=10
 source=(http://ftpmirror.gnu.org/gnu/glibc/glibc-2.24.tar.xz \
-        http://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.13.tar.xz \
+        http://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.5.tar.xz \
         hosts resolv.conf nsswitch.conf host.conf ld.so.conf \
         glibc-2.24-10.patch)
 
 build() {
   # install kernel headers
-  cd linux-4.1.13
+  cd linux-4.9.5
   make mrproper
   make ARCH=arm headers_check
   make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
