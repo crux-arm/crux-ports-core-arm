@@ -5,9 +5,9 @@
 # Depends on: zlib flex
 
 name=binutils
-version=2.27
+version=2.29.1
 release=1
-source=(ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.bz2)
+source=(http://ftpmirror.gnu.org/gnu/$name/$name-$version.tar.bz2)
 
 build() {
   sed -i '/^SUBDIRS/s/doc//' $name-$version/bfd/Makefile.in
