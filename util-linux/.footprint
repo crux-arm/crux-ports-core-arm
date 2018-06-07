@@ -25,6 +25,7 @@ drwxr-xr-x	root/root	sbin/
 -rwxr-xr-x	root/root	sbin/agetty
 -rwxr-xr-x	root/root	sbin/blkdiscard
 -rwxr-xr-x	root/root	sbin/blkid
+-rwxr-xr-x	root/root	sbin/blkzone
 -rwxr-xr-x	root/root	sbin/blockdev
 -rwxr-xr-x	root/root	sbin/cfdisk
 -rwxr-xr-x	root/root	sbin/chcpu
