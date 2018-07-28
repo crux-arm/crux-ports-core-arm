@@ -6,9 +6,10 @@
 
 name=glibc
 version=2.27
-release=1
+release=2
 source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
         http://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.14.tar.xz \
+        $name-$version-$release.patch \
         hosts resolv.conf nsswitch.conf host.conf ld.so.conf)
 
 build() {
@@ -17,6 +18,9 @@ build() {
   make mrproper
   make ARCH=arm headers_check
   make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
+  chown root:root $PKG/usr
+
+  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-$release.patch
 
   mkdir $SRC/build
   cd $SRC/build
@@ -24,14 +28,15 @@ build() {
                               --build=arm-unknown-linux-gnueabihf \
                               --libexecdir=/usr/lib \
                               --with-headers=$PKG/usr/include \
-                              --enable-kernel=2.6.25 \
+                              --enable-kernel=3.12 \
                               --enable-add-ons \
                               --enable-static-nss \
+                              --enable-stack-protector=strong \
+                              --enable-obsolete-rpc \
+                              --enable-obsolete-nsl \
                               --disable-profile \
                               --disable-werror \
-                              --without-gd \
-                              --enable-obsolete-rpc \
-                              --enable-obsolete-nsl
+                              --without-gd
 
   make
   #make check
@@ -42,6 +47,10 @@ build() {
 
   install -m 0644 $SRC/{hosts,resolv.conf,nsswitch.conf,host.conf,ld.so.conf} $PKG/etc
 
+  # install needed headers
+  install -d $PKG/usr/include/rpcsvc
+  install -m 0644 $SRC/$name-${version:0:4}/nis/rpcsvc/yp* $PKG/usr/include/rpcsvc
+
   ln -sf ../usr/share/zoneinfo/UTC $PKG/etc/localtime
   ln -s stubs-hard.h $PKG/usr/include/gnu/stubs-soft.h
   install -d $PKG/etc/ld.so.conf.d $PKG/usr/lib/locale
@@ -50,4 +59,6 @@ build() {
   rm -rf $PKG/usr/share/{info,locale} \
         $PKG/usr/bin/tzselect \
         $PKG/usr/sbin/z{dump,ic}
+  find $PKG -name "*install.cmd" -delete
+  find $PKG -name ".\install" -delete
 }
