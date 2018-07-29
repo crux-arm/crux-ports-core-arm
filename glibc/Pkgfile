@@ -28,7 +28,7 @@ build() {
                               --build=arm-unknown-linux-gnueabihf \
                               --libexecdir=/usr/lib \
                               --with-headers=$PKG/usr/include \
-                              --enable-kernel=3.12 \
+                              --enable-kernel=3.2 \
                               --enable-add-ons \
                               --enable-static-nss \
                               --enable-stack-protector=strong \
