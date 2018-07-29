@@ -36,7 +36,8 @@ build() {
                               --enable-obsolete-nsl \
                               --disable-profile \
                               --disable-werror \
-                              --without-gd
+                              --without-gd \
+                              --disable-multi-arch
 
   make
   #make check
