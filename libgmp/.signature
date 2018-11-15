@@ -1,0 +1,5 @@
+untrusted comment: verify with /etc/ports/core-arm.pub
+RWTMGLGEHsm4dUGioF0M0jxe4GQZTHyn3dE0k6rTSCIWxEEjmjeV31jyls1QbklbMewgXJMtX54FDbNoqnKK+MBXpb9Yo9MG8AY=
+SHA256 (Pkgfile) = fd73840fe8f39fdb75e7938118d64f0873ed6ec48f0ea4fddc08d382d46fb247
+SHA256 (.footprint) = 218290c3a4ed2797496099c1665969b303bcba4c1ea4ff548283608dea585558
+SHA256 (gmp-6.1.2.tar.xz) = 87b565e89a9a684fe4ebeeddb8399dce2599f9c9049854ca8c0dfbdea0e21912
