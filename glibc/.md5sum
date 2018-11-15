@@ -1,8 +1,0 @@
-360e6d4a42c595245c2132abd76697fe  glibc-2.27-2.patch
-898cd5656519ffbc3a03fe811dd89e82  glibc-2.27.tar.xz
-96156bec8e05de67384dc93e72bdc313  host.conf
-fbbc215a9b15ba4846f326cc88108057  hosts
-f7fefce570a3c776e26e778c5e401490  ld.so.conf
-2b772ad12fddd77ade316d87bc62a499  linux-4.14.14.tar.xz
-75931315bf9bc9be15a5e25e4ddd5f0d  nsswitch.conf
-acf9daad1ee85de5efd3543965596a63  resolv.conf
