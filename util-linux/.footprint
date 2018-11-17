@@ -54,6 +54,7 @@ drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/cal
 -rwxr-xr-x	root/root	usr/bin/chmem
+-rwxr-xr-x	root/root	usr/bin/choom
 -rwxr-xr-x	root/root	usr/bin/chrt
 -rwxr-xr-x	root/root	usr/bin/col
 -rwxr-xr-x	root/root	usr/bin/colcrt
