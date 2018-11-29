@@ -1,8 +1,221 @@
 diff --git a/ChangeLog b/ChangeLog
-index f3fe2716b2..6fba508ae1 100644
+index f3fe2716b2..2f1e82b61c 100644
 --- a/ChangeLog
 +++ b/ChangeLog
-@@ -1,3 +1,431 @@
+@@ -1,3 +1,644 @@
++2018-11-27  Florian Weimer  <fweimer@redhat.com>
++
++	[BZ #23927]
++	CVE-2018-19591
++	* sysdeps/unix/sysv/linux/if_index.c (__if_nametoindex): Avoid
++	descriptor leak in case of ENODEV error.
++
++2018-11-08  Alexandra Hájková  <ahajkova@redhat.com>
++
++	[BZ #17630]
++	* resolv/tst-resolv-network.c: Add test for getnetbyname.
++
++2018-11-05  Andreas Schwab  <schwab@suse.de>
++
++	[BZ #22927]
++	* resolv/gai_misc.c (__gai_enqueue_request): Don't crash if
++	creating the first helper thread failed.
++
++2018-10-23  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
++
++	[BZ #23709]
++	* sysdeps/x86/cpu-features.c (init_cpu_features): Set TSX bits
++	independently of other flags.
++
++2018-10-26  Szabolcs Nagy  <szabolcs.nagy@arm.com>
++
++	[BZ #23822]
++	* sysdeps/ia64/fpu/e_exp2f.S (exp2f): Use WEAK_LIBM_ENTRY.
++	* sysdeps/ia64/fpu/e_log2f.S (log2f): Likewise.
++	* sysdeps/ia64/fpu/e_exp2f.S (powf): Likewise.
++
++2018-10-25  Florian Weimer  <fweimer@redhat.com>
++
++	[BZ #23562]
++	[BZ #23821]
++	XFAIL siginfo_t si_band conform test on sparc64.
++	* sysdeps/unix/sysv/linux/sparc/bits/siginfo-arch.h
++	(__SI_BAND_TYPE): Only override long int default type on sparc64.
++	* sysdeps/unix/sysv/linux/sparc/sparc64/Makefile
++	(conformtest-xfail-conds): Add sparc64-linux.
++	* conform/data/signal.h-data (siginfo_t): XFAIL si_band test on
++	sparc64.
++	* conform/data/sys/wait.h-data (siginfo_t): Likewise.
++
++2018-10-19  Ilya Yu. Malakhov  <malakhov@mcst.ru>
++
++	[BZ #23562]
++	* sysdeps/unix/sysv/linux/bits/types/siginfo_t.h
++	(struct siginfo_t): Use correct type for si_band.
++
++2018-10-17  Stefan Liebler  <stli@linux.ibm.com>
++
++	[BZ #23275]
++	* nptl/tst-mutex10.c: New File.
++	* nptl/Makefile (tests): Add tst-mutex10.
++	(tst-mutex10-ENV): New variable.
++	* sysdeps/unix/sysv/linux/s390/force-elision.h: (FORCE_ELISION):
++	Ensure that elision path is used if elision is available.
++	* sysdeps/unix/sysv/linux/powerpc/force-elision.h (FORCE_ELISION):
++	Likewise.
++	* sysdeps/unix/sysv/linux/x86/force-elision.h: (FORCE_ELISION):
++	Likewise.
++	* nptl/pthreadP.h (PTHREAD_MUTEX_TYPE, PTHREAD_MUTEX_TYPE_ELISION)
++	(PTHREAD_MUTEX_PSHARED): Use atomic_load_relaxed.
++	* nptl/pthread_mutex_consistent.c (pthread_mutex_consistent): Likewise.
++	* nptl/pthread_mutex_getprioceiling.c (pthread_mutex_getprioceiling):
++	Likewise.
++	* nptl/pthread_mutex_lock.c (__pthread_mutex_lock_full)
++	(__pthread_mutex_cond_lock_adjust): Likewise.
++	* nptl/pthread_mutex_setprioceiling.c (pthread_mutex_setprioceiling):
++	Likewise.
++	* nptl/pthread_mutex_timedlock.c (__pthread_mutex_timedlock): Likewise.
++	* nptl/pthread_mutex_trylock.c (__pthread_mutex_trylock): Likewise.
++	* nptl/pthread_mutex_unlock.c (__pthread_mutex_unlock_full): Likewise.
++	* sysdeps/nptl/bits/thread-shared-types.h (struct __pthread_mutex_s):
++	Add comments.
++	* nptl/pthread_mutex_destroy.c (__pthread_mutex_destroy):
++	Use atomic_load_relaxed and atomic_store_relaxed.
++	* nptl/pthread_mutex_init.c (__pthread_mutex_init):
++	Use atomic_store_relaxed.
++
++2018-09-28  Adhemerval Zanella  <adhemerval.zanella@linaro.org>
++
++	[BZ #23579]
++	* misc/tst-preadvwritev2-common.c (do_test_with_invalid_fd,
++	do_test_with_invalid_iov): New tests.
++	* misc/tst-preadvwritev2.c, misc/tst-preadvwritev64v2.c (do_test):
++	Call do_test_with_invalid_fd and do_test_with_invalid_iov.
++	* sysdeps/unix/sysv/linux/preadv2.c (preadv2): Use fallback code iff
++	errno is ENOSYS.
++	* sysdeps/unix/sysv/linux/preadv64v2.c (preadv64v2): Likewise.
++	* sysdeps/unix/sysv/linux/pwritev2.c (pwritev2): Likewise.
++	* sysdeps/unix/sysv/linux/pwritev64v2.c (pwritev64v2): Likewise.
++	* NEWS: Add bug fixed.
++
++2018-09-28  Florian Weimer  <fweimer@redhat.com>
++
++	[BZ #22753]
++	* sysdeps/posix/preadv2.c (preadv2): Handle offset == -1.
++	* sysdeps/posix/preadv64v2.c (preadv64v2): Likewise.
++	* sysdeps/posix/pwritev2.c (pwritev2): Likewise.
++	* sysdeps/posix/pwritev64v2.c (pwritev64v2): Likweise.
++	* sysdeps/unix/sysv/linux/preadv2.c (preadv2): Likewise.
++	* sysdeps/unix/sysv/linux/preadv64v2.c (preadv64v2): Likewise.
++	* sysdeps/unix/sysv/linux/pwritev2.c (pwritev2): Likewise.
++	* sysdeps/unix/sysv/linux/pwritev64v2.c (pwritev64v2): Likweise.
++	* manual/llio.texi (Scatter-Gather): Mention offset -1.
++	* misc/tst-preadvwritev-common.c (do_test_without_offset): New.
++	* misc/tst-preadvwritev2.c (do_test): Call it.
++	* misc/tst-preadvwritev64v2.c (do_test): Likewise.
++	* NEWS: Add bug fixed.
++
++2018-09-06  Stefan Liebler  <stli@linux.ibm.com>
++
++	* sysdeps/unix/sysv/linux/spawni.c (maybe_script_execute):
++	Increment size of new_argv by one.
++
++2018-08-27 Martin Kuchta  <martin.kuchta@netapp.com>
++	   Torvald Riegel  <triegel@redhat.com>
++
++	[BZ #23538]
++	* nptl/pthread_cond_common.c (__condvar_quiesce_and_switch_g1):
++	Update r to include the set wake-request flag if waiters are
++	remaining after spinning.
++
++2018-07-29  H.J. Lu  <hongjiu.lu@intel.com>
++
++	[BZ #23459]
++	* sysdeps/x86/cpu-features.c (get_extended_indices): New
++	function.
++	(init_cpu_features): Call get_extended_indices for both Intel
++	and AMD CPUs.
++	* sysdeps/x86/cpu-features.h (COMMON_CPUID_INDEX_80000001):
++	Remove "for AMD" comment.
++
++2018-07-29  H.J. Lu  <hongjiu.lu@intel.com>
++
++	[BZ #23456]
++	* sysdeps/x86/cpu-features.h (index_cpu_LZCNT): Set to
++	COMMON_CPUID_INDEX_80000001.
++
++2018-07-10  Florian Weimer  <fweimer@redhat.com>
++
++	[BZ #23036]
++	* posix/regexec.c (check_node_accept_bytes): When comparing
++	weights, do not compare an extra byte after the end of the
++	weights.
++
++2018-06-29  Sylvain Lesage  <severo@rednegra.net>
++
++	[BZ #22996]
++	* localedata/locales/es_BO (LC_PAPER): Change to “copy "en_US"”.
++
++2018-07-06  Florian Weimer  <fweimer@redhat.com>
++
++	* conform/conformtest.pl (checknamespace): Escape literal braces
++	in regular expressions.
++
++2018-06-21  Florian Weimer  <fweimer@redhat.com>
++
++	[BZ #23253]
++	* sysdeps/generic/math_private.h (default_libc_feholdsetround_ctx):
++	Renamed from libc_feholdsetround_ctx.
++	(default_libc_feresetround_ctx): Renamed from
++	libc_feresetround_ctx.
++	(default_libc_feholdsetround_noex_ctx): Renamed from
++	libc_feholdsetround_noex_ctx.
++	(default_libc_feresetround_noex_ctx): Renamed from
++	libc_feresetround_noex_ctx.
++	[!HAVE_RM_CTX] (libc_feholdsetround_ctx, libc_feresetround_ctx)
++	(libc_feholdsetround_noex_ctx, libc_feresetround_noex_ctx): Macros
++	forwardning to the old implementations under the new names.
++	* sysdeps/i386/fpu/fenv_private.h [__SSE_MATH__]
++	(libc_feholdexcept_setround_ctx, libc_fesetenv_ctx)
++	(libc_feupdateenv_ctx, libc_feholdsetround_ctx)
++	(libc_feresetround_ctx): Forward to default implements for i386
++	and MATH_SET_BOTH_ROUNDING_MODES.
++	* sysdeps/i386/Makefile [$(subdir) == math] (CFLAGS-e_gamma_r.c):
++	Add -DMATH_SET_BOTH_ROUNDING_MODES.
++
++2018-07-03  Florian Weimer  <fweimer@redhat.com>
++
++	[BZ #23363]
++	* stdio-common/tst-printf.c (DEC, INT, UNS, fp_test): Remove.
++	* stdio-common/tst-printf.sh: Adjust expected output.
++	* LICENSES: Update.
++
++2018-06-26  Florian Weimer  <fweimer@redhat.com>
++
++	* libio/Makefile (tests-internal): Add tst-vtables,
++	tst-vtables-interposed.
++	* libio/tst-vtables.c: New file.
++	* libio/tst-vtables-common.c: Likewise.
++	* libio/tst-vtables-interposed.c: Likewise.
++
++2018-06-26  Florian Weimer  <fweimer@redhat.com>
++
++	[BZ #23313]
++	* libio/vtables.c (check_stdfiles_vtables): New ELF constructor.
++
++2018-06-29  Daniel Alvarez  <dalvarez@redhat.com>
++	    Jakub Sitnicki  <jkbs@redhat.com>
++
++	[BZ #21812]
++	* sysdeps/unix/sysv/linux/ifaddrs.c (getifaddrs_internal): Retry
++	on NLM_F_DUMP_INTR.
++
++2018-06-28  Florian Weimer  <fweimer@redhat.com>
++
++	[BZ #23349]
++	* time/bits/types/struct_timespec.h: Change header inclusion guard to
++	_STRUCT_TIMESPEC.
++
 +2018-05-24  Gabriel F. T. Gomes  <gabriel@inconstante.eti.br>
 +
 +	[BZ #23171]
@@ -434,7 +647,7 @@ index f3fe2716b2..6fba508ae1 100644
  2018-02-01  Dmitry V. Levin  <ldv@altlinux.org>
  
  	* version.h (RELEASE): Set to "stable".
-@@ -710,7 +1138,9 @@
+@@ -710,7 +1351,9 @@
  2018-01-18  Arjun Shankar  <arjun@redhat.com>
  
  	[BZ #22343]
@@ -444,11 +657,31 @@ index f3fe2716b2..6fba508ae1 100644
  	* malloc/malloc.c (checked_request2size): call REQUEST_OUT_OF_RANGE
  	after padding.
  	(_int_memalign): check for integer overflow before calling
+diff --git a/LICENSES b/LICENSES
+index 80f7f14879..858076d9d3 100644
+--- a/LICENSES
++++ b/LICENSES
+@@ -441,15 +441,6 @@ Permission to use, copy, modify, and distribute this
+ software is freely granted, provided that this notice
+ is preserved.
+ 
+-Part of stdio-common/tst-printf.c is copyright C E Chew:
+-
+-(C) Copyright C E Chew
+-
+-Feel free to copy, use and distribute this software provided:
+-
+-     1. you do not pretend that you wrote it
+-     2. you leave this copyright notice intact.
+-
+ Various long double libm functions are copyright Stephen L. Moshier:
+ 
+ Copyright 2001 by Stephen L. Moshier <moshier@na-net.ornl.gov>
 diff --git a/NEWS b/NEWS
-index a71c1038a8..2dab66e851 100644
+index a71c1038a8..e1a23f076b 100644
 --- a/NEWS
 +++ b/NEWS
-@@ -5,6 +5,83 @@ See the end for copying conditions.
+@@ -5,6 +5,105 @@ See the end for copying conditions.
  Please send GNU C library bug reports via <https://sourceware.org/bugzilla/>
  using `glibc' in the "product" field.
  
@@ -484,6 +717,10 @@ index a71c1038a8..2dab66e851 100644
 +  architecture could write beyond the target buffer, resulting in a buffer
 +  overflow.  Reported by Andreas Schwab.
 +
++  CVE-2018-19591: A file descriptor leak in if_nametoindex can lead to a
++  denial of service due to resource exhaustion when processing getaddrinfo
++  calls with crafted host names.  Reported by Guido Vranken.
++
 +The following bugs are resolved with this release:
 +
 +  [6889] 'PWD' mentioned but not specified
@@ -492,6 +729,7 @@ index a71c1038a8..2dab66e851 100644
 +  [18018] Additional $ORIGIN handling issues (CVE-2011-0536)
 +  [20419] files with large allocated notes crash in open_verify
 +  [21269] i386 sigaction sa_restorer handling is wrong
++  [21812] getifaddrs: Don't return ifa entries with NULL names
 +  [21942] _dl_dst_substitute incorrectly handles $ORIGIN: with AT_SECURE=1
 +  [22342] NSCD not properly caching netgroup
 +  [22638] sparc: static binaries are broken if glibc is built by gcc
@@ -499,6 +737,7 @@ index a71c1038a8..2dab66e851 100644
 +  [22644] memmove-sse2-unaligned on 32bit x86 produces garbage when crossing
 +    2GB threshold
 +  [22735] Misleading typo in time.h source comment regarding CLOCKS_PER_SECOND
++  [22753] libc: preadv2/pwritev2 fallback code should handle offset=-1
 +  [22786] Stack buffer overflow in realpath() if input size is close
 +    to SSIZE_MAX
 +  [22797] Linux: use reserved name __key in pkey_get
@@ -510,11 +749,14 @@ index a71c1038a8..2dab66e851 100644
 +  [22918] multiple common of `__nss_shadow_database'
 +  [22919] sparc32: backtrace yields infinite backtrace with makecontext
 +  [22926] FTBFS on powerpcspe
++  [22927] libanl: properly cleanup if first helper thread creation failed
 +  [22932] lt_LT: Update of abbreviated month names from CLDR required
 +  [22937] Greek (el_GR, el_CY) locales actually need ab_alt_mon
 +  [22947] FAIL: misc/tst-preadvwritev2
 +  [22963] cs_CZ: Add alternative month names
++  [22996] localedata: change LC_PAPER to en_US in es_BO locale
 +  [23005] Crash in __res_context_send after memory allocation failure
++  [23036] regexec: Fix off-by-one bug in weight comparison
 +  [23037] initialize msg_flags to zero for sendmmsg() calls
 +  [23069] sigaction broken on riscv64-linux-gnu
 +  [23102] Incorrect parsing of consecutive $ variables in runpath entries
@@ -525,14 +767,27 @@ index a71c1038a8..2dab66e851 100644
 +  [23171] Fix parameter type in C++ version of iseqsig
 +  [23196] __mempcpy_avx512_no_vzeroupper mishandles large copies
 +  [23236] Harden function pointers in _IO_str_fields
++  [23253] Set 387 and SSE2 rounding mode for tgamma on i386
 +  [23259] Unsubstituted ${ORIGIN} remains in DT_NEEDED for AT_SECURE
 +  [23264] libc: posix_spawnp wrongly executes ENOEXEC in non compat mode
++  [23313] libio: Disable vtable validation in case of interposition
++  [23349] Various glibc headers no longer compatible with <linux/time.h>
++  [23363] stdio-common/tst-printf.c has non-free license
++  [23456] Wrong index_cpu_LZCNT
++  [23459] COMMON_CPUID_INDEX_80000001 isn't populated for Intel processors
++  [23538] pthread_cond_broadcast: Fix waiters-after-spinning case
++  [23562] signal: Use correct type for si_band in siginfo_t
++  [23579] libc: Errors misreported in preadv2
++  [23709] Fix CPU string flags for Haswell-type CPUs
++  [23821] si_band in siginfo_t has wrong type long int on sparc64
++  [23822] ia64 static libm.a is missing exp2f, log2f and powf symbols
++  [23927] Linux if_nametoindex() does not close descriptor (CVE-2018-19591)
 +
 +
  Version 2.27
  
  Major new features:
-@@ -262,6 +339,10 @@ Security related changes:
+@@ -262,6 +361,10 @@ Security related changes:
    an object size near the value of SIZE_MAX, would return a pointer to a
    buffer which is too small, instead of NULL.  Reported by Jakub Wilk.
  
@@ -554,6 +809,133 @@ index 8c15a05d9a..d5aa06fd08 100644
 +#define RWF_APPEND	0x00000010 /* per-IO O_APPEND.  */
  
  #endif /* sys/uio_ext.h */
+diff --git a/conform/conformtest.pl b/conform/conformtest.pl
+index cb500f0e76..a4ef756105 100644
+--- a/conform/conformtest.pl
++++ b/conform/conformtest.pl
+@@ -367,7 +367,7 @@ while ($#headers >= 0) {
+       s/^optional-//;
+       $optional = 1;
+     }
+-    if (/^element *({([^}]*)}|([^{ ]*)) *({([^}]*)}|([^{ ]*)) *([A-Za-z0-9_]*) *(.*)/) {
++    if (/^element *(\{([^}]*)\}|([^{ ]*)) *(\{([^}]*)\}|([^{ ]*)) *([A-Za-z0-9_]*) *(.*)/) {
+       my($struct) = "$2$3";
+       my($type) = "$5$6";
+       my($member) = "$7";
+@@ -556,7 +556,7 @@ while ($#headers >= 0) {
+ 			"Symbol \"$symbol\" has not the right value.", $res,
+ 			$xfail);
+       }
+-    } elsif (/^type *({([^}]*)|([a-zA-Z0-9_]*))/) {
++    } elsif (/^type *(\{([^}]*)|([a-zA-Z0-9_]*))/) {
+       my($type) = "$2$3";
+       my($maybe_opaque) = 0;
+ 
+@@ -586,7 +586,7 @@ while ($#headers >= 0) {
+ 		    ? "NOT AVAILABLE"
+ 		    : "Type \"$type\" not available."), $missing, $optional,
+ 		   $xfail);
+-    } elsif (/^tag *({([^}]*)|([a-zA-Z0-9_]*))/) {
++    } elsif (/^tag *(\{([^}]*)|([a-zA-Z0-9_]*))/) {
+       my($type) = "$2$3";
+ 
+       # Remember that this name is allowed.
+@@ -607,7 +607,7 @@ while ($#headers >= 0) {
+ 
+       compiletest ($fnamebase, "Testing for type $type",
+ 		   "Type \"$type\" not available.", $missing, 0, $xfail);
+-    } elsif (/^function *({([^}]*)}|([a-zA-Z0-9_]*)) [(][*]([a-zA-Z0-9_]*) ([(].*[)])/) {
++    } elsif (/^function *(\{([^}]*)\}|([a-zA-Z0-9_]*)) [(][*]([a-zA-Z0-9_]*) ([(].*[)])/) {
+       my($rettype) = "$2$3";
+       my($fname) = "$4";
+       my($args) = "$5";
+@@ -644,7 +644,7 @@ while ($#headers >= 0) {
+ 		     "Function \"$fname\" has incorrect type.", $res, 0,
+ 		     $xfail);
+       }
+-    } elsif (/^function *({([^}]*)}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*) ([(].*[)])/) {
++    } elsif (/^function *(\{([^}]*)\}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*) ([(].*[)])/) {
+       my($rettype) = "$2$3";
+       my($fname) = "$4";
+       my($args) = "$5";
+@@ -681,7 +681,7 @@ while ($#headers >= 0) {
+ 		     "Function \"$fname\" has incorrect type.", $res, 0,
+ 		     $xfail);
+       }
+-    } elsif (/^variable *({([^}]*)}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*) *(.*)/) {
++    } elsif (/^variable *(\{([^}]*)\}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*) *(.*)/) {
+       my($type) = "$2$3";
+       my($vname) = "$4";
+       my($rest) = "$5";
+@@ -713,7 +713,7 @@ while ($#headers >= 0) {
+ 
+       compiletest ($fnamebase, "Test for type of variable $fname",
+ 		   "Variable \"$vname\" has incorrect type.", $res, 0, $xfail);
+-    } elsif (/^macro-function *({([^}]*)}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*) ([(].*[)])/) {
++    } elsif (/^macro-function *(\{([^}]*)\}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*) ([(].*[)])/) {
+       my($rettype) = "$2$3";
+       my($fname) = "$4";
+       my($args) = "$5";
+@@ -812,11 +812,11 @@ while ($#headers >= 0) {
+ 
+       s/^xfail(\[([^\]]*)\])?-//;
+       s/^optional-//;
+-      if (/^element *({([^}]*)}|([^ ]*)) *({([^}]*)}|([^ ]*)) *([A-Za-z0-9_]*) *(.*)/) {
++      if (/^element *(\{([^}]*)\}|([^ ]*)) *(\{([^}]*)\}|([^ ]*)) *([A-Za-z0-9_]*) *(.*)/) {
+ 	push @allow, $7;
+       } elsif (/^(macro|constant|macro-constant|macro-int-constant) +([a-zA-Z0-9_]*) *(?:{([^}]*)} *)?(?:([>=<!]+) ([A-Za-z0-9_-]*))?/) {
+ 	push @allow, $2;
+-      } elsif (/^(type|tag) *({([^}]*)|([a-zA-Z0-9_]*))/) {
++      } elsif (/^(type|tag) *(\{([^}]*)|([a-zA-Z0-9_]*))/) {
+ 	my($type) = "$3$4";
+ 
+ 	# Remember that this name is allowed.
+@@ -827,13 +827,13 @@ while ($#headers >= 0) {
+ 	} else {
+ 	  push @allow, $type;
+ 	}
+-      } elsif (/^function *({([^}]*)}|([a-zA-Z0-9_]*)) [(][*]([a-zA-Z0-9_]*) ([(].*[)])/) {
++      } elsif (/^function *(\{([^}]*)\}|([a-zA-Z0-9_]*)) [(][*]([a-zA-Z0-9_]*) ([(].*[)])/) {
+ 	push @allow, $4;
+-      } elsif (/^function *({([^}]*)}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*) ([(].*[)])/) {
++      } elsif (/^function *(\{([^}]*)\}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*) ([(].*[)])/) {
+ 	push @allow, $4;
+-      } elsif (/^variable *({([^}]*)}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*)/) {
++      } elsif (/^variable *(\{([^}]*)\}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*)/) {
+ 	push @allow, $4;
+-      } elsif (/^macro-function *({([^}]*)}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*) ([(].*[)])/) {
++      } elsif (/^macro-function *(\{([^}]*)\}|([a-zA-Z0-9_]*)) ([a-zA-Z0-9_]*) ([(].*[)])/) {
+ 	push @allow, $4;
+       } elsif (/^symbol *([a-zA-Z0-9_]*) *([A-Za-z0-9_-]*)?/) {
+ 	push @allow, $1;
+diff --git a/conform/data/signal.h-data b/conform/data/signal.h-data
+index fa841cfdbe..88c1f5eba2 100644
+--- a/conform/data/signal.h-data
++++ b/conform/data/signal.h-data
+@@ -170,7 +170,8 @@ element siginfo_t pid_t si_pid
+ element siginfo_t uid_t si_uid
+ element siginfo_t {void*} si_addr
+ element siginfo_t int si_status
+-element siginfo_t long si_band
++// Bug 23821: si_band has type int on sparc64.
++xfail[sparc64-linux]-element siginfo_t long si_band
+ #  endif
+ #  ifndef XPG42
+ element siginfo_t {union sigval} si_value
+diff --git a/conform/data/sys/wait.h-data b/conform/data/sys/wait.h-data
+index 559ebdf677..a6713461ea 100644
+--- a/conform/data/sys/wait.h-data
++++ b/conform/data/sys/wait.h-data
+@@ -44,7 +44,8 @@ element siginfo_t pid_t si_pid
+ element siginfo_t uid_t si_uid
+ element siginfo_t {void*} si_addr
+ element siginfo_t int si_status
+-element siginfo_t long si_band
++// Bug 23821: si_band has type int on sparc64.
++xfail[sparc64-linux]-element siginfo_t long si_band
+ # ifndef XPG42
+ element siginfo_t {union sigval} si_value
+ # endif
 diff --git a/debug/vasprintf_chk.c b/debug/vasprintf_chk.c
 index a00ef771e6..3eb64617fd 100644
 --- a/debug/vasprintf_chk.c
@@ -1117,6 +1499,20 @@ index 3d239e8f09..69a4394191 100644
     is meaningful only to faccessat, while AT_REMOVEDIR is meaningful only to
     unlinkat.  The two functions do completely different things and therefore,
     the flags can be allowed to overlap.  For example, passing AT_REMOVEDIR to
+diff --git a/libio/Makefile b/libio/Makefile
+index 918a86bb74..81bd1792a5 100644
+--- a/libio/Makefile
++++ b/libio/Makefile
+@@ -64,6 +64,9 @@ tests = tst_swprintf tst_wprintf tst_swscanf tst_wscanf tst_getwc tst_putwc   \
+ 	tst-setvbuf1 tst-popen1 tst-fgetwc bug-wsetpos tst-fseek \
+ 	tst-fwrite-error tst-ftell-partial-wide tst-ftell-active-handler \
+ 	tst-ftell-append tst-fputws tst-bz22415
++
++tests-internal = tst-vtables tst-vtables-interposed
++
+ ifeq (yes,$(build-shared))
+ # Add test-fopenloc only if shared library is enabled since it depends on
+ # shared localedata objects.
 diff --git a/libio/memstream.c b/libio/memstream.c
 index d86befcc02..c5c7c2f6db 100644
 --- a/libio/memstream.c
@@ -1220,6 +1616,601 @@ index ac995c830e..5fb38976e3 100644
    fp->_IO_buf_base = NULL;
  
    _IO_default_finish (fp, 0);
+diff --git a/libio/tst-vtables-common.c b/libio/tst-vtables-common.c
+new file mode 100644
+index 0000000000..dc8d89c195
+--- /dev/null
++++ b/libio/tst-vtables-common.c
+@@ -0,0 +1,511 @@
++/* Test for libio vtables and their validation.  Common code.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++/* This test provides some coverage for how various stdio functions
++   use the vtables in FILE * objects.  The focus is mostly on which
++   functions call which methods, not so much on validating data
++   processing.  An initial series of tests check that custom vtables
++   do not work without activation through _IO_init.
++
++   Note: libio vtables are deprecated feature.  Do not use this test
++   as a documentation source for writing custom vtables.  See
++   fopencookie for a different way of creating custom stdio
++   streams.  */
++
++#include <stdbool.h>
++#include <string.h>
++#include <support/capture_subprocess.h>
++#include <support/check.h>
++#include <support/namespace.h>
++#include <support/support.h>
++#include <support/test-driver.h>
++#include <support/xunistd.h>
++
++/* Data shared between the test subprocess and the test driver in the
++   parent.  Note that *shared is reset at the start of the check_call
++   function.  */
++struct shared
++{
++  /* Expected file pointer for method calls.  */
++  FILE *fp;
++
++  /* If true, assume that a call to _IO_init is needed to enable
++     custom vtables.  */
++  bool initially_disabled;
++
++  /* Requested return value for the methods which have one.  */
++  int return_value;
++
++  /* A value (usually a character) recorded by some of the methods
++     below.  */
++  int value;
++
++  /* Likewise, for some data.  */
++  char buffer[16];
++  size_t buffer_length;
++
++  /* Total number of method calls.  */
++  unsigned int calls;
++
++  /* Individual method call counts.  */
++  unsigned int calls_finish;
++  unsigned int calls_overflow;
++  unsigned int calls_underflow;
++  unsigned int calls_uflow;
++  unsigned int calls_pbackfail;
++  unsigned int calls_xsputn;
++  unsigned int calls_xsgetn;
++  unsigned int calls_seekoff;
++  unsigned int calls_seekpos;
++  unsigned int calls_setbuf;
++  unsigned int calls_sync;
++  unsigned int calls_doallocate;
++  unsigned int calls_read;
++  unsigned int calls_write;
++  unsigned int calls_seek;
++  unsigned int calls_close;
++  unsigned int calls_stat;
++  unsigned int calls_showmanyc;
++  unsigned int calls_imbue;
++} *shared;
++
++/* Method implementations which increment the counters in *shared.  */
++
++static void
++log_method (FILE *fp, const char *name)
++{
++  if (test_verbose > 0)
++    printf ("info: %s (%p) called\n", name, fp);
++}
++
++static void
++method_finish (FILE *fp, int dummy)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_finish;
++}
++
++static int
++method_overflow (FILE *fp, int ch)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_overflow;
++  shared->value = ch;
++  return shared->return_value;
++}
++
++static int
++method_underflow (FILE *fp)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_underflow;
++  return shared->return_value;
++}
++
++static int
++method_uflow (FILE *fp)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_uflow;
++  return shared->return_value;
++}
++
++static int
++method_pbackfail (FILE *fp, int ch)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_pbackfail;
++  shared->value = ch;
++  return shared->return_value;
++}
++
++static size_t
++method_xsputn (FILE *fp, const void *data, size_t n)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_xsputn;
++
++  size_t to_copy = n;
++  if (n > sizeof (shared->buffer))
++    to_copy = sizeof (shared->buffer);
++  memcpy (shared->buffer, data, to_copy);
++  shared->buffer_length = to_copy;
++  return to_copy;
++}
++
++static size_t
++method_xsgetn (FILE *fp, void *data, size_t n)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_xsgetn;
++  return 0;
++}
++
++static off64_t
++method_seekoff (FILE *fp, off64_t offset, int dir, int mode)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_seekoff;
++  return shared->return_value;
++}
++
++static off64_t
++method_seekpos (FILE *fp, off64_t offset, int mode)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_seekpos;
++  return shared->return_value;
++}
++
++static FILE *
++method_setbuf (FILE *fp, char *buffer, ssize_t length)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_setbuf;
++  return fp;
++}
++
++static int
++method_sync (FILE *fp)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_sync;
++  return shared->return_value;
++}
++
++static int
++method_doallocate (FILE *fp)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_doallocate;
++  return shared->return_value;
++}
++
++static ssize_t
++method_read (FILE *fp, void *data, ssize_t length)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_read;
++  return shared->return_value;
++}
++
++static ssize_t
++method_write (FILE *fp, const void *data, ssize_t length)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_write;
++  return shared->return_value;
++}
++
++static off64_t
++method_seek (FILE *fp, off64_t offset, int mode)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_seek;
++  return shared->return_value;
++}
++
++static int
++method_close (FILE *fp)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_close;
++  return shared->return_value;
++}
++
++static int
++method_stat (FILE *fp, void *buffer)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_stat;
++  return shared->return_value;
++}
++
++static int
++method_showmanyc (FILE *fp)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_showmanyc;
++  return shared->return_value;
++}
++
++static void
++method_imbue (FILE *fp, void *locale)
++{
++  log_method (fp, __func__);
++  TEST_VERIFY (fp == shared->fp);
++  ++shared->calls;
++  ++shared->calls_imbue;
++}
++
++/* Our custom vtable.  */
++
++static const struct _IO_jump_t jumps =
++{
++  JUMP_INIT_DUMMY,
++  JUMP_INIT (finish, method_finish),
++  JUMP_INIT (overflow, method_overflow),
++  JUMP_INIT (underflow, method_underflow),
++  JUMP_INIT (uflow, method_uflow),
++  JUMP_INIT (pbackfail, method_pbackfail),
++  JUMP_INIT (xsputn, method_xsputn),
++  JUMP_INIT (xsgetn, method_xsgetn),
++  JUMP_INIT (seekoff, method_seekoff),
++  JUMP_INIT (seekpos, method_seekpos),
++  JUMP_INIT (setbuf, method_setbuf),
++  JUMP_INIT (sync, method_sync),
++  JUMP_INIT (doallocate, method_doallocate),
++  JUMP_INIT (read, method_read),
++  JUMP_INIT (write, method_write),
++  JUMP_INIT (seek, method_seek),
++  JUMP_INIT (close, method_close),
++  JUMP_INIT (stat, method_stat),
++  JUMP_INIT (showmanyc, method_showmanyc),
++  JUMP_INIT (imbue, method_imbue)
++};
++
++/* Our file implementation.  */
++
++struct my_file
++{
++  FILE f;
++  const struct _IO_jump_t *vtable;
++};
++
++struct my_file
++my_file_create (void)
++{
++  return (struct my_file)
++    {
++      /* Disable locking, so that we do not have to set up a lock
++         pointer.  */
++      .f._flags =  _IO_USER_LOCK,
++
++      /* Copy the offset from the an initialized handle, instead of
++         figuring it out from scratch.  */
++      .f._vtable_offset = stdin->_vtable_offset,
++
++      .vtable = &jumps,
++    };
++}
++
++/* Initial tests which do not enable vtable compatibility.  */
++
++/* Inhibit GCC optimization of fprintf.  */
++typedef int (*fprintf_type) (FILE *, const char *, ...);
++static const volatile fprintf_type fprintf_ptr = &fprintf;
++
++static void
++without_compatibility_fprintf (void *closure)
++{
++  /* This call should abort.  */
++  fprintf_ptr (shared->fp, " ");
++  _exit (1);
++}
++
++static void
++without_compatibility_fputc (void *closure)
++{
++  /* This call should abort.  */
++  fputc (' ', shared->fp);
++  _exit (1);
++}
++
++static void
++without_compatibility_fgetc (void *closure)
++{
++  /* This call should abort.  */
++  fgetc (shared->fp);
++  _exit (1);
++}
++
++static void
++without_compatibility_fflush (void *closure)
++{
++  /* This call should abort.  */
++  fflush (shared->fp);
++  _exit (1);
++}
++
++/* Exit status after abnormal termination.  */
++static int termination_status;
++
++static void
++init_termination_status (void)
++{
++  pid_t pid = xfork ();
++  if (pid == 0)
++    abort ();
++  xwaitpid (pid, &termination_status, 0);
++
++  TEST_VERIFY (WIFSIGNALED (termination_status));
++  TEST_COMPARE (WTERMSIG (termination_status), SIGABRT);
++}
++
++static void
++check_for_termination (const char *name, void (*callback) (void *))
++{
++  struct my_file file = my_file_create ();
++  shared->fp = &file.f;
++  shared->return_value = -1;
++  shared->calls = 0;
++  struct support_capture_subprocess proc
++    = support_capture_subprocess (callback, NULL);
++  support_capture_subprocess_check (&proc, name, termination_status,
++                                    sc_allow_stderr);
++  const char *message
++    = "Fatal error: glibc detected an invalid stdio handle\n";
++  TEST_COMPARE_BLOB (proc.err.buffer, proc.err.length,
++                     message, strlen (message));
++  TEST_COMPARE (shared->calls, 0);
++  support_capture_subprocess_free (&proc);
++}
++
++/* The test with vtable validation disabled.  */
++
++/* This function does not have a prototype in libioP.h to prevent
++   accidental use from within the library (which would disable vtable
++   verification).  */
++void _IO_init (FILE *fp, int flags);
++
++static void
++with_compatibility_fprintf (void *closure)
++{
++  TEST_COMPARE (fprintf_ptr (shared->fp, "A%sCD", "B"), 4);
++  TEST_COMPARE (shared->calls, 3);
++  TEST_COMPARE (shared->calls_xsputn, 3);
++  TEST_COMPARE_BLOB (shared->buffer, shared->buffer_length,
++                     "CD", 2);
++}
++
++static void
++with_compatibility_fputc (void *closure)
++{
++  shared->return_value = '@';
++  TEST_COMPARE (fputc ('@', shared->fp), '@');
++  TEST_COMPARE (shared->calls, 1);
++  TEST_COMPARE (shared->calls_overflow, 1);
++  TEST_COMPARE (shared->value, '@');
++}
++
++static void
++with_compatibility_fgetc (void *closure)
++{
++  shared->return_value = 'X';
++  TEST_COMPARE (fgetc (shared->fp), 'X');
++  TEST_COMPARE (shared->calls, 1);
++  TEST_COMPARE (shared->calls_uflow, 1);
++}
++
++static void
++with_compatibility_fflush (void *closure)
++{
++  TEST_COMPARE (fflush (shared->fp), 0);
++  TEST_COMPARE (shared->calls, 1);
++  TEST_COMPARE (shared->calls_sync, 1);
++}
++
++/* Call CALLBACK in a subprocess, after setting up a custom file
++   object and updating shared->fp.  */
++static void
++check_call (const char *name, void (*callback) (void *),
++            bool initially_disabled)
++{
++  *shared = (struct shared)
++    {
++     .initially_disabled = initially_disabled,
++    };
++
++  /* Set up a custom file object.  */
++  struct my_file file = my_file_create ();
++  shared->fp = &file.f;
++  if (shared->initially_disabled)
++    _IO_init (shared->fp, file.f._flags);
++
++  if (test_verbose > 0)
++    printf ("info: calling test %s\n", name);
++  support_isolate_in_subprocess (callback, NULL);
++}
++
++/* Run the tests.  INITIALLY_DISABLED indicates whether custom vtables
++   are disabled when the test starts.  */
++static int
++run_tests (bool initially_disabled)
++{
++  /* The test relies on fatal error messages being printed to standard
++     error.  */
++  setenv ("LIBC_FATAL_STDERR_", "1", 1);
++
++  shared = support_shared_allocate (sizeof (*shared));
++  shared->initially_disabled = initially_disabled;
++  init_termination_status ();
++
++  if (initially_disabled)
++    {
++      check_for_termination ("fprintf", without_compatibility_fprintf);
++      check_for_termination ("fputc", without_compatibility_fputc);
++      check_for_termination ("fgetc", without_compatibility_fgetc);
++      check_for_termination ("fflush", without_compatibility_fflush);
++    }
++
++  check_call ("fprintf", with_compatibility_fprintf, initially_disabled);
++  check_call ("fputc", with_compatibility_fputc, initially_disabled);
++  check_call ("fgetc", with_compatibility_fgetc, initially_disabled);
++  check_call ("fflush", with_compatibility_fflush, initially_disabled);
++
++  support_shared_free (shared);
++  shared = NULL;
++
++  return 0;
++}
+diff --git a/libio/tst-vtables-interposed.c b/libio/tst-vtables-interposed.c
+new file mode 100644
+index 0000000000..c8f4e8c7c3
+--- /dev/null
++++ b/libio/tst-vtables-interposed.c
+@@ -0,0 +1,37 @@
++/* Test for libio vtables and their validation.  Enabled through interposition.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++/* Provide an interposed definition of the standard file handles with
++   our own vtable.  stdout/stdin/stderr will not work as a result, but
++   a succesful test does not print anything, so this is fine.  */
++static const struct _IO_jump_t jumps;
++#define _IO_file_jumps jumps
++#include "stdfiles.c"
++
++#include "tst-vtables-common.c"
++
++static int
++do_test (void)
++{
++  return run_tests (false);
++}
++
++/* Calling setvbuf in the test driver is not supported with our
++   interposed file handles.  */
++#define TEST_NO_SETVBUF
++#include <support/test-driver.c>
+diff --git a/libio/tst-vtables.c b/libio/tst-vtables.c
+new file mode 100644
+index 0000000000..f16acf5d23
+--- /dev/null
++++ b/libio/tst-vtables.c
+@@ -0,0 +1,29 @@
++/* Test for libio vtables and their validation.  Initially disabled case.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++#include "libioP.h"
++
++#include "tst-vtables-common.c"
++
++static int
++do_test (void)
++{
++  return run_tests (true);
++}
++
++#include <support/test-driver.c>
 diff --git a/libio/vasprintf.c b/libio/vasprintf.c
 index 390a63d124..0bb217e46e 100644
 --- a/libio/vasprintf.c
@@ -1235,6 +2226,30 @@ index 390a63d124..0bb217e46e 100644
    ret = _IO_vfprintf (&sf._sbf._f, format, args);
    if (ret < 0)
      {
+diff --git a/libio/vtables.c b/libio/vtables.c
+index 9fd4ccf642..9df75668c8 100644
+--- a/libio/vtables.c
++++ b/libio/vtables.c
+@@ -71,3 +71,19 @@ _IO_vtable_check (void)
+ 
+   __libc_fatal ("Fatal error: glibc detected an invalid stdio handle\n");
+ }
++
++/* Some variants of libstdc++ interpose _IO_2_1_stdin_ etc. and
++   install their own vtables directly, without calling _IO_init or
++   other functions.  Detect this by looking at the vtables values
++   during startup, and disable vtable validation in this case.  */
++#ifdef SHARED
++__attribute__ ((constructor))
++static void
++check_stdfiles_vtables (void)
++{
++  if (_IO_2_1_stdin_.vtable != &_IO_file_jumps
++      || _IO_2_1_stdout_.vtable != &_IO_file_jumps
++      || _IO_2_1_stderr_.vtable != &_IO_file_jumps)
++    IO_set_accept_foreign_vtables (&_IO_vtable_check);
++}
++#endif
 diff --git a/libio/wmemstream.c b/libio/wmemstream.c
 index c962071d26..f4c6e75246 100644
 --- a/libio/wmemstream.c
@@ -1534,6 +2549,19 @@ index a82ef8c6d9..7362492fbd 100644
  alt_mon "<U0399><U03B1><U03BD><U03BF><U03C5><U03AC><U03C1><U03B9><U03BF><U03C2>";/
          "<U03A6><U03B5><U03B2><U03C1><U03BF><U03C5><U03AC><U03C1><U03B9><U03BF><U03C2>";/
          "<U039C><U03AC><U03C1><U03C4><U03B9><U03BF><U03C2>";/
+diff --git a/localedata/locales/es_BO b/localedata/locales/es_BO
+index 4202c5a0cf..5b6c6e2312 100644
+--- a/localedata/locales/es_BO
++++ b/localedata/locales/es_BO
+@@ -124,7 +124,7 @@ first_weekday 2
+ END LC_TIME
+ 
+ LC_PAPER
+-copy "i18n"
++copy "en_US"
+ END LC_PAPER
+ 
+ LC_TELEPHONE
 diff --git a/localedata/locales/et_EE b/localedata/locales/et_EE
 index 9cb55b568f..bab7493c98 100644
 --- a/localedata/locales/et_EE
@@ -1909,10 +2937,27 @@ index ca77996902..cc70a6b7ee 100644
  This function is a GNU extension.
  @end deftypefun
 diff --git a/manual/llio.texi b/manual/llio.texi
-index 642e56e710..7d877992d9 100644
+index 642e56e710..82f03be2be 100644
 --- a/manual/llio.texi
 +++ b/manual/llio.texi
-@@ -1271,6 +1271,9 @@ Per-IO synchronization as if the file was opened with @code{O_SYNC} flag.
+@@ -1251,9 +1251,13 @@ When the source file is compiled using @code{_FILE_OFFSET_BITS == 64} on a
+ @c This is a syscall for Linux v4.6.  The sysdeps/posix fallback emulation
+ @c is also MT-Safe since it calls preadv.
+ 
+-This function is similar to the @code{preadv} function, with the difference
+-it adds an extra @var{flags} parameter of type @code{int}.  The supported
+-@var{flags} are dependent of the underlying system.  For Linux it supports:
++This function is similar to the @code{preadv} function, with the
++difference it adds an extra @var{flags} parameter of type @code{int}.
++Additionally, if @var{offset} is @math{-1}, the current file position
++is used and updated (like the @code{readv} function).
++
++The supported @var{flags} are dependent of the underlying system.  For
++Linux it supports:
+ 
+ @vtable @code
+ @item RWF_HIPRI
+@@ -1271,6 +1275,9 @@ Per-IO synchronization as if the file was opened with @code{O_SYNC} flag.
  @item RWF_NOWAIT
  Use nonblocking mode for this operation; that is, this call to @code{preadv2}
  will fail and set @code{errno} to @code{EAGAIN} if the operation would block.
@@ -1922,6 +2967,24 @@ index 642e56e710..7d877992d9 100644
  @end vtable
  
  When the source file is compiled with @code{_FILE_OFFSET_BITS == 64} the
+@@ -1320,10 +1327,13 @@ When the source file is compiled using @code{_FILE_OFFSET_BITS == 64} on a
+ @c This is a syscall for Linux v4.6.  The sysdeps/posix fallback emulation
+ @c is also MT-Safe since it calls pwritev.
+ 
+-This function is similar to the @code{pwritev} function, with the difference
+-it adds an extra @var{flags} parameter of type @code{int}.  The supported
+-@var{flags} are dependent of the underlying system and for Linux it supports
+-the same ones as for @code{preadv2}.
++This function is similar to the @code{pwritev} function, with the
++difference it adds an extra @var{flags} parameter of type @code{int}.
++Additionally, if @var{offset} is @math{-1}, the current file position
++should is used and updated (like the @code{writev} function).
++
++The supported @var{flags} are dependent of the underlying system.  For
++Linux, the supported flags are the same as those for @code{preadv2}.
+ 
+ When the source file is compiled with @code{_FILE_OFFSET_BITS == 64} the
+ @code{pwritev2} function is in fact @code{pwritev64v2} and the type
 diff --git a/manual/platform.texi b/manual/platform.texi
 index b8721a0712..504addc956 100644
 --- a/manual/platform.texi
@@ -2001,11 +3064,84 @@ index 3c515f817f..0fcbd91366 100644
    {
  #  ifndef __NO_LONG_DOUBLE_MATH
      return __iseqsigl (__x, __y);
+diff --git a/misc/tst-preadvwritev-common.c b/misc/tst-preadvwritev-common.c
+index 560c8f89b6..b59a3de465 100644
+--- a/misc/tst-preadvwritev-common.c
++++ b/misc/tst-preadvwritev-common.c
+@@ -16,6 +16,7 @@
+    License along with the GNU C Library; if not, see
+    <http://www.gnu.org/licenses/>.  */
+ 
++#include <array_length.h>
+ #include <stdio.h>
+ #include <stdint.h>
+ #include <errno.h>
+@@ -25,6 +26,7 @@
+ 
+ #include <support/check.h>
+ #include <support/temp_file.h>
++#include <support/xunistd.h>
+ 
+ static char *temp_filename;
+ static int temp_fd;
+@@ -50,6 +52,42 @@ do_prepare (int argc, char **argv)
+   pwritev (__fd, __iov, __iovcnt, __offset)
+ #endif
+ 
++static __attribute__ ((unused)) void
++do_test_without_offset (void)
++{
++  xftruncate (temp_fd, 0);
++
++  xwrite (temp_fd, "123", 3);
++  xlseek (temp_fd, 2, SEEK_SET);
++  {
++    struct iovec iov[] =
++      {
++        { (void *) "abc", 3 },
++        { (void *) "xyzt", 4 },
++      };
++    TEST_COMPARE (PWRITEV (temp_fd, iov, array_length (iov), -1), 7);
++  }
++  TEST_COMPARE (xlseek (temp_fd, 0, SEEK_CUR), 9);
++
++  xlseek (temp_fd, 1, SEEK_SET);
++  char buf1[3];
++  char buf2[2];
++  {
++    struct iovec iov[] =
++      {
++        { buf1, sizeof (buf1) },
++        { buf2, sizeof (buf2) },
++      };
++    TEST_COMPARE (PREADV (temp_fd, iov, array_length (iov), -1),
++                  sizeof (buf1) + sizeof (buf2));
++    TEST_COMPARE (memcmp ("2ab", buf1, sizeof (buf1)), 0);
++    TEST_COMPARE (memcmp ("cx", buf2, sizeof (buf2)), 0);
++    TEST_COMPARE (xlseek (temp_fd, 0, SEEK_CUR), 6);
++  }
++
++  xftruncate (temp_fd, 0);
++}
++
+ static int
+ do_test_with_offset (off_t offset)
+ {
 diff --git a/misc/tst-preadvwritev2-common.c b/misc/tst-preadvwritev2-common.c
-index 89fd0a3ff5..f889a21544 100644
+index 89fd0a3ff5..50b9da3fea 100644
 --- a/misc/tst-preadvwritev2-common.c
 +++ b/misc/tst-preadvwritev2-common.c
-@@ -34,7 +34,11 @@ do_test_with_invalid_flags (void)
+@@ -19,9 +19,6 @@
+ #include <limits.h>
+ #include <support/check.h>
+ 
+-static void
+-do_test_with_invalid_flags (void)
+-{
+ #ifndef RWF_HIPRI
+ # define RWF_HIPRI 0
+ #endif
+@@ -34,7 +31,73 @@ do_test_with_invalid_flags (void)
  #ifndef RWF_NOWAIT
  # define RWF_NOWAIT 0
  #endif
@@ -2015,9 +3151,610 @@ index 89fd0a3ff5..f889a21544 100644
 +#endif
 +#define RWF_SUPPORTED	(RWF_HIPRI | RWF_DSYNC | RWF_SYNC | RWF_NOWAIT \
 +			 | RWF_APPEND)
++
++static void
++do_test_with_invalid_fd (void)
++{
++  char buf[256];
++  struct iovec iov = { buf, sizeof buf };
++
++  /* Check with flag being 0 to use the fallback code which calls pwritev
++     or writev.  */
++  TEST_VERIFY (preadv2 (-1, &iov, 1, -1, 0) == -1);
++  TEST_COMPARE (errno, EBADF);
++  TEST_VERIFY (pwritev2 (-1, &iov, 1, -1, 0) == -1);
++  TEST_COMPARE (errno, EBADF);
++
++  /* Same tests as before but with flags being different than 0.  Since
++     there is no emulation for any flag value, fallback code returns
++     ENOTSUP.  This is different running on a kernel with preadv2/pwritev2
++     support, where EBADF is returned).  */
++  TEST_VERIFY (preadv2 (-1, &iov, 1, 0, RWF_HIPRI) == -1);
++  TEST_VERIFY (errno == EBADF || errno == ENOTSUP);
++  TEST_VERIFY (pwritev2 (-1, &iov, 1, 0, RWF_HIPRI) == -1);
++  TEST_VERIFY (errno == EBADF || errno == ENOTSUP);
++}
++
++static void
++do_test_with_invalid_iov (void)
++{
++  {
++    char buf[256];
++    struct iovec iov;
++
++    iov.iov_base = buf;
++    iov.iov_len = (size_t)SSIZE_MAX + 1;
++
++    TEST_VERIFY (preadv2 (temp_fd, &iov, 1, 0, 0) == -1);
++    TEST_COMPARE (errno, EINVAL);
++    TEST_VERIFY (pwritev2 (temp_fd, &iov, 1, 0, 0) == -1);
++    TEST_COMPARE (errno, EINVAL);
++
++    /* Same as for invalid file descriptor tests, emulation fallback
++       first checks for flag value and return ENOTSUP.  */
++    TEST_VERIFY (preadv2 (temp_fd, &iov, 1, 0, RWF_HIPRI) == -1);
++    TEST_VERIFY (errno == EINVAL || errno == ENOTSUP);
++    TEST_VERIFY (pwritev2 (temp_fd, &iov, 1, 0, RWF_HIPRI) == -1);
++    TEST_VERIFY (errno == EINVAL || errno == ENOTSUP);
++  }
++
++  {
++    /* An invalid iovec buffer should trigger an invalid memory access
++       or an error (Linux for instance returns EFAULT).  */
++    struct iovec iov[IOV_MAX+1] = { 0 };
++
++    TEST_VERIFY (preadv2 (temp_fd, iov, IOV_MAX + 1, 0, RWF_HIPRI) == -1);
++    TEST_VERIFY (errno == EINVAL || errno == ENOTSUP);
++    TEST_VERIFY (pwritev2 (temp_fd, iov, IOV_MAX + 1, 0, RWF_HIPRI) == -1);
++    TEST_VERIFY (errno == EINVAL || errno == ENOTSUP);
++  }
++}
++
++static void
++do_test_with_invalid_flags (void)
++{
    /* Set the next bit from the mask of all supported flags.  */
    int invalid_flag = RWF_SUPPORTED != 0 ? __builtin_clz (RWF_SUPPORTED) : 2;
    invalid_flag = 0x1 << ((sizeof (int) * CHAR_BIT) - invalid_flag);
+diff --git a/misc/tst-preadvwritev2.c b/misc/tst-preadvwritev2.c
+index d8a9daf66a..cb58cbe41e 100644
+--- a/misc/tst-preadvwritev2.c
++++ b/misc/tst-preadvwritev2.c
+@@ -29,6 +29,9 @@ static int
+ do_test (void)
+ {
+   do_test_with_invalid_flags ();
++  do_test_without_offset ();
++  do_test_with_invalid_fd ();
++  do_test_with_invalid_iov ();
+ 
+   return do_test_with_offset (0);
+ }
+diff --git a/misc/tst-preadvwritev64v2.c b/misc/tst-preadvwritev64v2.c
+index 2c656ae3d7..6a9de54c78 100644
+--- a/misc/tst-preadvwritev64v2.c
++++ b/misc/tst-preadvwritev64v2.c
+@@ -31,6 +31,9 @@ static int
+ do_test (void)
+ {
+   do_test_with_invalid_flags ();
++  do_test_without_offset ();
++  do_test_with_invalid_fd ();
++  do_test_with_invalid_iov ();
+ 
+   return do_test_with_offset (0);
+ }
+diff --git a/nptl/Makefile b/nptl/Makefile
+index 6fc2c8bb6a..a3447addea 100644
+--- a/nptl/Makefile
++++ b/nptl/Makefile
+@@ -235,9 +235,9 @@ LDLIBS-tst-minstack-throw = -lstdc++
+ 
+ tests = tst-attr1 tst-attr2 tst-attr3 tst-default-attr \
+ 	tst-mutex1 tst-mutex2 tst-mutex3 tst-mutex4 tst-mutex5 tst-mutex6 \
+-	tst-mutex7 tst-mutex9 tst-mutex5a tst-mutex7a tst-mutex7robust \
+-	tst-mutexpi1 tst-mutexpi2 tst-mutexpi3 tst-mutexpi4 tst-mutexpi5 \
+-	tst-mutexpi5a tst-mutexpi6 tst-mutexpi7 tst-mutexpi7a \
++	tst-mutex7 tst-mutex9 tst-mutex10 tst-mutex5a tst-mutex7a \
++	tst-mutex7robust tst-mutexpi1 tst-mutexpi2 tst-mutexpi3 tst-mutexpi4 \
++	tst-mutexpi5 tst-mutexpi5a tst-mutexpi6 tst-mutexpi7 tst-mutexpi7a \
+ 	tst-mutexpi9 \
+ 	tst-spin1 tst-spin2 tst-spin3 tst-spin4 \
+ 	tst-cond1 tst-cond2 tst-cond3 tst-cond4 tst-cond5 tst-cond6 tst-cond7 \
+@@ -730,6 +730,8 @@ $(objpfx)tst-compat-forwarder: $(objpfx)tst-compat-forwarder-mod.so
+ # destroying a mutex.
+ tst-mutex8-ENV = GLIBC_TUNABLES=glibc.elision.enable=0
+ 
++tst-mutex10-ENV = GLIBC_TUNABLES=glibc.elision.enable=1
++
+ # The tests here better do not run in parallel
+ ifneq ($(filter %tests,$(MAKECMDGOALS)),)
+ .NOTPARALLEL:
+diff --git a/nptl/pthreadP.h b/nptl/pthreadP.h
+index 583515ff48..ff51f452c6 100644
+--- a/nptl/pthreadP.h
++++ b/nptl/pthreadP.h
+@@ -110,19 +110,23 @@ enum
+ };
+ #define PTHREAD_MUTEX_PSHARED_BIT 128
+ 
++/* See concurrency notes regarding __kind in struct __pthread_mutex_s
++   in sysdeps/nptl/bits/thread-shared-types.h.  */
+ #define PTHREAD_MUTEX_TYPE(m) \
+-  ((m)->__data.__kind & 127)
++  (atomic_load_relaxed (&((m)->__data.__kind)) & 127)
+ /* Don't include NO_ELISION, as that type is always the same
+    as the underlying lock type.  */
+ #define PTHREAD_MUTEX_TYPE_ELISION(m) \
+-  ((m)->__data.__kind & (127|PTHREAD_MUTEX_ELISION_NP))
++  (atomic_load_relaxed (&((m)->__data.__kind))	\
++   & (127 | PTHREAD_MUTEX_ELISION_NP))
+ 
+ #if LLL_PRIVATE == 0 && LLL_SHARED == 128
+ # define PTHREAD_MUTEX_PSHARED(m) \
+-  ((m)->__data.__kind & 128)
++  (atomic_load_relaxed (&((m)->__data.__kind)) & 128)
+ #else
+ # define PTHREAD_MUTEX_PSHARED(m) \
+-  (((m)->__data.__kind & 128) ? LLL_SHARED : LLL_PRIVATE)
++  ((atomic_load_relaxed (&((m)->__data.__kind)) & 128)	\
++   ? LLL_SHARED : LLL_PRIVATE)
+ #endif
+ 
+ /* The kernel when waking robust mutexes on exit never uses
+diff --git a/nptl/pthread_cond_common.c b/nptl/pthread_cond_common.c
+index 8e425eb01e..479e54febb 100644
+--- a/nptl/pthread_cond_common.c
++++ b/nptl/pthread_cond_common.c
+@@ -405,8 +405,12 @@ __condvar_quiesce_and_switch_g1 (pthread_cond_t *cond, uint64_t wseq,
+ 	{
+ 	  /* There is still a waiter after spinning.  Set the wake-request
+ 	     flag and block.  Relaxed MO is fine because this is just about
+-	     this futex word.  */
+-	  r = atomic_fetch_or_relaxed (cond->__data.__g_refs + g1, 1);
++	     this futex word.
++
++	     Update r to include the set wake-request flag so that the upcoming
++	     futex_wait only blocks if the flag is still set (otherwise, we'd
++	     violate the basic client-side futex protocol).  */
++	  r = atomic_fetch_or_relaxed (cond->__data.__g_refs + g1, 1) | 1;
+ 
+ 	  if ((r >> 1) > 0)
+ 	    futex_wait_simple (cond->__data.__g_refs + g1, r, private);
+diff --git a/nptl/pthread_mutex_consistent.c b/nptl/pthread_mutex_consistent.c
+index 85b8e1a6cb..4fbd875430 100644
+--- a/nptl/pthread_mutex_consistent.c
++++ b/nptl/pthread_mutex_consistent.c
+@@ -23,8 +23,11 @@
+ int
+ pthread_mutex_consistent (pthread_mutex_t *mutex)
+ {
+-  /* Test whether this is a robust mutex with a dead owner.  */
+-  if ((mutex->__data.__kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP) == 0
++  /* Test whether this is a robust mutex with a dead owner.
++     See concurrency notes regarding __kind in struct __pthread_mutex_s
++     in sysdeps/nptl/bits/thread-shared-types.h.  */
++  if ((atomic_load_relaxed (&(mutex->__data.__kind))
++       & PTHREAD_MUTEX_ROBUST_NORMAL_NP) == 0
+       || mutex->__data.__owner != PTHREAD_MUTEX_INCONSISTENT)
+     return EINVAL;
+ 
+diff --git a/nptl/pthread_mutex_destroy.c b/nptl/pthread_mutex_destroy.c
+index 5a22611541..713ea68496 100644
+--- a/nptl/pthread_mutex_destroy.c
++++ b/nptl/pthread_mutex_destroy.c
+@@ -27,12 +27,17 @@ __pthread_mutex_destroy (pthread_mutex_t *mutex)
+ {
+   LIBC_PROBE (mutex_destroy, 1, mutex);
+ 
+-  if ((mutex->__data.__kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP) == 0
++  /* See concurrency notes regarding __kind in struct __pthread_mutex_s
++     in sysdeps/nptl/bits/thread-shared-types.h.  */
++  if ((atomic_load_relaxed (&(mutex->__data.__kind))
++       & PTHREAD_MUTEX_ROBUST_NORMAL_NP) == 0
+       && mutex->__data.__nusers != 0)
+     return EBUSY;
+ 
+-  /* Set to an invalid value.  */
+-  mutex->__data.__kind = -1;
++  /* Set to an invalid value.  Relaxed MO is enough as it is undefined behavior
++     if the mutex is used after it has been destroyed.  But you can reinitialize
++     it with pthread_mutex_init.  */
++  atomic_store_relaxed (&(mutex->__data.__kind), -1);
+ 
+   return 0;
+ }
+diff --git a/nptl/pthread_mutex_getprioceiling.c b/nptl/pthread_mutex_getprioceiling.c
+index efa37b0d99..ee85949578 100644
+--- a/nptl/pthread_mutex_getprioceiling.c
++++ b/nptl/pthread_mutex_getprioceiling.c
+@@ -24,7 +24,9 @@
+ int
+ pthread_mutex_getprioceiling (const pthread_mutex_t *mutex, int *prioceiling)
+ {
+-  if (__builtin_expect ((mutex->__data.__kind
++  /* See concurrency notes regarding __kind in struct __pthread_mutex_s
++     in sysdeps/nptl/bits/thread-shared-types.h.  */
++  if (__builtin_expect ((atomic_load_relaxed (&(mutex->__data.__kind))
+ 			 & PTHREAD_MUTEX_PRIO_PROTECT_NP) == 0, 0))
+     return EINVAL;
+ 
+diff --git a/nptl/pthread_mutex_init.c b/nptl/pthread_mutex_init.c
+index d8fe473728..5cf290c272 100644
+--- a/nptl/pthread_mutex_init.c
++++ b/nptl/pthread_mutex_init.c
+@@ -101,7 +101,7 @@ __pthread_mutex_init (pthread_mutex_t *mutex,
+   memset (mutex, '\0', __SIZEOF_PTHREAD_MUTEX_T);
+ 
+   /* Copy the values from the attribute.  */
+-  mutex->__data.__kind = imutexattr->mutexkind & ~PTHREAD_MUTEXATTR_FLAG_BITS;
++  int mutex_kind = imutexattr->mutexkind & ~PTHREAD_MUTEXATTR_FLAG_BITS;
+ 
+   if ((imutexattr->mutexkind & PTHREAD_MUTEXATTR_FLAG_ROBUST) != 0)
+     {
+@@ -111,17 +111,17 @@ __pthread_mutex_init (pthread_mutex_t *mutex,
+ 	return ENOTSUP;
+ #endif
+ 
+-      mutex->__data.__kind |= PTHREAD_MUTEX_ROBUST_NORMAL_NP;
++      mutex_kind |= PTHREAD_MUTEX_ROBUST_NORMAL_NP;
+     }
+ 
+   switch (imutexattr->mutexkind & PTHREAD_MUTEXATTR_PROTOCOL_MASK)
+     {
+     case PTHREAD_PRIO_INHERIT << PTHREAD_MUTEXATTR_PROTOCOL_SHIFT:
+-      mutex->__data.__kind |= PTHREAD_MUTEX_PRIO_INHERIT_NP;
++      mutex_kind |= PTHREAD_MUTEX_PRIO_INHERIT_NP;
+       break;
+ 
+     case PTHREAD_PRIO_PROTECT << PTHREAD_MUTEXATTR_PROTOCOL_SHIFT:
+-      mutex->__data.__kind |= PTHREAD_MUTEX_PRIO_PROTECT_NP;
++      mutex_kind |= PTHREAD_MUTEX_PRIO_PROTECT_NP;
+ 
+       int ceiling = (imutexattr->mutexkind
+ 		     & PTHREAD_MUTEXATTR_PRIO_CEILING_MASK)
+@@ -145,7 +145,11 @@ __pthread_mutex_init (pthread_mutex_t *mutex,
+      FUTEX_PRIVATE_FLAG FUTEX_WAKE.  */
+   if ((imutexattr->mutexkind & (PTHREAD_MUTEXATTR_FLAG_PSHARED
+ 				| PTHREAD_MUTEXATTR_FLAG_ROBUST)) != 0)
+-    mutex->__data.__kind |= PTHREAD_MUTEX_PSHARED_BIT;
++    mutex_kind |= PTHREAD_MUTEX_PSHARED_BIT;
++
++  /* See concurrency notes regarding __kind in struct __pthread_mutex_s
++     in sysdeps/nptl/bits/thread-shared-types.h.  */
++  atomic_store_relaxed (&(mutex->__data.__kind), mutex_kind);
+ 
+   /* Default values: mutex not used yet.  */
+   // mutex->__count = 0;	already done by memset
+diff --git a/nptl/pthread_mutex_lock.c b/nptl/pthread_mutex_lock.c
+index 1519c142bd..29cc143e6c 100644
+--- a/nptl/pthread_mutex_lock.c
++++ b/nptl/pthread_mutex_lock.c
+@@ -62,6 +62,8 @@ static int __pthread_mutex_lock_full (pthread_mutex_t *mutex)
+ int
+ __pthread_mutex_lock (pthread_mutex_t *mutex)
+ {
++  /* See concurrency notes regarding mutex type which is loaded from __kind
++     in struct __pthread_mutex_s in sysdeps/nptl/bits/thread-shared-types.h.  */
+   unsigned int type = PTHREAD_MUTEX_TYPE_ELISION (mutex);
+ 
+   LIBC_PROBE (mutex_entry, 1, mutex);
+@@ -350,8 +352,14 @@ __pthread_mutex_lock_full (pthread_mutex_t *mutex)
+     case PTHREAD_MUTEX_PI_ROBUST_NORMAL_NP:
+     case PTHREAD_MUTEX_PI_ROBUST_ADAPTIVE_NP:
+       {
+-	int kind = mutex->__data.__kind & PTHREAD_MUTEX_KIND_MASK_NP;
+-	int robust = mutex->__data.__kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP;
++	int kind, robust;
++	{
++	  /* See concurrency notes regarding __kind in struct __pthread_mutex_s
++	     in sysdeps/nptl/bits/thread-shared-types.h.  */
++	  int mutex_kind = atomic_load_relaxed (&(mutex->__data.__kind));
++	  kind = mutex_kind & PTHREAD_MUTEX_KIND_MASK_NP;
++	  robust = mutex_kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP;
++	}
+ 
+ 	if (robust)
+ 	  {
+@@ -502,7 +510,10 @@ __pthread_mutex_lock_full (pthread_mutex_t *mutex)
+     case PTHREAD_MUTEX_PP_NORMAL_NP:
+     case PTHREAD_MUTEX_PP_ADAPTIVE_NP:
+       {
+-	int kind = mutex->__data.__kind & PTHREAD_MUTEX_KIND_MASK_NP;
++	/* See concurrency notes regarding __kind in struct __pthread_mutex_s
++	   in sysdeps/nptl/bits/thread-shared-types.h.  */
++	int kind = atomic_load_relaxed (&(mutex->__data.__kind))
++	  & PTHREAD_MUTEX_KIND_MASK_NP;
+ 
+ 	oldval = mutex->__data.__lock;
+ 
+@@ -607,15 +618,18 @@ hidden_def (__pthread_mutex_lock)
+ void
+ __pthread_mutex_cond_lock_adjust (pthread_mutex_t *mutex)
+ {
+-  assert ((mutex->__data.__kind & PTHREAD_MUTEX_PRIO_INHERIT_NP) != 0);
+-  assert ((mutex->__data.__kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP) == 0);
+-  assert ((mutex->__data.__kind & PTHREAD_MUTEX_PSHARED_BIT) == 0);
++  /* See concurrency notes regarding __kind in struct __pthread_mutex_s
++     in sysdeps/nptl/bits/thread-shared-types.h.  */
++  int mutex_kind = atomic_load_relaxed (&(mutex->__data.__kind));
++  assert ((mutex_kind & PTHREAD_MUTEX_PRIO_INHERIT_NP) != 0);
++  assert ((mutex_kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP) == 0);
++  assert ((mutex_kind & PTHREAD_MUTEX_PSHARED_BIT) == 0);
+ 
+   /* Record the ownership.  */
+   pid_t id = THREAD_GETMEM (THREAD_SELF, tid);
+   mutex->__data.__owner = id;
+ 
+-  if (mutex->__data.__kind == PTHREAD_MUTEX_PI_RECURSIVE_NP)
++  if (mutex_kind == PTHREAD_MUTEX_PI_RECURSIVE_NP)
+     ++mutex->__data.__count;
+ }
+ #endif
+diff --git a/nptl/pthread_mutex_setprioceiling.c b/nptl/pthread_mutex_setprioceiling.c
+index 8594874f85..8306cabcf4 100644
+--- a/nptl/pthread_mutex_setprioceiling.c
++++ b/nptl/pthread_mutex_setprioceiling.c
+@@ -27,9 +27,10 @@ int
+ pthread_mutex_setprioceiling (pthread_mutex_t *mutex, int prioceiling,
+ 			      int *old_ceiling)
+ {
+-  /* The low bits of __kind aren't ever changed after pthread_mutex_init,
+-     so we don't need a lock yet.  */
+-  if ((mutex->__data.__kind & PTHREAD_MUTEX_PRIO_PROTECT_NP) == 0)
++  /* See concurrency notes regarding __kind in struct __pthread_mutex_s
++     in sysdeps/nptl/bits/thread-shared-types.h.  */
++  if ((atomic_load_relaxed (&(mutex->__data.__kind))
++       & PTHREAD_MUTEX_PRIO_PROTECT_NP) == 0)
+     return EINVAL;
+ 
+   /* See __init_sched_fifo_prio.  */
+diff --git a/nptl/pthread_mutex_timedlock.c b/nptl/pthread_mutex_timedlock.c
+index 66efd3989f..40b559f517 100644
+--- a/nptl/pthread_mutex_timedlock.c
++++ b/nptl/pthread_mutex_timedlock.c
+@@ -53,6 +53,8 @@ __pthread_mutex_timedlock (pthread_mutex_t *mutex,
+   /* We must not check ABSTIME here.  If the thread does not block
+      abstime must not be checked for a valid value.  */
+ 
++  /* See concurrency notes regarding mutex type which is loaded from __kind
++     in struct __pthread_mutex_s in sysdeps/nptl/bits/thread-shared-types.h.  */
+   switch (__builtin_expect (PTHREAD_MUTEX_TYPE_ELISION (mutex),
+ 			    PTHREAD_MUTEX_TIMED_NP))
+     {
+@@ -338,8 +340,14 @@ __pthread_mutex_timedlock (pthread_mutex_t *mutex,
+     case PTHREAD_MUTEX_PI_ROBUST_NORMAL_NP:
+     case PTHREAD_MUTEX_PI_ROBUST_ADAPTIVE_NP:
+       {
+-	int kind = mutex->__data.__kind & PTHREAD_MUTEX_KIND_MASK_NP;
+-	int robust = mutex->__data.__kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP;
++	int kind, robust;
++	{
++	  /* See concurrency notes regarding __kind in struct __pthread_mutex_s
++	     in sysdeps/nptl/bits/thread-shared-types.h.  */
++	  int mutex_kind = atomic_load_relaxed (&(mutex->__data.__kind));
++	  kind = mutex_kind & PTHREAD_MUTEX_KIND_MASK_NP;
++	  robust = mutex_kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP;
++	}
+ 
+ 	if (robust)
+ 	  {
+@@ -509,7 +517,10 @@ __pthread_mutex_timedlock (pthread_mutex_t *mutex,
+     case PTHREAD_MUTEX_PP_NORMAL_NP:
+     case PTHREAD_MUTEX_PP_ADAPTIVE_NP:
+       {
+-	int kind = mutex->__data.__kind & PTHREAD_MUTEX_KIND_MASK_NP;
++	/* See concurrency notes regarding __kind in struct __pthread_mutex_s
++	   in sysdeps/nptl/bits/thread-shared-types.h.  */
++	int kind = atomic_load_relaxed (&(mutex->__data.__kind))
++	  & PTHREAD_MUTEX_KIND_MASK_NP;
+ 
+ 	oldval = mutex->__data.__lock;
+ 
+diff --git a/nptl/pthread_mutex_trylock.c b/nptl/pthread_mutex_trylock.c
+index 7de61f4f68..fa90c1d1e6 100644
+--- a/nptl/pthread_mutex_trylock.c
++++ b/nptl/pthread_mutex_trylock.c
+@@ -36,6 +36,8 @@ __pthread_mutex_trylock (pthread_mutex_t *mutex)
+   int oldval;
+   pid_t id = THREAD_GETMEM (THREAD_SELF, tid);
+ 
++  /* See concurrency notes regarding mutex type which is loaded from __kind
++     in struct __pthread_mutex_s in sysdeps/nptl/bits/thread-shared-types.h.  */
+   switch (__builtin_expect (PTHREAD_MUTEX_TYPE_ELISION (mutex),
+ 			    PTHREAD_MUTEX_TIMED_NP))
+     {
+@@ -199,8 +201,14 @@ __pthread_mutex_trylock (pthread_mutex_t *mutex)
+     case PTHREAD_MUTEX_PI_ROBUST_NORMAL_NP:
+     case PTHREAD_MUTEX_PI_ROBUST_ADAPTIVE_NP:
+       {
+-	int kind = mutex->__data.__kind & PTHREAD_MUTEX_KIND_MASK_NP;
+-	int robust = mutex->__data.__kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP;
++	int kind, robust;
++	{
++	  /* See concurrency notes regarding __kind in struct __pthread_mutex_s
++	     in sysdeps/nptl/bits/thread-shared-types.h.  */
++	  int mutex_kind = atomic_load_relaxed (&(mutex->__data.__kind));
++	  kind = mutex_kind & PTHREAD_MUTEX_KIND_MASK_NP;
++	  robust = mutex_kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP;
++	}
+ 
+ 	if (robust)
+ 	  /* Note: robust PI futexes are signaled by setting bit 0.  */
+@@ -325,7 +333,10 @@ __pthread_mutex_trylock (pthread_mutex_t *mutex)
+     case PTHREAD_MUTEX_PP_NORMAL_NP:
+     case PTHREAD_MUTEX_PP_ADAPTIVE_NP:
+       {
+-	int kind = mutex->__data.__kind & PTHREAD_MUTEX_KIND_MASK_NP;
++	/* See concurrency notes regarding __kind in struct __pthread_mutex_s
++	   in sysdeps/nptl/bits/thread-shared-types.h.  */
++	int kind = atomic_load_relaxed (&(mutex->__data.__kind))
++	  & PTHREAD_MUTEX_KIND_MASK_NP;
+ 
+ 	oldval = mutex->__data.__lock;
+ 
+diff --git a/nptl/pthread_mutex_unlock.c b/nptl/pthread_mutex_unlock.c
+index 9ea62943b7..68d04d5395 100644
+--- a/nptl/pthread_mutex_unlock.c
++++ b/nptl/pthread_mutex_unlock.c
+@@ -35,6 +35,8 @@ int
+ attribute_hidden
+ __pthread_mutex_unlock_usercnt (pthread_mutex_t *mutex, int decr)
+ {
++  /* See concurrency notes regarding mutex type which is loaded from __kind
++     in struct __pthread_mutex_s in sysdeps/nptl/bits/thread-shared-types.h.  */
+   int type = PTHREAD_MUTEX_TYPE_ELISION (mutex);
+   if (__builtin_expect (type &
+ 		~(PTHREAD_MUTEX_KIND_MASK_NP|PTHREAD_MUTEX_ELISION_FLAGS_NP), 0))
+@@ -222,13 +224,19 @@ __pthread_mutex_unlock_full (pthread_mutex_t *mutex, int decr)
+       /* If the previous owner died and the caller did not succeed in
+ 	 making the state consistent, mark the mutex as unrecoverable
+ 	 and make all waiters.  */
+-      if ((mutex->__data.__kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP) != 0
++      /* See concurrency notes regarding __kind in struct __pthread_mutex_s
++	 in sysdeps/nptl/bits/thread-shared-types.h.  */
++      if ((atomic_load_relaxed (&(mutex->__data.__kind))
++	   & PTHREAD_MUTEX_ROBUST_NORMAL_NP) != 0
+ 	  && __builtin_expect (mutex->__data.__owner
+ 			       == PTHREAD_MUTEX_INCONSISTENT, 0))
+       pi_notrecoverable:
+        newowner = PTHREAD_MUTEX_NOTRECOVERABLE;
+ 
+-      if ((mutex->__data.__kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP) != 0)
++      /* See concurrency notes regarding __kind in struct __pthread_mutex_s
++	 in sysdeps/nptl/bits/thread-shared-types.h.  */
++      if ((atomic_load_relaxed (&(mutex->__data.__kind))
++	   & PTHREAD_MUTEX_ROBUST_NORMAL_NP) != 0)
+ 	{
+ 	continue_pi_robust:
+ 	  /* Remove mutex from the list.
+@@ -251,7 +259,10 @@ __pthread_mutex_unlock_full (pthread_mutex_t *mutex, int decr)
+       /* Unlock.  Load all necessary mutex data before releasing the mutex
+ 	 to not violate the mutex destruction requirements (see
+ 	 lll_unlock).  */
+-      int robust = mutex->__data.__kind & PTHREAD_MUTEX_ROBUST_NORMAL_NP;
++      /* See concurrency notes regarding __kind in struct __pthread_mutex_s
++	 in sysdeps/nptl/bits/thread-shared-types.h.  */
++      int robust = atomic_load_relaxed (&(mutex->__data.__kind))
++	& PTHREAD_MUTEX_ROBUST_NORMAL_NP;
+       private = (robust
+ 		 ? PTHREAD_ROBUST_MUTEX_PSHARED (mutex)
+ 		 : PTHREAD_MUTEX_PSHARED (mutex));
+diff --git a/nptl/tst-mutex10.c b/nptl/tst-mutex10.c
+new file mode 100644
+index 0000000000..e1113ca60a
+--- /dev/null
++++ b/nptl/tst-mutex10.c
+@@ -0,0 +1,109 @@
++/* Testing race while enabling lock elision.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++#include <stdio.h>
++#include <stdlib.h>
++#include <stdint.h>
++#include <pthread.h>
++#include <unistd.h>
++#include <getopt.h>
++#include <support/support.h>
++#include <support/xthread.h>
++
++static pthread_barrier_t barrier;
++static pthread_mutex_t mutex;
++static long long int iteration_count = 1000000;
++static unsigned int thread_count = 3;
++
++static void *
++thr_func (void *arg)
++{
++  long long int i;
++  for (i = 0; i < iteration_count; i++)
++    {
++      if ((uintptr_t) arg == 0)
++	{
++	  xpthread_mutex_destroy (&mutex);
++	  xpthread_mutex_init (&mutex, NULL);
++	}
++
++      xpthread_barrier_wait (&barrier);
++
++      /* Test if enabling lock elision works if it is enabled concurrently.
++	 There was a race in FORCE_ELISION macro which leads to either
++	 pthread_mutex_destroy returning EBUSY as the owner was recorded
++	 by pthread_mutex_lock - in "normal mutex" code path - but was not
++	 resetted in pthread_mutex_unlock - in "elision" code path.
++	 Or it leads to the assertion in nptl/pthread_mutex_lock.c:
++	 assert (mutex->__data.__owner == 0);
++	 Please ensure that the test is run with lock elision:
++	 export GLIBC_TUNABLES=glibc.elision.enable=1  */
++      xpthread_mutex_lock (&mutex);
++      xpthread_mutex_unlock (&mutex);
++
++      xpthread_barrier_wait (&barrier);
++    }
++  return NULL;
++}
++
++static int
++do_test (void)
++{
++  unsigned int i;
++  printf ("Starting %d threads to run %lld iterations.\n",
++	  thread_count, iteration_count);
++
++  pthread_t *threads = xmalloc (thread_count * sizeof (pthread_t));
++  xpthread_barrier_init (&barrier, NULL, thread_count);
++  xpthread_mutex_init (&mutex, NULL);
++
++  for (i = 0; i < thread_count; i++)
++    threads[i] = xpthread_create (NULL, thr_func, (void *) (uintptr_t) i);
++
++  for (i = 0; i < thread_count; i++)
++    xpthread_join (threads[i]);
++
++  xpthread_barrier_destroy (&barrier);
++  free (threads);
++
++  return EXIT_SUCCESS;
++}
++
++#define OPT_ITERATIONS	10000
++#define OPT_THREADS	10001
++#define CMDLINE_OPTIONS						\
++  { "iterations", required_argument, NULL, OPT_ITERATIONS },	\
++  { "threads", required_argument, NULL, OPT_THREADS },
++static void
++cmdline_process (int c)
++{
++  long long int arg = strtoll (optarg, NULL, 0);
++  switch (c)
++    {
++    case OPT_ITERATIONS:
++      if (arg > 0)
++	iteration_count = arg;
++      break;
++    case OPT_THREADS:
++      if (arg > 0 && arg < 100)
++	thread_count = arg;
++      break;
++    }
++}
++#define CMDLINE_PROCESS cmdline_process
++#define TIMEOUT 50
++#include <support/test-driver.c>
 diff --git a/nscd/gai.c b/nscd/gai.c
 index d081747797..576fd0045b 100644
 --- a/nscd/gai.c
@@ -12673,6 +14410,61 @@ index 859c0f69bf..ea67d19fcd 100644
 +{
 +  return __execvpe_common (file, argv, envp, false);
 +}
+diff --git a/posix/regexec.c b/posix/regexec.c
+index 4b1ab4ecff..21129432d1 100644
+--- a/posix/regexec.c
++++ b/posix/regexec.c
+@@ -3848,30 +3848,27 @@ check_node_accept_bytes (const re_dfa_t *dfa, int node_idx,
+ 	      indirect = (const int32_t *)
+ 		_NL_CURRENT (LC_COLLATE, _NL_COLLATE_INDIRECTMB);
+ 	      int32_t idx = findidx (table, indirect, extra, &cp, elem_len);
++	      int32_t rule = idx >> 24;
++	      idx &= 0xffffff;
+ 	      if (idx > 0)
+-		for (i = 0; i < cset->nequiv_classes; ++i)
+-		  {
+-		    int32_t equiv_class_idx = cset->equiv_classes[i];
+-		    size_t weight_len = weights[idx & 0xffffff];
+-		    if (weight_len == weights[equiv_class_idx & 0xffffff]
+-			&& (idx >> 24) == (equiv_class_idx >> 24))
+-		      {
+-			int cnt = 0;
+-
+-			idx &= 0xffffff;
+-			equiv_class_idx &= 0xffffff;
+-
+-			while (cnt <= weight_len
+-			       && (weights[equiv_class_idx + 1 + cnt]
+-				   == weights[idx + 1 + cnt]))
+-			  ++cnt;
+-			if (cnt > weight_len)
+-			  {
+-			    match_len = elem_len;
+-			    goto check_node_accept_bytes_match;
+-			  }
+-		      }
+-		  }
++		{
++		  size_t weight_len = weights[idx];
++		  for (i = 0; i < cset->nequiv_classes; ++i)
++		    {
++		      int32_t equiv_class_idx = cset->equiv_classes[i];
++		      int32_t equiv_class_rule = equiv_class_idx >> 24;
++		      equiv_class_idx &= 0xffffff;
++		      if (weights[equiv_class_idx] == weight_len
++			  && equiv_class_rule == rule
++			  && memcmp (weights + idx + 1,
++				     weights + equiv_class_idx + 1,
++				     weight_len) == 0)
++			{
++			  match_len = elem_len;
++			  goto check_node_accept_bytes_match;
++			}
++		    }
++		}
+ 	    }
+ 	}
+       else
 diff --git a/posix/tst-glob_lstat_compat.c b/posix/tst-glob_lstat_compat.c
 index c46bc9e578..22cd1f02f9 100644
 --- a/posix/tst-glob_lstat_compat.c
@@ -12873,6 +14665,24 @@ index 0000000000..e4a1fa3f00
 +}
 +
 +#include <support/test-driver.c>
+diff --git a/resolv/gai_misc.c b/resolv/gai_misc.c
+index e7c3b63cc5..80a2cff835 100644
+--- a/resolv/gai_misc.c
++++ b/resolv/gai_misc.c
+@@ -261,8 +261,11 @@ __gai_enqueue_request (struct gaicb *gaicbp)
+ 	      /* We cannot create a thread in the moment and there is
+ 		 also no thread running.  This is a problem.  `errno' is
+ 		 set to EAGAIN if this is only a temporary problem.  */
+-	      assert (lastp->next == newp);
+-	      lastp->next = NULL;
++	      assert (requests == newp || lastp->next == newp);
++	      if (lastp != NULL)
++		lastp->next = NULL;
++	      else
++		requests = NULL;
+ 	      requests_tail = lastp;
+ 
+ 	      newp->next = freelist;
 diff --git a/resolv/res_send.c b/resolv/res_send.c
 index dde0425a33..9e9541789b 100644
 --- a/resolv/res_send.c
@@ -12936,6 +14746,30 @@ index dde0425a33..9e9541789b 100644
  
  		    int ndg = __sendmmsg (pfd[0].fd, reqs, 2, MSG_NOSIGNAL);
  		    if (__glibc_likely (ndg == 2))
+diff --git a/resolv/tst-resolv-network.c b/resolv/tst-resolv-network.c
+index 4b862d57e6..735e38d0f8 100644
+--- a/resolv/tst-resolv-network.c
++++ b/resolv/tst-resolv-network.c
+@@ -149,6 +149,9 @@ handle_code (const struct resolv_response_context *ctx,
+           resolv_response_add_data (b, &rrtype, sizeof (rrtype));
+         }
+       break;
++    case 104:
++      send_ptr (b, qname, qclass, qtype, "host.example");
++      break;
+     default:
+       FAIL_EXIT1 ("invalid QNAME: %s (code %d)", qname, code);
+     }
+@@ -257,6 +260,9 @@ do_test (void)
+                 "error: TRY_AGAIN\n");
+   check_netent ("code103.example", getnetbyname ("code103.example"),
+                 "error: NO_RECOVERY\n");
++  /* Test bug #17630.  */
++  check_netent ("code104.example", getnetbyname ("code104.example"),
++                "error: TRY_AGAIN\n");
+ 
+   /* Lookup by address, success cases.  */
+   check_reverse (1,
 diff --git a/signal/Makefile b/signal/Makefile
 index a9b99a20be..aa63434f47 100644
 --- a/signal/Makefile
@@ -13011,6 +14845,159 @@ index 0000000000..c908e8f6f6
 +}
 +
 +#include <support/test-driver.c>
+diff --git a/stdio-common/tst-printf.c b/stdio-common/tst-printf.c
+index d73f0cc34e..70d9e584b3 100644
+--- a/stdio-common/tst-printf.c
++++ b/stdio-common/tst-printf.c
+@@ -69,77 +69,7 @@ fmtst2chk (const char *fmt)
+   (void) printf(fmt, 4, 4, 0x12);
+   (void) printf("'\n");
+ }
+-
+-/* This page is covered by the following copyright: */
+-
+-/* (C) Copyright C E Chew
+- *
+- * Feel free to copy, use and distribute this software provided:
+- *
+- *	1. you do not pretend that you wrote it
+- *	2. you leave this copyright notice intact.
+- */
+-
+-/*
+- * Extracted from exercise.c for glibc-1.05 bug report by Bruce Evans.
+- */
+-
+-#define DEC -123
+-#define INT 255
+-#define UNS (~0)
+ 
+-/* Formatted Output Test
+- *
+- * This exercises the output formatting code.
+- */
+-
+-static void
+-fp_test (void)
+-{
+-  int i, j, k, l;
+-  char buf[7];
+-  char *prefix = buf;
+-  char tp[20];
+-
+-  puts("\nFormatted output test");
+-  printf("prefix  6d      6o      6x      6X      6u\n");
+-  strcpy(prefix, "%");
+-  for (i = 0; i < 2; i++) {
+-    for (j = 0; j < 2; j++) {
+-      for (k = 0; k < 2; k++) {
+-	for (l = 0; l < 2; l++) {
+-	  strcpy(prefix, "%");
+-	  if (i == 0) strcat(prefix, "-");
+-	  if (j == 0) strcat(prefix, "+");
+-	  if (k == 0) strcat(prefix, "#");
+-	  if (l == 0) strcat(prefix, "0");
+-	  printf("%5s |", prefix);
+-	  strcpy(tp, prefix);
+-	  strcat(tp, "6d |");
+-	  printf(tp, DEC);
+-	  strcpy(tp, prefix);
+-	  strcat(tp, "6o |");
+-	  printf(tp, INT);
+-	  strcpy(tp, prefix);
+-	  strcat(tp, "6x |");
+-	  printf(tp, INT);
+-	  strcpy(tp, prefix);
+-	  strcat(tp, "6X |");
+-	  printf(tp, INT);
+-	  strcpy(tp, prefix);
+-	  strcat(tp, "6u |");
+-	  printf(tp, UNS);
+-	  printf("\n");
+-	}
+-      }
+-    }
+-  }
+-  printf("%10s\n", (char *) NULL);
+-  printf("%-10s\n", (char *) NULL);
+-  printf("%.8f\n", DBL_MAX);
+-  printf("%.8f\n", -DBL_MAX);
+-}
+-
+ static int
+ do_test (void)
+ {
+@@ -239,8 +169,8 @@ I am ready for my first lesson today.";
+ 	    snprintf(buf2, sizeof(buf2), "%.999999u", 10));
+   }
+ 
+-  fp_test ();
+-
++  printf("%.8f\n", DBL_MAX);
++  printf("%.8f\n", -DBL_MAX);
+   printf ("%e should be 1.234568e+06\n", 1234567.8);
+   printf ("%f should be 1234567.800000\n", 1234567.8);
+   printf ("%g should be 1.23457e+06\n", 1234567.8);
+diff --git a/stdio-common/tst-printf.sh b/stdio-common/tst-printf.sh
+index 93bfe03c6f..b543cc646c 100644
+--- a/stdio-common/tst-printf.sh
++++ b/stdio-common/tst-printf.sh
+@@ -105,27 +105,6 @@ something really insane: 1.00000000000000000000000000000000000000000000000000000
+ | 123456.0000|  1.2346e+05|   1.235e+05|
+ snprintf ("%30s", "foo") == 30, "                   "
+ snprintf ("%.999999u", 10) == 999999
+-
+-Formatted output test
+-prefix  6d      6o      6x      6X      6u
+-%-+#0 |-123   |0377   |0xff   |0XFF   |4294967295 |
+- %-+# |-123   |0377   |0xff   |0XFF   |4294967295 |
+- %-+0 |-123   |377    |ff     |FF     |4294967295 |
+-  %-+ |-123   |377    |ff     |FF     |4294967295 |
+- %-#0 |-123   |0377   |0xff   |0XFF   |4294967295 |
+-  %-# |-123   |0377   |0xff   |0XFF   |4294967295 |
+-  %-0 |-123   |377    |ff     |FF     |4294967295 |
+-   %- |-123   |377    |ff     |FF     |4294967295 |
+- %+#0 |-00123 |000377 |0x00ff |0X00FF |4294967295 |
+-  %+# |  -123 |  0377 |  0xff |  0XFF |4294967295 |
+-  %+0 |-00123 |000377 |0000ff |0000FF |4294967295 |
+-   %+ |  -123 |   377 |    ff |    FF |4294967295 |
+-  %#0 |-00123 |000377 |0x00ff |0X00FF |4294967295 |
+-   %# |  -123 |  0377 |  0xff |  0XFF |4294967295 |
+-   %0 |-00123 |000377 |0000ff |0000FF |4294967295 |
+-    % |  -123 |   377 |    ff |    FF |4294967295 |
+-    (null)
+-(null)    
+ 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00000000
+ -179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00000000
+ 1.234568e+06 should be 1.234568e+06
+@@ -225,27 +204,6 @@ something really insane: 1.00000000000000000000000000000000000000000000000000000
+ | 123456.0000|  1.2346e+05|   1.235e+05|
+ snprintf ("%30s", "foo") == 30, "                   "
+ snprintf ("%.999999u", 10) == 999999
+-
+-Formatted output test
+-prefix  6d      6o      6x      6X      6u
+-%-+#0 |-123   |0377   |0xff   |0XFF   |4294967295 |
+- %-+# |-123   |0377   |0xff   |0XFF   |4294967295 |
+- %-+0 |-123   |377    |ff     |FF     |4294967295 |
+-  %-+ |-123   |377    |ff     |FF     |4294967295 |
+- %-#0 |-123   |0377   |0xff   |0XFF   |4294967295 |
+-  %-# |-123   |0377   |0xff   |0XFF   |4294967295 |
+-  %-0 |-123   |377    |ff     |FF     |4294967295 |
+-   %- |-123   |377    |ff     |FF     |4294967295 |
+- %+#0 |-00123 |000377 |0x00ff |0X00FF |4294967295 |
+-  %+# |  -123 |  0377 |  0xff |  0XFF |4294967295 |
+-  %+0 |-00123 |000377 |0000ff |0000FF |4294967295 |
+-   %+ |  -123 |   377 |    ff |    FF |4294967295 |
+-  %#0 |-00123 |000377 |0x00ff |0X00FF |4294967295 |
+-   %# |  -123 |  0377 |  0xff |  0XFF |4294967295 |
+-   %0 |-00123 |000377 |0000ff |0000FF |4294967295 |
+-    % |  -123 |   377 |    ff |    FF |4294967295 |
+-    (null)
+-(null)    
+ 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00000000
+ -179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00000000
+ 1.234568e+06 should be 1.234568e+06
 diff --git a/stdlib/Makefile b/stdlib/Makefile
 index 7c363a6e4d..a9ad849531 100644
 --- a/stdlib/Makefile
@@ -13375,6 +15362,973 @@ index f99a5a324f..9ce4804239 100644
  
  /*
   * Service side authenticator for AUTH_DES
+diff --git a/support/Makefile b/support/Makefile
+index 1bda81e55e..652d2cdf69 100644
+--- a/support/Makefile
++++ b/support/Makefile
+@@ -52,9 +52,12 @@ libsupport-routines = \
+   support_format_hostent \
+   support_format_netent \
+   support_isolate_in_subprocess \
++  support_openpty \
++  support_quote_blob \
+   support_record_failure \
+   support_run_diff \
+   support_shared_allocate \
++  support_test_compare_blob \
+   support_test_compare_failure \
+   support_write_file_string \
+   support_test_main \
+@@ -95,6 +98,9 @@ libsupport-routines = \
+   xpthread_barrier_destroy \
+   xpthread_barrier_init \
+   xpthread_barrier_wait \
++  xpthread_barrierattr_destroy \
++  xpthread_barrierattr_init \
++  xpthread_barrierattr_setpshared \
+   xpthread_cancel \
+   xpthread_check_return \
+   xpthread_cond_wait \
+@@ -150,8 +156,10 @@ tests = \
+   tst-support-namespace \
+   tst-support_capture_subprocess \
+   tst-support_format_dns_packet \
++  tst-support_quote_blob \
+   tst-support_record_failure \
+   tst-test_compare \
++  tst-test_compare_blob \
+   tst-xreadlink \
+ 
+ ifeq ($(run-built-tests),yes)
+diff --git a/support/check.h b/support/check.h
+index 2192f38941..b3a4645e92 100644
+--- a/support/check.h
++++ b/support/check.h
+@@ -64,6 +64,8 @@ __BEGIN_DECLS
+         (1, __FILE__, __LINE__, #expr);                         \
+   })
+ 
++
++
+ int support_print_failure_impl (const char *file, int line,
+                                 const char *format, ...)
+   __attribute__ ((nonnull (1), format (printf, 3, 4)));
+@@ -141,6 +143,26 @@ void support_test_compare_failure (const char *file, int line,
+                                    int right_size);
+ 
+ 
++/* Compare [LEFT, LEFT + LEFT_LENGTH) with [RIGHT, RIGHT +
++   RIGHT_LENGTH) and report a test failure if the arrays are
++   different.  LEFT_LENGTH and RIGHT_LENGTH are measured in bytes.  If
++   the length is null, the corresponding pointer is ignored (i.e., it
++   can be NULL).  The blobs should be reasonably short because on
++   mismatch, both are printed.  */
++#define TEST_COMPARE_BLOB(left, left_length, right, right_length)       \
++  (support_test_compare_blob (left, left_length, right, right_length,   \
++                              __FILE__, __LINE__,                       \
++                              #left, #left_length, #right, #right_length))
++
++void support_test_compare_blob (const void *left,
++                                unsigned long int left_length,
++                                const void *right,
++                                unsigned long int right_length,
++                                const char *file, int line,
++                                const char *left_exp, const char *left_len_exp,
++                                const char *right_exp,
++                                const char *right_len_exp);
++
+ /* Internal function called by the test driver.  */
+ int support_report_failure (int status)
+   __attribute__ ((weak, warn_unused_result));
+diff --git a/support/support.h b/support/support.h
+index bc5827ed87..b61fe0735c 100644
+--- a/support/support.h
++++ b/support/support.h
+@@ -59,6 +59,12 @@ void support_shared_free (void *);
+    process on error.  */
+ void support_write_file_string (const char *path, const char *contents);
+ 
++/* Quote the contents of the byte array starting at BLOB, of LENGTH
++   bytes, in such a way that the result string can be included in a C
++   literal (in single/double quotes, without putting the quotes into
++   the result).  */
++char *support_quote_blob (const void *blob, size_t length);
++
+ /* Error-checking wrapper functions which terminate the process on
+    error.  */
+ 
+diff --git a/support/support_format_addrinfo.c b/support/support_format_addrinfo.c
+index c5e00e516a..60d2cc40f6 100644
+--- a/support/support_format_addrinfo.c
++++ b/support/support_format_addrinfo.c
+@@ -67,8 +67,6 @@ format_ai_flags (FILE *out, struct addrinfo *ai)
+       FLAG (AI_ADDRCONFIG);
+       FLAG (AI_IDN);
+       FLAG (AI_CANONIDN);
+-      FLAG (AI_IDN_ALLOW_UNASSIGNED);
+-      FLAG (AI_IDN_USE_STD3_ASCII_RULES);
+       FLAG (AI_NUMERICSERV);
+ #undef FLAG
+       int remaining = ai->ai_flags & ~flags_printed;
+@@ -220,7 +218,11 @@ support_format_addrinfo (struct addrinfo *ai, int ret)
+   xopen_memstream (&mem);
+   if (ret != 0)
+     {
+-      fprintf (mem.out, "error: %s\n", gai_strerror (ret));
++      const char *errmsg = gai_strerror (ret);
++      if (strcmp (errmsg, "Unknown error") == 0)
++        fprintf (mem.out, "error: Unknown error %d\n", ret);
++      else
++        fprintf (mem.out, "error: %s\n", errmsg);
+       if (ret == EAI_SYSTEM)
+         {
+           errno = errno_copy;
+diff --git a/support/support_openpty.c b/support/support_openpty.c
+new file mode 100644
+index 0000000000..ac779ab91e
+--- /dev/null
++++ b/support/support_openpty.c
+@@ -0,0 +1,109 @@
++/* Open a pseudoterminal.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++#include <support/tty.h>
++#include <support/check.h>
++#include <support/support.h>
++
++#include <errno.h>
++#include <stdlib.h>
++#include <string.h>
++
++#include <fcntl.h>
++#include <termios.h>
++#include <sys/ioctl.h>
++#include <unistd.h>
++
++/* As ptsname, but allocates space for an appropriately-sized string
++   using malloc.  */
++static char *
++xptsname (int fd)
++{
++  int rv;
++  size_t buf_len = 128;
++  char *buf = xmalloc (buf_len);
++  for (;;)
++    {
++      rv = ptsname_r (fd, buf, buf_len);
++      if (rv)
++        FAIL_EXIT1 ("ptsname_r: %s", strerror (errno));
++
++      if (memchr (buf, '\0', buf_len))
++        return buf; /* ptsname succeeded and the buffer was not truncated */
++
++      buf_len *= 2;
++      buf = xrealloc (buf, buf_len);
++    }
++}
++
++void
++support_openpty (int *a_outer, int *a_inner, char **a_name,
++                 const struct termios *termp,
++                 const struct winsize *winp)
++{
++  int outer = -1, inner = -1;
++  char *namebuf = 0;
++
++  outer = posix_openpt (O_RDWR | O_NOCTTY);
++  if (outer == -1)
++    FAIL_EXIT1 ("posix_openpt: %s", strerror (errno));
++
++  if (grantpt (outer))
++    FAIL_EXIT1 ("grantpt: %s", strerror (errno));
++
++  if (unlockpt (outer))
++    FAIL_EXIT1 ("unlockpt: %s", strerror (errno));
++
++
++#ifdef TIOCGPTPEER
++  inner = ioctl (outer, TIOCGPTPEER, O_RDWR | O_NOCTTY);
++#endif
++  if (inner == -1)
++    {
++      /* The kernel might not support TIOCGPTPEER, fall back to open
++         by name.  */
++      namebuf = xptsname (outer);
++      inner = open (namebuf, O_RDWR | O_NOCTTY);
++      if (inner == -1)
++        FAIL_EXIT1 ("%s: %s", namebuf, strerror (errno));
++    }
++
++  if (termp)
++    {
++      if (tcsetattr (inner, TCSAFLUSH, termp))
++        FAIL_EXIT1 ("tcsetattr: %s", strerror (errno));
++    }
++#ifdef TIOCSWINSZ
++  if (winp)
++    {
++      if (ioctl (inner, TIOCSWINSZ, winp))
++        FAIL_EXIT1 ("TIOCSWINSZ: %s", strerror (errno));
++    }
++#endif
++
++  if (a_name)
++    {
++      if (!namebuf)
++        namebuf = xptsname (outer);
++      *a_name = namebuf;
++    }
++  else
++    free (namebuf);
++  *a_outer = outer;
++  *a_inner = inner;
++}
+diff --git a/support/support_quote_blob.c b/support/support_quote_blob.c
+new file mode 100644
+index 0000000000..d6a678d8d6
+--- /dev/null
++++ b/support/support_quote_blob.c
+@@ -0,0 +1,83 @@
++/* Quote a blob so that it can be used in C literals.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++#include <support/support.h>
++#include <support/xmemstream.h>
++
++char *
++support_quote_blob (const void *blob, size_t length)
++{
++  struct xmemstream out;
++  xopen_memstream (&out);
++
++  const unsigned char *p = blob;
++  for (size_t i = 0; i < length; ++i)
++    {
++      unsigned char ch = p[i];
++
++      /* Use C backslash escapes for those control characters for
++         which they are defined.  */
++      switch (ch)
++        {
++          case '\a':
++            putc_unlocked ('\\', out.out);
++            putc_unlocked ('a', out.out);
++            break;
++          case '\b':
++            putc_unlocked ('\\', out.out);
++            putc_unlocked ('b', out.out);
++            break;
++          case '\f':
++            putc_unlocked ('\\', out.out);
++            putc_unlocked ('f', out.out);
++            break;
++          case '\n':
++            putc_unlocked ('\\', out.out);
++            putc_unlocked ('n', out.out);
++            break;
++          case '\r':
++            putc_unlocked ('\\', out.out);
++            putc_unlocked ('r', out.out);
++            break;
++          case '\t':
++            putc_unlocked ('\\', out.out);
++            putc_unlocked ('t', out.out);
++            break;
++          case '\v':
++            putc_unlocked ('\\', out.out);
++            putc_unlocked ('v', out.out);
++            break;
++          case '\\':
++          case '\'':
++          case '\"':
++            putc_unlocked ('\\', out.out);
++            putc_unlocked (ch, out.out);
++            break;
++        default:
++          if (ch < ' ' || ch > '~')
++            /* Use octal sequences because they are fixed width,
++               unlike hexadecimal sequences.  */
++            fprintf (out.out, "\\%03o", ch);
++          else
++            putc_unlocked (ch, out.out);
++        }
++    }
++
++  xfclose_memstream (&out);
++  return out.buffer;
++}
+diff --git a/support/support_test_compare_blob.c b/support/support_test_compare_blob.c
+new file mode 100644
+index 0000000000..c5e63d1b93
+--- /dev/null
++++ b/support/support_test_compare_blob.c
+@@ -0,0 +1,76 @@
++/* Check two binary blobs for equality.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <support/check.h>
++#include <support/support.h>
++#include <support/xmemstream.h>
++
++static void
++report_length (const char *what, unsigned long int length, const char *expr)
++{
++  printf ("  %s %lu bytes (from %s)\n", what, length, expr);
++}
++
++static void
++report_blob (const char *what, const unsigned char *blob,
++             unsigned long int length, const char *expr)
++{
++  if (length > 0)
++    {
++      printf ("  %s (evaluated from %s):\n", what, expr);
++      char *quoted = support_quote_blob (blob, length);
++      printf ("      \"%s\"\n", quoted);
++      free (quoted);
++
++      fputs ("     ", stdout);
++      for (unsigned long i = 0; i < length; ++i)
++        printf (" %02X", blob[i]);
++      putc ('\n', stdout);
++    }
++}
++
++void
++support_test_compare_blob (const void *left, unsigned long int left_length,
++                           const void *right, unsigned long int right_length,
++                           const char *file, int line,
++                           const char *left_expr, const char *left_len_expr,
++                           const char *right_expr, const char *right_len_expr)
++{
++  /* No differences are possible if both lengths are null.  */
++  if (left_length == 0 && right_length == 0)
++    return;
++
++  if (left_length != right_length || left == NULL || right == NULL
++      || memcmp (left, right, left_length) != 0)
++    {
++      support_record_failure ();
++      printf ("%s:%d: error: blob comparison failed\n", file, line);
++      if (left_length == right_length)
++        printf ("  blob length: %lu bytes\n", left_length);
++      else
++        {
++          report_length ("left length: ", left_length, left_len_expr);
++          report_length ("right length:", right_length, right_len_expr);
++        }
++      report_blob ("left", left, left_length, left_expr);
++      report_blob ("right", right, right_length, right_expr);
++    }
++}
+diff --git a/support/support_test_main.c b/support/support_test_main.c
+index 396385729b..23429779ac 100644
+--- a/support/support_test_main.c
++++ b/support/support_test_main.c
+@@ -270,7 +270,8 @@ support_test_main (int argc, char **argv, const struct test_config *config)
+     timeout =  DEFAULT_TIMEOUT;
+ 
+   /* Make sure we see all message, even those on stdout.  */
+-  setvbuf (stdout, NULL, _IONBF, 0);
++  if (!config->no_setvbuf)
++    setvbuf (stdout, NULL, _IONBF, 0);
+ 
+   /* Make sure temporary files are deleted.  */
+   if (support_delete_temp_files != NULL)
+diff --git a/support/test-driver.c b/support/test-driver.c
+index 09c8783e4f..9798f16227 100644
+--- a/support/test-driver.c
++++ b/support/test-driver.c
+@@ -140,6 +140,10 @@ main (int argc, char **argv)
+   test_config.no_mallopt = 1;
+ #endif
+ 
++#ifdef TEST_NO_SETVBUF
++  test_config.no_setvbuf = 1;
++#endif
++
+ #ifdef TIMEOUT
+   test_config.timeout = TIMEOUT;
+ #endif
+diff --git a/support/test-driver.h b/support/test-driver.h
+index 1708d68d60..549179b254 100644
+--- a/support/test-driver.h
++++ b/support/test-driver.h
+@@ -35,6 +35,7 @@ struct test_config
+   int expected_status;   /* Expected exit status.  */
+   int expected_signal;   /* If non-zero, expect termination by signal.  */
+   char no_mallopt;       /* Boolean flag to disable mallopt.  */
++  char no_setvbuf;       /* Boolean flag to disable setvbuf.  */
+   const char *optstring; /* Short command line options.  */
+ };
+ 
+diff --git a/support/tst-support_quote_blob.c b/support/tst-support_quote_blob.c
+new file mode 100644
+index 0000000000..5467a190a6
+--- /dev/null
++++ b/support/tst-support_quote_blob.c
+@@ -0,0 +1,61 @@
++/* Test the support_quote_blob function.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++#include <support/check.h>
++#include <support/support.h>
++#include <string.h>
++#include <stdlib.h>
++
++static int
++do_test (void)
++{
++  /* Check handling of the empty blob, both with and without trailing
++     NUL byte.  */
++  char *p = support_quote_blob ("", 0);
++  TEST_COMPARE (strlen (p), 0);
++  free (p);
++  p = support_quote_blob ("X", 0);
++  TEST_COMPARE (strlen (p), 0);
++  free (p);
++
++  /* Check escaping of backslash-escaped characters, and lack of
++     escaping for other shell meta-characters.  */
++  p = support_quote_blob ("$()*?`@[]{}~\'\"X", 14);
++  TEST_COMPARE (strcmp (p, "$()*?`@[]{}~\\'\\\""), 0);
++  free (p);
++
++  /* Check lack of escaping for letters and digits.  */
++#define LETTERS_AND_DIGTS                       \
++  "abcdefghijklmnopqrstuvwxyz"                  \
++  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"                  \
++  "0123456789"
++  p = support_quote_blob (LETTERS_AND_DIGTS "@", 2 * 26 + 10);
++  TEST_COMPARE (strcmp (p, LETTERS_AND_DIGTS), 0);
++  free (p);
++
++  /* Check escaping of control characters and other non-printable
++     characters.  */
++  p = support_quote_blob ("\r\n\t\a\b\f\v\1\177\200\377\0@", 14);
++  TEST_COMPARE (strcmp (p, "\\r\\n\\t\\a\\b\\f\\v\\001"
++                        "\\177\\200\\377\\000@\\000"), 0);
++  free (p);
++
++  return 0;
++}
++
++#include <support/test-driver.c>
+diff --git a/support/tst-test_compare_blob.c b/support/tst-test_compare_blob.c
+new file mode 100644
+index 0000000000..aa8643e182
+--- /dev/null
++++ b/support/tst-test_compare_blob.c
+@@ -0,0 +1,125 @@
++/* Basic test for the TEST_COMPARE_BLOB macro.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++#include <string.h>
++#include <support/check.h>
++#include <support/capture_subprocess.h>
++
++static void
++subprocess (void *closure)
++{
++  /* These tests should fail.  They were chosen to cover differences
++     in length (with the same contents), single-bit mismatches, and
++     mismatching null pointers.  */
++  TEST_COMPARE_BLOB ("", 0, "", 1);    /* Line 29.  */
++  TEST_COMPARE_BLOB ("X", 1, "", 1);   /* Line 30.  */
++  TEST_COMPARE_BLOB ("abcd", 3, "abcd", 4); /* Line 31.  */
++  TEST_COMPARE_BLOB ("abcd", 4, "abcD", 4); /* Line 32.  */
++  TEST_COMPARE_BLOB ("abcd", 4, NULL, 0); /* Line 33.  */
++  TEST_COMPARE_BLOB (NULL, 0, "abcd", 4); /* Line 34.  */
++}
++
++/* Same contents, different addresses.  */
++char buffer_abc_1[] = "abc";
++char buffer_abc_2[] = "abc";
++
++static int
++do_test (void)
++{
++  /* This should succeed.  Even if the pointers and array contents are
++     different, zero-length inputs are not different.  */
++  TEST_COMPARE_BLOB ("", 0, "", 0);
++  TEST_COMPARE_BLOB ("", 0, buffer_abc_1, 0);
++  TEST_COMPARE_BLOB (buffer_abc_1, 0, "", 0);
++  TEST_COMPARE_BLOB (NULL, 0, "", 0);
++  TEST_COMPARE_BLOB ("", 0, NULL, 0);
++  TEST_COMPARE_BLOB (NULL, 0, NULL, 0);
++
++  /* Check equality of blobs containing a single NUL byte.  */
++  TEST_COMPARE_BLOB ("", 1, "", 1);
++  TEST_COMPARE_BLOB ("", 1, &buffer_abc_1[3], 1);
++
++  /* Check equality of blobs of varying lengths.  */
++  for (size_t i = 0; i <= sizeof (buffer_abc_1); ++i)
++    TEST_COMPARE_BLOB (buffer_abc_1, i, buffer_abc_2, i);
++
++  struct support_capture_subprocess proc = support_capture_subprocess
++    (&subprocess, NULL);
++
++  /* Discard the reported error.  */
++  support_record_failure_reset ();
++
++  puts ("info: *** subprocess output starts ***");
++  fputs (proc.out.buffer, stdout);
++  puts ("info: *** subprocess output ends ***");
++
++  TEST_VERIFY
++    (strcmp (proc.out.buffer,
++"tst-test_compare_blob.c:29: error: blob comparison failed\n"
++"  left length:  0 bytes (from 0)\n"
++"  right length: 1 bytes (from 1)\n"
++"  right (evaluated from \"\"):\n"
++"      \"\\000\"\n"
++"      00\n"
++"tst-test_compare_blob.c:30: error: blob comparison failed\n"
++"  blob length: 1 bytes\n"
++"  left (evaluated from \"X\"):\n"
++"      \"X\"\n"
++"      58\n"
++"  right (evaluated from \"\"):\n"
++"      \"\\000\"\n"
++"      00\n"
++"tst-test_compare_blob.c:31: error: blob comparison failed\n"
++"  left length:  3 bytes (from 3)\n"
++"  right length: 4 bytes (from 4)\n"
++"  left (evaluated from \"abcd\"):\n"
++"      \"abc\"\n"
++"      61 62 63\n"
++"  right (evaluated from \"abcd\"):\n"
++"      \"abcd\"\n"
++"      61 62 63 64\n"
++"tst-test_compare_blob.c:32: error: blob comparison failed\n"
++"  blob length: 4 bytes\n"
++"  left (evaluated from \"abcd\"):\n"
++"      \"abcd\"\n"
++"      61 62 63 64\n"
++"  right (evaluated from \"abcD\"):\n"
++"      \"abcD\"\n"
++"      61 62 63 44\n"
++"tst-test_compare_blob.c:33: error: blob comparison failed\n"
++"  left length:  4 bytes (from 4)\n"
++"  right length: 0 bytes (from 0)\n"
++"  left (evaluated from \"abcd\"):\n"
++"      \"abcd\"\n"
++"      61 62 63 64\n"
++"tst-test_compare_blob.c:34: error: blob comparison failed\n"
++"  left length:  0 bytes (from 0)\n"
++"  right length: 4 bytes (from 4)\n"
++"  right (evaluated from \"abcd\"):\n"
++"      \"abcd\"\n"
++"      61 62 63 64\n"
++             ) == 0);
++
++  /* Check that there is no output on standard error.  */
++  support_capture_subprocess_check (&proc, "TEST_COMPARE_BLOB",
++                                    0, sc_allow_stdout);
++
++  return 0;
++}
++
++#include <support/test-driver.c>
+diff --git a/support/tty.h b/support/tty.h
+new file mode 100644
+index 0000000000..1d37c42279
+--- /dev/null
++++ b/support/tty.h
+@@ -0,0 +1,45 @@
++/* Support functions related to (pseudo)terminals.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++#ifndef _SUPPORT_TTY_H
++#define _SUPPORT_TTY_H 1
++
++struct termios;
++struct winsize;
++
++/** Open a pseudoterminal pair.  The outer fd is written to the address
++    A_OUTER and the inner fd to A_INNER.
++
++    If A_NAME is not NULL, it will be set to point to a string naming
++    the /dev/pts/NNN device corresponding to the inner fd; space for
++    this string is allocated with malloc and should be freed by the
++    caller when no longer needed.  (This is different from the libutil
++    function 'openpty'.)
++
++    If TERMP is not NULL, the terminal parameters will be initialized
++    according to the termios structure it points to.
++
++    If WINP is not NULL, the terminal window size will be set
++    accordingly.
++
++    Terminates the process on failure (like xmalloc).  */
++extern void support_openpty (int *a_outer, int *a_inner, char **a_name,
++                             const struct termios *termp,
++                             const struct winsize *winp);
++
++#endif
+diff --git a/support/xpthread_barrierattr_destroy.c b/support/xpthread_barrierattr_destroy.c
+new file mode 100644
+index 0000000000..3e471f9a81
+--- /dev/null
++++ b/support/xpthread_barrierattr_destroy.c
+@@ -0,0 +1,26 @@
++/* pthread_barrierattr_destroy with error checking.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++#include <support/xthread.h>
++
++void
++xpthread_barrierattr_destroy (pthread_barrierattr_t *attr)
++{
++  xpthread_check_return ("pthread_barrierattr_destroy",
++                         pthread_barrierattr_destroy (attr));
++}
+diff --git a/support/xpthread_barrierattr_init.c b/support/xpthread_barrierattr_init.c
+new file mode 100644
+index 0000000000..4ee14e78f3
+--- /dev/null
++++ b/support/xpthread_barrierattr_init.c
+@@ -0,0 +1,26 @@
++/* pthread_barrierattr_init with error checking.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++#include <support/xthread.h>
++
++void
++xpthread_barrierattr_init (pthread_barrierattr_t *attr)
++{
++  xpthread_check_return ("pthread_barrierattr_init",
++                         pthread_barrierattr_init (attr));
++}
+diff --git a/support/xpthread_barrierattr_setpshared.c b/support/xpthread_barrierattr_setpshared.c
+new file mode 100644
+index 0000000000..90b2c5bec6
+--- /dev/null
++++ b/support/xpthread_barrierattr_setpshared.c
+@@ -0,0 +1,26 @@
++/* pthread_barrierattr_setpshared with error checking.
++   Copyright (C) 2018 Free Software Foundation, Inc.
++   This file is part of the GNU C Library.
++
++   The GNU C Library is free software; you can redistribute it and/or
++   modify it under the terms of the GNU Lesser General Public
++   License as published by the Free Software Foundation; either
++   version 2.1 of the License, or (at your option) any later version.
++
++   The GNU C Library is distributed in the hope that it will be useful,
++   but WITHOUT ANY WARRANTY; without even the implied warranty of
++   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++   Lesser General Public License for more details.
++
++   You should have received a copy of the GNU Lesser General Public
++   License along with the GNU C Library; if not, see
++   <http://www.gnu.org/licenses/>.  */
++
++#include <support/xthread.h>
++
++void
++xpthread_barrierattr_setpshared (pthread_barrierattr_t *attr, int pshared)
++{
++  xpthread_check_return ("pthread_barrierattr_setpshared",
++                         pthread_barrierattr_setpshared (attr, pshared));
++}
+diff --git a/support/xthread.h b/support/xthread.h
+index 79358e7c99..623f5ad0ac 100644
+--- a/support/xthread.h
++++ b/support/xthread.h
+@@ -41,6 +41,9 @@ void xpthread_check_return (const char *function, int value);
+ void xpthread_barrier_init (pthread_barrier_t *barrier,
+                             pthread_barrierattr_t *attr, unsigned int count);
+ void xpthread_barrier_destroy (pthread_barrier_t *barrier);
++void xpthread_barrierattr_destroy (pthread_barrierattr_t *);
++void xpthread_barrierattr_init (pthread_barrierattr_t *);
++void xpthread_barrierattr_setpshared (pthread_barrierattr_t *, int pshared);
+ void xpthread_mutexattr_destroy (pthread_mutexattr_t *);
+ void xpthread_mutexattr_init (pthread_mutexattr_t *);
+ void xpthread_mutexattr_setprotocol (pthread_mutexattr_t *, int);
+diff --git a/sysdeps/generic/math_private.h b/sysdeps/generic/math_private.h
+index e4b9d8697f..cff76149d6 100644
+--- a/sysdeps/generic/math_private.h
++++ b/sysdeps/generic/math_private.h
+@@ -514,33 +514,6 @@ default_libc_feupdateenv_test (fenv_t *e, int ex)
+ # define HAVE_RM_CTX 0
+ #endif
+ 
+-#if HAVE_RM_CTX
+-/* Set/Restore Rounding Modes only when necessary.  If defined, these functions
+-   set/restore floating point state only if the state needed within the lexical
+-   block is different from the current state.  This saves a lot of time when
+-   the floating point unit is much slower than the fixed point units.  */
+-
+-# ifndef libc_feholdsetround_noex_ctx
+-#   define libc_feholdsetround_noex_ctx  libc_feholdsetround_ctx
+-# endif
+-# ifndef libc_feholdsetround_noexf_ctx
+-#   define libc_feholdsetround_noexf_ctx libc_feholdsetroundf_ctx
+-# endif
+-# ifndef libc_feholdsetround_noexl_ctx
+-#   define libc_feholdsetround_noexl_ctx libc_feholdsetroundl_ctx
+-# endif
+-
+-# ifndef libc_feresetround_noex_ctx
+-#   define libc_feresetround_noex_ctx  libc_fesetenv_ctx
+-# endif
+-# ifndef libc_feresetround_noexf_ctx
+-#   define libc_feresetround_noexf_ctx libc_fesetenvf_ctx
+-# endif
+-# ifndef libc_feresetround_noexl_ctx
+-#   define libc_feresetround_noexl_ctx libc_fesetenvl_ctx
+-# endif
+-
+-#else
+ 
+ /* Default implementation using standard fenv functions.
+    Avoid unnecessary rounding mode changes by first checking the
+@@ -548,7 +521,7 @@ default_libc_feupdateenv_test (fenv_t *e, int ex)
+    important for performance.  */
+ 
+ static __always_inline void
+-libc_feholdsetround_ctx (struct rm_ctx *ctx, int round)
++default_libc_feholdsetround_ctx (struct rm_ctx *ctx, int round)
+ {
+   ctx->updated_status = false;
+ 
+@@ -562,7 +535,7 @@ libc_feholdsetround_ctx (struct rm_ctx *ctx, int round)
+ }
+ 
+ static __always_inline void
+-libc_feresetround_ctx (struct rm_ctx *ctx)
++default_libc_feresetround_ctx (struct rm_ctx *ctx)
+ {
+   /* Restore the rounding mode if updated.  */
+   if (__glibc_unlikely (ctx->updated_status))
+@@ -570,7 +543,7 @@ libc_feresetround_ctx (struct rm_ctx *ctx)
+ }
+ 
+ static __always_inline void
+-libc_feholdsetround_noex_ctx (struct rm_ctx *ctx, int round)
++default_libc_feholdsetround_noex_ctx (struct rm_ctx *ctx, int round)
+ {
+   /* Save exception flags and rounding mode, and disable exception
+      traps.  */
+@@ -582,12 +555,45 @@ libc_feholdsetround_noex_ctx (struct rm_ctx *ctx, int round)
+ }
+ 
+ static __always_inline void
+-libc_feresetround_noex_ctx (struct rm_ctx *ctx)
++default_libc_feresetround_noex_ctx (struct rm_ctx *ctx)
+ {
+   /* Restore exception flags and rounding mode.  */
+   __fesetenv (&ctx->env);
+ }
+ 
++#if HAVE_RM_CTX
++/* Set/Restore Rounding Modes only when necessary.  If defined, these functions
++   set/restore floating point state only if the state needed within the lexical
++   block is different from the current state.  This saves a lot of time when
++   the floating point unit is much slower than the fixed point units.  */
++
++# ifndef libc_feholdsetround_noex_ctx
++#   define libc_feholdsetround_noex_ctx  libc_feholdsetround_ctx
++# endif
++# ifndef libc_feholdsetround_noexf_ctx
++#   define libc_feholdsetround_noexf_ctx libc_feholdsetroundf_ctx
++# endif
++# ifndef libc_feholdsetround_noexl_ctx
++#   define libc_feholdsetround_noexl_ctx libc_feholdsetroundl_ctx
++# endif
++
++# ifndef libc_feresetround_noex_ctx
++#   define libc_feresetround_noex_ctx  libc_fesetenv_ctx
++# endif
++# ifndef libc_feresetround_noexf_ctx
++#   define libc_feresetround_noexf_ctx libc_fesetenvf_ctx
++# endif
++# ifndef libc_feresetround_noexl_ctx
++#   define libc_feresetround_noexl_ctx libc_fesetenvl_ctx
++# endif
++
++#else
++
++# define libc_feholdsetround_ctx      default_libc_feholdsetround_ctx
++# define libc_feresetround_ctx        default_libc_feresetround_ctx
++# define libc_feholdsetround_noex_ctx default_libc_feholdsetround_noex_ctx
++# define libc_feresetround_noex_ctx   default_libc_feresetround_noex_ctx
++
+ # define libc_feholdsetroundf_ctx libc_feholdsetround_ctx
+ # define libc_feholdsetroundl_ctx libc_feholdsetround_ctx
+ # define libc_feresetroundf_ctx   libc_feresetround_ctx
+diff --git a/sysdeps/i386/Makefile b/sysdeps/i386/Makefile
+index a1500454e5..9c7078e33c 100644
+--- a/sysdeps/i386/Makefile
++++ b/sysdeps/i386/Makefile
+@@ -5,6 +5,14 @@ asm-CPPFLAGS += -DGAS_SYNTAX
+ # The i386 `long double' is a distinct type we support.
+ long-double-fcts = yes
+ 
++ifeq ($(subdir),math)
++# These functions change the rounding mode internally and need to
++# update both the SSE2 rounding mode and the 387 rounding mode.  See
++# the handling of MATH_SET_BOTH_ROUNDING_MODES in
++# sysdeps/i386/fpu/fenv_private.h.
++CFLAGS-e_gamma_r.c += -DMATH_SET_BOTH_ROUNDING_MODES
++endif
++
+ ifeq ($(subdir),string)
+ sysdep_routines += cacheinfo
+ endif
+diff --git a/sysdeps/i386/fpu/fenv_private.h b/sysdeps/i386/fpu/fenv_private.h
+index 38fd0b92b5..03177bb1ed 100644
+--- a/sysdeps/i386/fpu/fenv_private.h
++++ b/sysdeps/i386/fpu/fenv_private.h
+@@ -491,11 +491,19 @@ libc_feupdateenv_387_ctx (struct rm_ctx *ctx)
+ #endif /* __SSE_MATH__ */
+ 
+ #ifdef __SSE2_MATH__
+-# define libc_feholdexcept_setround_ctx	libc_feholdexcept_setround_sse_ctx
+-# define libc_fesetenv_ctx		libc_fesetenv_sse_ctx
+-# define libc_feupdateenv_ctx		libc_feupdateenv_sse_ctx
+-# define libc_feholdsetround_ctx	libc_feholdsetround_sse_ctx
+-# define libc_feresetround_ctx		libc_feresetround_sse_ctx
++# if defined (__x86_64__) || !defined (MATH_SET_BOTH_ROUNDING_MODES)
++#  define libc_feholdexcept_setround_ctx libc_feholdexcept_setround_sse_ctx
++#  define libc_fesetenv_ctx		libc_fesetenv_sse_ctx
++#  define libc_feupdateenv_ctx		libc_feupdateenv_sse_ctx
++#  define libc_feholdsetround_ctx	libc_feholdsetround_sse_ctx
++#  define libc_feresetround_ctx		libc_feresetround_sse_ctx
++# else
++#  define libc_feholdexcept_setround_ctx default_libc_feholdexcept_setround_ctx
++#  define libc_fesetenv_ctx		default_libc_fesetenv_ctx
++#  define libc_feupdateenv_ctx		default_libc_feupdateenv_ctx
++#  define libc_feholdsetround_ctx	default_libc_feholdsetround_ctx
++#  define libc_feresetround_ctx		default_libc_feresetround_ctx
++# endif
+ #else
+ # define libc_feholdexcept_setround_ctx	libc_feholdexcept_setround_387_ctx
+ # define libc_feupdateenv_ctx		libc_feupdateenv_387_ctx
 diff --git a/sysdeps/i386/fpu/libm-test-ulps b/sysdeps/i386/fpu/libm-test-ulps
 index 862a74e09d..9d1c35c605 100644
 --- a/sysdeps/i386/fpu/libm-test-ulps
@@ -15957,6 +18911,117 @@ index cc059da494..2e3eca9b2b 100644
  # define STRNCMP __strncmp_ia32
  # undef libc_hidden_builtin_def
  # define libc_hidden_builtin_def(name)  \
+diff --git a/sysdeps/ia64/fpu/e_exp2f.S b/sysdeps/ia64/fpu/e_exp2f.S
+index 77bc6ea686..3010a95a2d 100644
+--- a/sysdeps/ia64/fpu/e_exp2f.S
++++ b/sysdeps/ia64/fpu/e_exp2f.S
+@@ -221,7 +221,7 @@ LOCAL_OBJECT_END(T_table)
+ 
+ 
+ .section .text
+-GLOBAL_LIBM_ENTRY(__exp2f)
++WEAK_LIBM_ENTRY(exp2f)
+ 
+ 
+ {.mfi
+@@ -468,10 +468,10 @@ OUT_RANGE_exp2:
+ }
+ ;;
+ 
+-GLOBAL_LIBM_END(__exp2f)
++WEAK_LIBM_END(exp2f)
+ libm_alias_float_other (__exp2, exp2)
+ #ifdef SHARED
+-.symver __exp2f,exp2f@@GLIBC_2.27
++.symver exp2f,exp2f@@GLIBC_2.27
+ .weak __exp2f_compat
+ .set __exp2f_compat,__exp2f
+ .symver __exp2f_compat,exp2f@GLIBC_2.2
+diff --git a/sysdeps/ia64/fpu/e_log2f.S b/sysdeps/ia64/fpu/e_log2f.S
+index 5ca3bd61ea..e4ea094344 100644
+--- a/sysdeps/ia64/fpu/e_log2f.S
++++ b/sysdeps/ia64/fpu/e_log2f.S
+@@ -252,7 +252,7 @@ LOCAL_OBJECT_END(T_table)
+ 
+ 
+ .section .text
+-GLOBAL_LIBM_ENTRY(__log2f)
++WEAK_LIBM_ENTRY(log2f)
+ 
+ { .mfi
+   alloc r32=ar.pfs,1,4,4,0
+@@ -491,10 +491,10 @@ SPECIAL_log2f:
+   br.ret.sptk b0;;
+ }
+ 
+-GLOBAL_LIBM_END(__log2f)
++WEAK_LIBM_END(log2f)
+ libm_alias_float_other (__log2, log2)
+ #ifdef SHARED
+-.symver __log2f,log2f@@GLIBC_2.27
++.symver log2f,log2f@@GLIBC_2.27
+ .weak __log2f_compat
+ .set __log2f_compat,__log2f
+ .symver __log2f_compat,log2f@GLIBC_2.2
+diff --git a/sysdeps/ia64/fpu/e_powf.S b/sysdeps/ia64/fpu/e_powf.S
+index 7449f8c7d5..945d5cdf28 100644
+--- a/sysdeps/ia64/fpu/e_powf.S
++++ b/sysdeps/ia64/fpu/e_powf.S
+@@ -868,7 +868,7 @@ data8 0xEAC0C6E7DD24392F , 0x00003FFF
+ LOCAL_OBJECT_END(pow_tbl2)
+ 
+ .section .text
+-GLOBAL_LIBM_ENTRY(__powf)
++WEAK_LIBM_ENTRY(powf)
+ 
+ // Get exponent of x.  Will be used to calculate K.
+ { .mfi
+@@ -2002,10 +2002,10 @@ POW_OVER_UNDER_ERROR:
+ }
+ ;;
+ 
+-GLOBAL_LIBM_END(__powf)
++WEAK_LIBM_END(powf)
+ libm_alias_float_other (__pow, pow)
+ #ifdef SHARED
+-.symver __powf,powf@@GLIBC_2.27
++.symver powf,powf@@GLIBC_2.27
+ .weak __powf_compat
+ .set __powf_compat,__powf
+ .symver __powf_compat,powf@GLIBC_2.2
+diff --git a/sysdeps/nptl/bits/thread-shared-types.h b/sysdeps/nptl/bits/thread-shared-types.h
+index 1e2092a05d..05c94e7a71 100644
+--- a/sysdeps/nptl/bits/thread-shared-types.h
++++ b/sysdeps/nptl/bits/thread-shared-types.h
+@@ -124,7 +124,27 @@ struct __pthread_mutex_s
+   unsigned int __nusers;
+ #endif
+   /* KIND must stay at this position in the structure to maintain
+-     binary compatibility with static initializers.  */
++     binary compatibility with static initializers.
++
++     Concurrency notes:
++     The __kind of a mutex is initialized either by the static
++     PTHREAD_MUTEX_INITIALIZER or by a call to pthread_mutex_init.
++
++     After a mutex has been initialized, the __kind of a mutex is usually not
++     changed.  BUT it can be set to -1 in pthread_mutex_destroy or elision can
++     be enabled.  This is done concurrently in the pthread_mutex_*lock functions
++     by using the macro FORCE_ELISION. This macro is only defined for
++     architectures which supports lock elision.
++
++     For elision, there are the flags PTHREAD_MUTEX_ELISION_NP and
++     PTHREAD_MUTEX_NO_ELISION_NP which can be set in addition to the already set
++     type of a mutex.
++     Before a mutex is initialized, only PTHREAD_MUTEX_NO_ELISION_NP can be set
++     with pthread_mutexattr_settype.
++     After a mutex has been initialized, the functions pthread_mutex_*lock can
++     enable elision - if the mutex-type and the machine supports it - by setting
++     the flag PTHREAD_MUTEX_ELISION_NP. This is done concurrently. Afterwards
++     the lock / unlock functions are using specific elision code-paths.  */
+   int __kind;
+   __PTHREAD_COMPAT_PADDING_MID
+ #if __PTHREAD_MUTEX_NUSERS_AFTER_KIND
 diff --git a/sysdeps/nptl/lowlevellock.h b/sysdeps/nptl/lowlevellock.h
 index 8326e2805c..bfbda99940 100644
 --- a/sysdeps/nptl/lowlevellock.h
@@ -15981,6 +19046,70 @@ index 8326e2805c..bfbda99940 100644
    } while (0)
  
  extern int __lll_timedwait_tid (int *, const struct timespec *)
+diff --git a/sysdeps/posix/preadv2.c b/sysdeps/posix/preadv2.c
+index d29147608f..4f8557ac83 100644
+--- a/sysdeps/posix/preadv2.c
++++ b/sysdeps/posix/preadv2.c
+@@ -33,7 +33,10 @@ preadv2 (int fd, const struct iovec *vector, int count, off_t offset,
+       return -1;
+     }
+ 
+-  return preadv (fd, vector, count, offset);
++  if (offset == -1)
++    return __readv (fd, vector, count);
++  else
++    return preadv (fd, vector, count, offset);
+ }
+ 
+ #endif
+diff --git a/sysdeps/posix/preadv64v2.c b/sysdeps/posix/preadv64v2.c
+index a4844b145c..f89ad08c54 100644
+--- a/sysdeps/posix/preadv64v2.c
++++ b/sysdeps/posix/preadv64v2.c
+@@ -30,7 +30,10 @@ preadv64v2 (int fd, const struct iovec *vector, int count, off64_t offset,
+       return -1;
+     }
+ 
+-  return preadv64 (fd, vector, count, offset);
++  if (offset == -1)
++    return __readv (fd, vector, count);
++  else
++    return preadv64 (fd, vector, count, offset);
+ }
+ 
+ #ifdef __OFF_T_MATCHES_OFF64_T
+diff --git a/sysdeps/posix/pwritev2.c b/sysdeps/posix/pwritev2.c
+index 3abf37a810..a39304d9d9 100644
+--- a/sysdeps/posix/pwritev2.c
++++ b/sysdeps/posix/pwritev2.c
+@@ -33,7 +33,10 @@ pwritev2 (int fd, const struct iovec *vector, int count, off_t offset,
+       return -1;
+     }
+ 
+-  return pwritev (fd, vector, count, offset);
++  if (offset == -1)
++    return __writev (fd, vector, count);
++  else
++    return pwritev (fd, vector, count, offset);
+ }
+ 
+ #endif
+diff --git a/sysdeps/posix/pwritev64v2.c b/sysdeps/posix/pwritev64v2.c
+index 374d2ad8a9..7a3a3239d7 100644
+--- a/sysdeps/posix/pwritev64v2.c
++++ b/sysdeps/posix/pwritev64v2.c
+@@ -31,7 +31,10 @@ pwritev64v2 (int fd, const struct iovec *vector, int count, off64_t offset,
+       return -1;
+     }
+ 
+-  return pwritev64 (fd, vector, count, offset);
++  if (offset == -1)
++    return __writev (fd, vector, count);
++  else
++    return pwritev64 (fd, vector, count, offset);
+ }
+ 
+ #ifdef __OFF_T_MATCHES_OFF64_T
 diff --git a/sysdeps/posix/spawni.c b/sysdeps/posix/spawni.c
 index 36bb5b4f78..b138ab4393 100644
 --- a/sysdeps/posix/spawni.c
@@ -17091,6 +20220,19 @@ index 960b101f94..03a779140c 100644
  /* Perform process tracing functions.  REQUEST is one of the values
     above, and determines the action to be taken.
     For all requests except PTRACE_TRACEME, PID specifies the process to be
+diff --git a/sysdeps/unix/sysv/linux/bits/types/siginfo_t.h b/sysdeps/unix/sysv/linux/bits/types/siginfo_t.h
+index 33766d1813..43c4e009a4 100644
+--- a/sysdeps/unix/sysv/linux/bits/types/siginfo_t.h
++++ b/sysdeps/unix/sysv/linux/bits/types/siginfo_t.h
+@@ -107,7 +107,7 @@ typedef struct
+ 	/* SIGPOLL.  */
+ 	struct
+ 	  {
+-	    long int si_band;	/* Band event for SIGPOLL.  */
++	    __SI_BAND_TYPE si_band;	/* Band event for SIGPOLL.  */
+ 	    int si_fd;
+ 	  } _sigpoll;
+ 
 diff --git a/sysdeps/unix/sysv/linux/bits/uio-ext.h b/sysdeps/unix/sysv/linux/bits/uio-ext.h
 index 53663ed1a2..8698bc1200 100644
 --- a/sysdeps/unix/sysv/linux/bits/uio-ext.h
@@ -17417,6 +20559,54 @@ index 1c73b9dee6..e00b1212fc 100644
  };
  
  
+diff --git a/sysdeps/unix/sysv/linux/if_index.c b/sysdeps/unix/sysv/linux/if_index.c
+index e3d08982d9..782fc5e175 100644
+--- a/sysdeps/unix/sysv/linux/if_index.c
++++ b/sysdeps/unix/sysv/linux/if_index.c
+@@ -38,11 +38,6 @@ __if_nametoindex (const char *ifname)
+   return 0;
+ #else
+   struct ifreq ifr;
+-  int fd = __opensock ();
+-
+-  if (fd < 0)
+-    return 0;
+-
+   if (strlen (ifname) >= IFNAMSIZ)
+     {
+       __set_errno (ENODEV);
+@@ -50,6 +45,12 @@ __if_nametoindex (const char *ifname)
+     }
+ 
+   strncpy (ifr.ifr_name, ifname, sizeof (ifr.ifr_name));
++
++  int fd = __opensock ();
++
++  if (fd < 0)
++    return 0;
++
+   if (__ioctl (fd, SIOCGIFINDEX, &ifr) < 0)
+     {
+       int saved_errno = errno;
+diff --git a/sysdeps/unix/sysv/linux/ifaddrs.c b/sysdeps/unix/sysv/linux/ifaddrs.c
+index 32381f54e4..ac0e1e5738 100644
+--- a/sysdeps/unix/sysv/linux/ifaddrs.c
++++ b/sysdeps/unix/sysv/linux/ifaddrs.c
+@@ -370,6 +370,14 @@ getifaddrs_internal (struct ifaddrs **ifap)
+ 	  if ((pid_t) nlh->nlmsg_pid != nh.pid || nlh->nlmsg_seq != nlp->seq)
+ 	    continue;
+ 
++	  /* If the dump got interrupted, we can't rely on the results
++	     so try again. */
++	  if (nlh->nlmsg_flags & NLM_F_DUMP_INTR)
++	    {
++	      result = -EAGAIN;
++	      goto exit_free;
++	    }
++
+ 	  if (nlh->nlmsg_type == NLMSG_DONE)
+ 	    break;		/* ok */
+ 
 diff --git a/sysdeps/unix/sysv/linux/powerpc/elision-lock.c b/sysdeps/unix/sysv/linux/powerpc/elision-lock.c
 index b7093feab9..98a23f0dd2 100644
 --- a/sysdeps/unix/sysv/linux/powerpc/elision-lock.c
@@ -17476,6 +20666,60 @@ index dcfab199d7..14e0680ee9 100644
 +#endif
    return 0;
  }
+diff --git a/sysdeps/unix/sysv/linux/powerpc/force-elision.h b/sysdeps/unix/sysv/linux/powerpc/force-elision.h
+index fe5d6ceade..d8f5a4b1c7 100644
+--- a/sysdeps/unix/sysv/linux/powerpc/force-elision.h
++++ b/sysdeps/unix/sysv/linux/powerpc/force-elision.h
+@@ -18,9 +18,45 @@
+ 
+ /* Automatically enable elision for existing user lock kinds.  */
+ #define FORCE_ELISION(m, s)						\
+-  if (__pthread_force_elision						\
+-      && (m->__data.__kind & PTHREAD_MUTEX_ELISION_FLAGS_NP) == 0)	\
++  if (__pthread_force_elision)						\
+     {									\
+-      mutex->__data.__kind |= PTHREAD_MUTEX_ELISION_NP;			\
+-      s;								\
++      /* See concurrency notes regarding __kind in			\
++	 struct __pthread_mutex_s in					\
++	 sysdeps/nptl/bits/thread-shared-types.h.			\
++									\
++	 There are the following cases for the kind of a mutex		\
++	 (The mask PTHREAD_MUTEX_ELISION_FLAGS_NP covers the flags	\
++	 PTHREAD_MUTEX_ELISION_NP and PTHREAD_MUTEX_NO_ELISION_NP where	\
++	 only one of both flags can be set):				\
++	 - both flags are not set:					\
++	 This is the first lock operation for this mutex.  Enable	\
++	 elision as it is not enabled so far.				\
++	 Note: It can happen that multiple threads are calling e.g.	\
++	 pthread_mutex_lock at the same time as the first lock		\
++	 operation for this mutex.  Then elision is enabled for this	\
++	 mutex by multiple threads.  Storing with relaxed MO is enough	\
++	 as all threads will store the same new value for the kind of	\
++	 the mutex.  But we have to ensure that we always use the	\
++	 elision path regardless if this thread has enabled elision or	\
++	 another one.							\
++									\
++	 - PTHREAD_MUTEX_ELISION_NP flag is set:			\
++	 Elision was already enabled for this mutex by a previous lock	\
++	 operation.  See case above.  Just use the elision path.	\
++									\
++	 - PTHREAD_MUTEX_NO_ELISION_NP flag is set:			\
++	 Elision was explicitly disabled by pthread_mutexattr_settype.	\
++	 Do not use the elision path.					\
++	 Note: The flag PTHREAD_MUTEX_NO_ELISION_NP will never be	\
++	 changed after mutex initialization.  */			\
++      int mutex_kind = atomic_load_relaxed (&((m)->__data.__kind));	\
++      if ((mutex_kind & PTHREAD_MUTEX_ELISION_FLAGS_NP) == 0)		\
++	{								\
++	  mutex_kind |= PTHREAD_MUTEX_ELISION_NP;			\
++	  atomic_store_relaxed (&((m)->__data.__kind), mutex_kind);	\
++	}								\
++      if ((mutex_kind & PTHREAD_MUTEX_ELISION_NP) != 0)			\
++	{								\
++	  s;								\
++	}								\
+     }
 diff --git a/sysdeps/unix/sysv/linux/powerpc/sys/ptrace.h b/sysdeps/unix/sysv/linux/powerpc/sys/ptrace.h
 index 75567b2bad..9fde99c748 100644
 --- a/sysdeps/unix/sysv/linux/powerpc/sys/ptrace.h
@@ -17625,6 +20869,107 @@ index 75567b2bad..9fde99c748 100644
  };
  
  
+diff --git a/sysdeps/unix/sysv/linux/preadv2.c b/sysdeps/unix/sysv/linux/preadv2.c
+index 06d29b1322..bb08cbc5fd 100644
+--- a/sysdeps/unix/sysv/linux/preadv2.c
++++ b/sysdeps/unix/sysv/linux/preadv2.c
+@@ -32,7 +32,7 @@ preadv2 (int fd, const struct iovec *vector, int count, off_t offset,
+ # ifdef __NR_preadv2
+   ssize_t result = SYSCALL_CANCEL (preadv2, fd, vector, count,
+ 				   LO_HI_LONG (offset), flags);
+-  if (result >= 0)
++  if (result >= 0 || errno != ENOSYS)
+     return result;
+ # endif
+   /* Trying to emulate the preadv2 syscall flags is troublesome:
+@@ -49,7 +49,10 @@ preadv2 (int fd, const struct iovec *vector, int count, off_t offset,
+       __set_errno (ENOTSUP);
+       return -1;
+     }
+-  return preadv (fd, vector, count, offset);
++  if (offset == -1)
++    return __readv (fd, vector, count);
++  else
++    return preadv (fd, vector, count, offset);
+ }
+ 
+ #endif
+diff --git a/sysdeps/unix/sysv/linux/preadv64v2.c b/sysdeps/unix/sysv/linux/preadv64v2.c
+index 58f7848352..b72a047347 100644
+--- a/sysdeps/unix/sysv/linux/preadv64v2.c
++++ b/sysdeps/unix/sysv/linux/preadv64v2.c
+@@ -30,7 +30,7 @@ preadv64v2 (int fd, const struct iovec *vector, int count, off64_t offset,
+ #ifdef __NR_preadv64v2
+   ssize_t result = SYSCALL_CANCEL (preadv64v2, fd, vector, count,
+ 				   LO_HI_LONG (offset), flags);
+-  if (result >= 0)
++  if (result >= 0 || errno != ENOSYS)
+     return result;
+ #endif
+   /* Trying to emulate the preadv2 syscall flags is troublesome:
+@@ -47,7 +47,11 @@ preadv64v2 (int fd, const struct iovec *vector, int count, off64_t offset,
+       __set_errno (ENOTSUP);
+       return -1;
+     }
+-  return preadv64 (fd, vector, count, offset);
++
++  if (offset == -1)
++    return __readv (fd, vector, count);
++  else
++    return preadv64 (fd, vector, count, offset);
+ }
+ 
+ #ifdef __OFF_T_MATCHES_OFF64_T
+diff --git a/sysdeps/unix/sysv/linux/pwritev2.c b/sysdeps/unix/sysv/linux/pwritev2.c
+index d50d9f51f9..26333ebd43 100644
+--- a/sysdeps/unix/sysv/linux/pwritev2.c
++++ b/sysdeps/unix/sysv/linux/pwritev2.c
+@@ -28,7 +28,7 @@ pwritev2 (int fd, const struct iovec *vector, int count, off_t offset,
+ # ifdef __NR_pwritev2
+   ssize_t result = SYSCALL_CANCEL (pwritev2, fd, vector, count,
+ 				   LO_HI_LONG (offset), flags);
+-  if (result >= 0)
++  if (result >= 0 || errno != ENOSYS)
+     return result;
+ # endif
+   /* Trying to emulate the pwritev2 syscall flags is troublesome:
+@@ -45,7 +45,10 @@ pwritev2 (int fd, const struct iovec *vector, int count, off_t offset,
+       __set_errno (ENOTSUP);
+       return -1;
+     }
+-  return pwritev (fd, vector, count, offset);
++  if (offset == -1)
++    return __writev (fd, vector, count);
++  else
++    return pwritev (fd, vector, count, offset);
+ }
+ 
+ #endif
+diff --git a/sysdeps/unix/sysv/linux/pwritev64v2.c b/sysdeps/unix/sysv/linux/pwritev64v2.c
+index 40c2387690..17ea905aa6 100644
+--- a/sysdeps/unix/sysv/linux/pwritev64v2.c
++++ b/sysdeps/unix/sysv/linux/pwritev64v2.c
+@@ -30,7 +30,7 @@ pwritev64v2 (int fd, const struct iovec *vector, int count, off64_t offset,
+ #ifdef __NR_pwritev64v2
+   ssize_t result = SYSCALL_CANCEL (pwritev64v2, fd, vector, count,
+ 				   LO_HI_LONG (offset), flags);
+-  if (result >= 0)
++  if (result >= 0 || errno != ENOSYS)
+     return result;
+ #endif
+   /* Trying to emulate the pwritev2 syscall flags is troublesome:
+@@ -47,7 +47,10 @@ pwritev64v2 (int fd, const struct iovec *vector, int count, off64_t offset,
+       __set_errno (ENOTSUP);
+       return -1;
+     }
+-  return pwritev64 (fd, vector, count, offset);
++  if (offset == -1)
++    return __writev (fd, vector, count);
++  else
++    return pwritev64 (fd, vector, count, offset);
+ }
+ 
+ #ifdef __OFF_T_MATCHES_OFF64_T
 diff --git a/sysdeps/unix/sysv/linux/riscv/kernel_sigaction.h b/sysdeps/unix/sysv/linux/riscv/kernel_sigaction.h
 new file mode 100644
 index 0000000000..2a62bcc5bc
@@ -17659,6 +21004,60 @@ index 6e249ff82f..7e27e0c1d6 100644
      }
  
    /* RISC-V linkers encode the floating point ABI as part of the ELF headers.  */
+diff --git a/sysdeps/unix/sysv/linux/s390/force-elision.h b/sysdeps/unix/sysv/linux/s390/force-elision.h
+index d8a1b9972f..71f32367dd 100644
+--- a/sysdeps/unix/sysv/linux/s390/force-elision.h
++++ b/sysdeps/unix/sysv/linux/s390/force-elision.h
+@@ -18,9 +18,45 @@
+ 
+ /* Automatically enable elision for existing user lock kinds.  */
+ #define FORCE_ELISION(m, s)						\
+-  if (__pthread_force_elision						\
+-      && (m->__data.__kind & PTHREAD_MUTEX_ELISION_FLAGS_NP) == 0)	\
++  if (__pthread_force_elision)						\
+     {									\
+-      mutex->__data.__kind |= PTHREAD_MUTEX_ELISION_NP;			\
+-      s;								\
++      /* See concurrency notes regarding __kind in			\
++	 struct __pthread_mutex_s in					\
++	 sysdeps/nptl/bits/thread-shared-types.h.			\
++									\
++	 There are the following cases for the kind of a mutex		\
++	 (The mask PTHREAD_MUTEX_ELISION_FLAGS_NP covers the flags	\
++	 PTHREAD_MUTEX_ELISION_NP and PTHREAD_MUTEX_NO_ELISION_NP where	\
++	 only one of both flags can be set):				\
++	 - both flags are not set:					\
++	 This is the first lock operation for this mutex.  Enable	\
++	 elision as it is not enabled so far.				\
++	 Note: It can happen that multiple threads are calling e.g.	\
++	 pthread_mutex_lock at the same time as the first lock		\
++	 operation for this mutex.  Then elision is enabled for this	\
++	 mutex by multiple threads.  Storing with relaxed MO is enough	\
++	 as all threads will store the same new value for the kind of	\
++	 the mutex.  But we have to ensure that we always use the	\
++	 elision path regardless if this thread has enabled elision or	\
++	 another one.							\
++									\
++	 - PTHREAD_MUTEX_ELISION_NP flag is set:			\
++	 Elision was already enabled for this mutex by a previous lock	\
++	 operation.  See case above.  Just use the elision path.	\
++									\
++	 - PTHREAD_MUTEX_NO_ELISION_NP flag is set:			\
++	 Elision was explicitly disabled by pthread_mutexattr_settype.	\
++	 Do not use the elision path.					\
++	 Note: The flag PTHREAD_MUTEX_NO_ELISION_NP will never be	\
++	 changed after mutex initialization.  */			\
++      int mutex_kind = atomic_load_relaxed (&((m)->__data.__kind));	\
++      if ((mutex_kind & PTHREAD_MUTEX_ELISION_FLAGS_NP) == 0)		\
++	{								\
++	  mutex_kind |= PTHREAD_MUTEX_ELISION_NP;			\
++	  atomic_store_relaxed (&((m)->__data.__kind), mutex_kind);	\
++	}								\
++      if ((mutex_kind & PTHREAD_MUTEX_ELISION_NP) != 0)			\
++	{								\
++	  s;								\
++	}								\
+     }
 diff --git a/sysdeps/unix/sysv/linux/s390/sys/ptrace.h b/sysdeps/unix/sysv/linux/s390/sys/ptrace.h
 index cca02489d6..d60a034b11 100644
 --- a/sysdeps/unix/sysv/linux/s390/sys/ptrace.h
@@ -17682,6 +21081,24 @@ index cca02489d6..d60a034b11 100644
    PTRACE_PEEKUSR_AREA = 0x5000,
  #define PTRACE_PEEKUSR_AREA PTRACE_PEEKUSR_AREA
  
+diff --git a/sysdeps/unix/sysv/linux/sparc/bits/siginfo-arch.h b/sysdeps/unix/sysv/linux/sparc/bits/siginfo-arch.h
+index 9f79715ebe..4dd35237f6 100644
+--- a/sysdeps/unix/sysv/linux/sparc/bits/siginfo-arch.h
++++ b/sysdeps/unix/sysv/linux/sparc/bits/siginfo-arch.h
+@@ -2,7 +2,12 @@
+ #ifndef _BITS_SIGINFO_ARCH_H
+ #define _BITS_SIGINFO_ARCH_H 1
+ 
+-#define __SI_BAND_TYPE int
++/* The kernel uses int instead of long int (as in POSIX).  In 32-bit
++   mode, we can still use long int, but in 64-bit mode, we need to
++   deviate from POSIX.  */
++#if __WORDSIZE == 64
++# define __SI_BAND_TYPE int
++#endif
+ 
+ #define __SI_SIGFAULT_ADDL \
+   int _si_trapno;
 diff --git a/sysdeps/unix/sysv/linux/sparc/sparc32/setcontext.S b/sysdeps/unix/sysv/linux/sparc/sparc32/setcontext.S
 index 695f172c63..283aef1b30 100644
 --- a/sysdeps/unix/sysv/linux/sparc/sparc32/setcontext.S
@@ -17706,6 +21123,19 @@ index 695f172c63..283aef1b30 100644
  /* This is the helper code which gets called if a function which is
     registered with 'makecontext' returns.  In this case we have to
     install the context listed in the uc_link element of the context
+diff --git a/sysdeps/unix/sysv/linux/sparc/sparc64/Makefile b/sysdeps/unix/sysv/linux/sparc/sparc64/Makefile
+index 715af3df7b..218c246f16 100644
+--- a/sysdeps/unix/sysv/linux/sparc/sparc64/Makefile
++++ b/sysdeps/unix/sysv/linux/sparc/sparc64/Makefile
+@@ -7,3 +7,8 @@ LD += -melf64_sparc
+ ifeq ($(subdir),stdlib)
+ sysdep_routines += __start_context
+ endif
++
++ifeq ($(subdir),conform)
++# For bug 23821 (incorrect type of si_band).
++conformtest-xfail-conds += sparc64-linux
++endif
 diff --git a/sysdeps/unix/sysv/linux/sparc/sys/ptrace.h b/sysdeps/unix/sysv/linux/sparc/sys/ptrace.h
 index 9193275fac..c037734666 100644
 --- a/sysdeps/unix/sysv/linux/sparc/sys/ptrace.h
@@ -17725,9 +21155,18 @@ index 9193275fac..c037734666 100644
  
  
 diff --git a/sysdeps/unix/sysv/linux/spawni.c b/sysdeps/unix/sysv/linux/spawni.c
-index 6b699a46dd..32ab000560 100644
+index 6b699a46dd..5fa49b229e 100644
 --- a/sysdeps/unix/sysv/linux/spawni.c
 +++ b/sysdeps/unix/sysv/linux/spawni.c
+@@ -101,7 +101,7 @@ maybe_script_execute (struct posix_spawn_args *args)
+       ptrdiff_t argc = args->argc;
+ 
+       /* Construct an argument list for the shell.  */
+-      char *new_argv[argc + 1];
++      char *new_argv[argc + 2];
+       new_argv[0] = (char *) _PATH_BSHELL;
+       new_argv[1] = (char *) args->file;
+       if (argc > 1)
 @@ -404,6 +404,8 @@ __spawni (pid_t * pid, const char *file,
  	  const posix_spawnattr_t * attrp, char *const argv[],
  	  char *const envp[], int xflags)
@@ -17774,6 +21213,60 @@ index a1db185073..d391037ca8 100644
  };
  
  
+diff --git a/sysdeps/unix/sysv/linux/x86/force-elision.h b/sysdeps/unix/sysv/linux/x86/force-elision.h
+index dd659c908f..61282d6678 100644
+--- a/sysdeps/unix/sysv/linux/x86/force-elision.h
++++ b/sysdeps/unix/sysv/linux/x86/force-elision.h
+@@ -18,9 +18,45 @@
+ 
+ /* Automatically enable elision for existing user lock kinds.  */
+ #define FORCE_ELISION(m, s)						\
+-  if (__pthread_force_elision						\
+-      && (m->__data.__kind & PTHREAD_MUTEX_ELISION_FLAGS_NP) == 0)	\
++  if (__pthread_force_elision)						\
+     {									\
+-      mutex->__data.__kind |= PTHREAD_MUTEX_ELISION_NP;			\
+-      s;								\
++      /* See concurrency notes regarding __kind in			\
++	 struct __pthread_mutex_s in					\
++	 sysdeps/nptl/bits/thread-shared-types.h.			\
++									\
++	 There are the following cases for the kind of a mutex		\
++	 (The mask PTHREAD_MUTEX_ELISION_FLAGS_NP covers the flags	\
++	 PTHREAD_MUTEX_ELISION_NP and PTHREAD_MUTEX_NO_ELISION_NP where	\
++	 only one of both flags can be set):				\
++	 - both flags are not set:					\
++	 This is the first lock operation for this mutex.  Enable	\
++	 elision as it is not enabled so far.				\
++	 Note: It can happen that multiple threads are calling e.g.	\
++	 pthread_mutex_lock at the same time as the first lock		\
++	 operation for this mutex.  Then elision is enabled for this	\
++	 mutex by multiple threads.  Storing with relaxed MO is enough	\
++	 as all threads will store the same new value for the kind of	\
++	 the mutex.  But we have to ensure that we always use the	\
++	 elision path regardless if this thread has enabled elision or	\
++	 another one.							\
++									\
++	 - PTHREAD_MUTEX_ELISION_NP flag is set:			\
++	 Elision was already enabled for this mutex by a previous lock	\
++	 operation.  See case above.  Just use the elision path.	\
++									\
++	 - PTHREAD_MUTEX_NO_ELISION_NP flag is set:			\
++	 Elision was explicitly disabled by pthread_mutexattr_settype.	\
++	 Do not use the elision path.					\
++	 Note: The flag PTHREAD_MUTEX_NO_ELISION_NP will never be	\
++	 changed after mutex initialization.  */			\
++      int mutex_kind = atomic_load_relaxed (&((m)->__data.__kind));	\
++      if ((mutex_kind & PTHREAD_MUTEX_ELISION_FLAGS_NP) == 0)		\
++	{								\
++	  mutex_kind |= PTHREAD_MUTEX_ELISION_NP;			\
++	  atomic_store_relaxed (&((m)->__data.__kind), mutex_kind);	\
++	}								\
++      if ((mutex_kind & PTHREAD_MUTEX_ELISION_NP) != 0)			\
++	{								\
++	  s;								\
++	}								\
+     }
 diff --git a/sysdeps/unix/sysv/linux/x86/sys/ptrace.h b/sysdeps/unix/sysv/linux/x86/sys/ptrace.h
 index 60003422b3..6d4605b6ed 100644
 --- a/sysdeps/unix/sysv/linux/x86/sys/ptrace.h
@@ -17835,6 +21328,95 @@ index 44d76e8aa1..7d6cb1e20b 100644
  add_env="$add_env LD_LIBRARY_VERSION=\\$verify_out"
 -s_^\(RTLDLIST=\)\(.*lib\)\(\|64\|x32\)\(/[^/]*\)\(-x86-64\|-x32\)\(\.so\.[0-9.]*\)[ 	]*$_\1"\2\4\6 \264\4-x86-64\6 \2x32\4-x32\6"_
 +s_^\(RTLDLIST=\)\(.*lib\)\(\|64\|x32\)\(/[^/]*\)\(-x86-64\|-x32\)\(\.so\.[0-9.]*\)[    ]*$_\1"\232\4\6 \2\4-x86-64\6 \2x32\4-x32\6"_
+diff --git a/sysdeps/x86/cpu-features.c b/sysdeps/x86/cpu-features.c
+index 0fc3674c4b..ecc82fc6af 100644
+--- a/sysdeps/x86/cpu-features.c
++++ b/sysdeps/x86/cpu-features.c
+@@ -30,6 +30,20 @@ extern void TUNABLE_CALLBACK (set_hwcaps) (tunable_val_t *)
+   attribute_hidden;
+ #endif
+ 
++static void
++get_extended_indices (struct cpu_features *cpu_features)
++{
++  unsigned int eax, ebx, ecx, edx;
++  __cpuid (0x80000000, eax, ebx, ecx, edx);
++  if (eax >= 0x80000001)
++    __cpuid (0x80000001,
++	     cpu_features->cpuid[COMMON_CPUID_INDEX_80000001].eax,
++	     cpu_features->cpuid[COMMON_CPUID_INDEX_80000001].ebx,
++	     cpu_features->cpuid[COMMON_CPUID_INDEX_80000001].ecx,
++	     cpu_features->cpuid[COMMON_CPUID_INDEX_80000001].edx);
++
++}
++
+ static void
+ get_common_indeces (struct cpu_features *cpu_features,
+ 		    unsigned int *family, unsigned int *model,
+@@ -205,6 +219,8 @@ init_cpu_features (struct cpu_features *cpu_features)
+       get_common_indeces (cpu_features, &family, &model, &extended_model,
+ 			  &stepping);
+ 
++      get_extended_indices (cpu_features);
++
+       if (family == 0x06)
+ 	{
+ 	  model += extended_model;
+@@ -281,7 +297,13 @@ init_cpu_features (struct cpu_features *cpu_features)
+ 		    | bit_arch_Fast_Unaligned_Copy
+ 		    | bit_arch_Prefer_PMINUB_for_stringop);
+ 	      break;
++	    }
+ 
++	 /* Disable TSX on some Haswell processors to avoid TSX on kernels that
++	    weren't updated with the latest microcode package (which disables
++	    broken feature by default).  */
++	 switch (model)
++	    {
+ 	    case 0x3f:
+ 	      /* Xeon E7 v3 with stepping >= 4 has working TSX.  */
+ 	      if (stepping >= 4)
+@@ -324,16 +346,9 @@ init_cpu_features (struct cpu_features *cpu_features)
+       get_common_indeces (cpu_features, &family, &model, &extended_model,
+ 			  &stepping);
+ 
+-      ecx = cpu_features->cpuid[COMMON_CPUID_INDEX_1].ecx;
++      get_extended_indices (cpu_features);
+ 
+-      unsigned int eax;
+-      __cpuid (0x80000000, eax, ebx, ecx, edx);
+-      if (eax >= 0x80000001)
+-	__cpuid (0x80000001,
+-		 cpu_features->cpuid[COMMON_CPUID_INDEX_80000001].eax,
+-		 cpu_features->cpuid[COMMON_CPUID_INDEX_80000001].ebx,
+-		 cpu_features->cpuid[COMMON_CPUID_INDEX_80000001].ecx,
+-		 cpu_features->cpuid[COMMON_CPUID_INDEX_80000001].edx);
++      ecx = cpu_features->cpuid[COMMON_CPUID_INDEX_1].ecx;
+ 
+       if (HAS_ARCH_FEATURE (AVX_Usable))
+ 	{
+diff --git a/sysdeps/x86/cpu-features.h b/sysdeps/x86/cpu-features.h
+index c60c2e4eeb..4588c11095 100644
+--- a/sysdeps/x86/cpu-features.h
++++ b/sysdeps/x86/cpu-features.h
+@@ -106,7 +106,7 @@ enum
+   {
+     COMMON_CPUID_INDEX_1 = 0,
+     COMMON_CPUID_INDEX_7,
+-    COMMON_CPUID_INDEX_80000001,	/* for AMD */
++    COMMON_CPUID_INDEX_80000001,
+     /* Keep the following line at the end.  */
+     COMMON_CPUID_INDEX_MAX
+   };
+@@ -202,7 +202,7 @@ extern const struct cpu_features *__get_cpu_features (void)
+ # define index_cpu_HTT		COMMON_CPUID_INDEX_1
+ # define index_cpu_BMI1		COMMON_CPUID_INDEX_7
+ # define index_cpu_BMI2		COMMON_CPUID_INDEX_7
+-# define index_cpu_LZCNT	COMMON_CPUID_INDEX_1
++# define index_cpu_LZCNT	COMMON_CPUID_INDEX_80000001
+ # define index_cpu_MOVBE	COMMON_CPUID_INDEX_1
+ # define index_cpu_POPCNT	COMMON_CPUID_INDEX_1
+ # define index_cpu_IBT		COMMON_CPUID_INDEX_7
 diff --git a/sysdeps/x86_64/multiarch/memmove-avx512-no-vzeroupper.S b/sysdeps/x86_64/multiarch/memmove-avx512-no-vzeroupper.S
 index 23c0f7a9ed..effc3ac2de 100644
 --- a/sysdeps/x86_64/multiarch/memmove-avx512-no-vzeroupper.S
@@ -17880,6 +21462,19 @@ index cc5252d826..a5ecb82b13 100644
  
  #define USE_AS_STRNCMP
  #include <sysdeps/x86_64/strcmp.S>
+diff --git a/time/bits/types/struct_timespec.h b/time/bits/types/struct_timespec.h
+index 644db9fdb6..5b77c52b4f 100644
+--- a/time/bits/types/struct_timespec.h
++++ b/time/bits/types/struct_timespec.h
+@@ -1,5 +1,6 @@
+-#ifndef __timespec_defined
+-#define __timespec_defined 1
++/* NB: Include guard matches what <linux/time.h> uses.  */
++#ifndef _STRUCT_TIMESPEC
++#define _STRUCT_TIMESPEC 1
+ 
+ #include <bits/types.h>
+ 
 diff --git a/time/time.h b/time/time.h
 index 49d30438f3..4b55e34402 100644
 --- a/time/time.h
