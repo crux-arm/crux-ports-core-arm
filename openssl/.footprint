@@ -1653,6 +1653,7 @@ lrwxrwxrwx	root/root	usr/share/man/man3/X509_check_email.3ssl.gz -> X509_check_h
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_check_ip.3ssl.gz -> X509_check_host.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_check_ip_asc.3ssl.gz -> X509_check_host.3ssl.gz
 -rw-r--r--	root/root	usr/share/man/man3/X509_check_private_key.3ssl.gz
+-rw-r--r--	root/root	usr/share/man/man3/X509_cmp_time.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_free.3ssl.gz -> X509_new.3ssl.gz
 -rw-r--r--	root/root	usr/share/man/man3/X509_new.3ssl.gz
 -rw-r--r--	root/root	usr/share/man/man3/X509_verify_cert.3ssl.gz
