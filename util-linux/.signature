@@ -1,5 +1,5 @@
 untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4dXwQ26DpqkZxbP7jUa4A5HfxuyL3UldhNdC+Homjg9prqvs4Ak/DQ5HSfS/gz87WFTpDK75DNuXY27bv6Y0/ywM=
-SHA256 (Pkgfile) = 8f7575989dabbf40d1dc4f072f6d290096033e1bd0202edd1c2357b39eca0ef2
+RWTMGLGEHsm4dZc40cealcSYLUqhpeqjLKVbJ9XBMCUkxD7twF7pRmVcVt9muiVPzojVF1hEGikBSNosvhk877nztRrBwJq5Igk=
+SHA256 (Pkgfile) = bd801d2ea7975b378c07763b3cd31eb1ff4bf50978d79d3540d6fb0f5d7ed907
 SHA256 (.footprint) = 4022f62de659f8fde15fc2c74a9d95b8a4bbfd7efc3d89242393acfd03a62435
-SHA256 (util-linux-2.33.1.tar.xz) = c14bd9f3b6e1792b90db87696e87ec643f9d63efa0a424f092a5a6b2f2dbef21
+SHA256 (util-linux-2.33.2.tar.xz) = 631be8eac6cf6230ba478de211941d526808dba3cd436380793334496013ce97
