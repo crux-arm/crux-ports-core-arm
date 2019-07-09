@@ -5,22 +5,22 @@
 # Depends on:
 
 name=glibc
-version=2.27
-release=3
+version=2.28
+release=2
 source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
-        http://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.14.tar.xz \
-        $name-$version-$release.patch \
+        http://www.kernel.org/pub/linux/kernel/v4.x/linux-4.19.24.tar.xz \
+        $name-$version-1.patch \
         hosts resolv.conf nsswitch.conf host.conf ld.so.conf)
 
 build() {
   # install kernel headers
-  cd linux-4.14.14
+  cd linux-4.19.24
   make mrproper
   make ARCH=arm headers_check
   make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
   chown root:root $PKG/usr
 
-  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-$release.patch
+  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-1.patch
 
   mkdir $SRC/build
   cd $SRC/build
