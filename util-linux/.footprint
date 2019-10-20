@@ -65,6 +65,7 @@ drwxr-xr-x	root/root	usr/bin/
 -rwxr-xr-x	root/root	usr/bin/fincore
 -rwxr-xr-x	root/root	usr/bin/flock
 -rwxr-xr-x	root/root	usr/bin/getopt
+-rwxr-xr-x	root/root	usr/bin/hardlink
 -rwxr-xr-x	root/root	usr/bin/hexdump
 -rwxr-xr-x	root/root	usr/bin/ionice
 -rwxr-xr-x	root/root	usr/bin/ipcmk
