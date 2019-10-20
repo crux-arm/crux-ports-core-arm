@@ -1,0 +1,6 @@
+untrusted comment: verify with /etc/ports/core-arm.pub
+RWTMGLGEHsm4dXTn21c0AybfwJGtE0JeH34YYyVB8pBmHGsUSikPefsTbM8GGG9i6itIQXiMxu2oA6Yuy+M3jiCS6VoC27qQggU=
+SHA256 (Pkgfile) = eb7632d0d0820765846575569be09e1b050cd1584c699bc3d7f710d611a870c3
+SHA256 (.footprint) = 41f3cf3910ef0b707756d28d0abfe4b6ed9fd48b8ce3dd560840312e3bef0e3e
+SHA256 (openssl-1.1.1d.tar.gz) = 1e3a91bc1f9dfce01af26026f856e064eab4c8ee0a8f457b5ae30b40b8b711f2
+SHA256 (mksslcert.sh) = d01cfd061b792f4f7444429582c5c9e83aaa7fc63cafd05669fd3f2970dff779
