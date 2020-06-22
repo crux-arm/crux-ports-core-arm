@@ -93,6 +93,7 @@ lrwxrwxrwx	root/root	usr/bin/linux64 -> setarch
 -rwxr-xr-x	root/root	usr/bin/renice
 -rwxr-xr-x	root/root	usr/bin/rev
 -rwxr-xr-x	root/root	usr/bin/script
+-rwxr-xr-x	root/root	usr/bin/scriptlive
 -rwxr-xr-x	root/root	usr/bin/scriptreplay
 -rwxr-xr-x	root/root	usr/bin/setarch
 -rwxr-xr-x	root/root	usr/bin/setsid
