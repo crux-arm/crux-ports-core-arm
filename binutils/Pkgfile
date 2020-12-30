@@ -5,7 +5,7 @@
 # Depends on: zlib flex
 
 name=binutils
-version=2.32
+version=2.35.1
 release=1
 source=(http://ftpmirror.gnu.org/gnu/$name/$name-$version.tar.bz2)
 
@@ -23,12 +23,12 @@ build() {
                               --enable-gold=yes \
                               --enable-plugins \
                               --enable-install-libiberty \
-                              --disable-werror
+                              --disable-werror \
+                              --with-system-zlib
 
   make tooldir=/usr
   make tooldir=/usr DESTDIR=$PKG install
 
   rm -r $PKG/usr/share/info
-  rm $PKG/usr/share/man/man1/{dlltool,windres,windmc}.1
-  sed -i "s|-L$SRC[^ ]* ||g" $PKG/usr/lib/lib{bfd,opcodes}.la
+  sed -i "s|-L$SRC[^ ]* ||g" $PKG/usr/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.la
 }
