@@ -5,11 +5,11 @@
 # Depends on:
 
 name=glibc
-version=2.28
+version=2.32
 release=2
 source=(http://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
         http://www.kernel.org/pub/linux/kernel/v4.x/linux-4.19.24.tar.xz \
-        $name-$version-1.patch \
+        $name-$version-2.patch \
         hosts resolv.conf nsswitch.conf host.conf ld.so.conf)
 
 build() {
@@ -20,7 +20,7 @@ build() {
   make ARCH=arm INSTALL_HDR_PATH=$PKG/usr headers_install
   chown root:root $PKG/usr
 
-  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-1.patch
+  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-2.patch
 
   mkdir $SRC/build
   cd $SRC/build
@@ -32,8 +32,6 @@ build() {
                               --enable-add-ons \
                               --enable-static-nss \
                               --enable-stack-protector=strong \
-                              --enable-obsolete-rpc \
-                              --enable-obsolete-nsl \
                               --disable-profile \
                               --disable-werror \
                               --without-gd \
@@ -47,10 +45,6 @@ build() {
   install -d $PKG/var/{db,run}/nscd
 
   install -m 0644 $SRC/{hosts,resolv.conf,nsswitch.conf,host.conf,ld.so.conf} $PKG/etc
-
-  # install needed headers
-  install -d $PKG/usr/include/rpcsvc
-  install -m 0644 $SRC/$name-${version:0:4}/nis/rpcsvc/yp* $PKG/usr/include/rpcsvc
 
   ln -sf ../usr/share/zoneinfo/UTC $PKG/etc/localtime
   ln -s stubs-hard.h $PKG/usr/include/gnu/stubs-soft.h
