@@ -5,7 +5,7 @@
 
 name=linux-pam
 version=1.5.2
-release=1
+release=2
 source=(https://github.com/$name/$name/releases/download/v${version}/Linux-PAM-$version.tar.xz \
     common-account common-auth common-password common-session \
     other)
@@ -18,8 +18,11 @@ build() {
               --disable-nls \
               --disable-prelude \
               --enable-db=no
+
   make
   make DESTDIR=$PKG install
+
+  mv $PKG/lib/pkgconfig $PKG/usr/lib
 
   # unix_chkpwd needs to be setuid root
   chmod u+s $PKG/sbin/unix_chkpwd
@@ -29,5 +32,5 @@ build() {
     $SRC/{common-*,other} \
     $PKG/etc/pam.d/
 
-  rm -r $PKG/usr/share/doc
+  rm -r $PKG/usr/{lib/systemd,share/doc}
 }
