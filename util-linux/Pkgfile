@@ -7,7 +7,8 @@
 name=util-linux
 version=2.37.3
 release=1
-source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz)
+source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz
+        $name-man-$version.tar.xz)
 
 build() {
   cd $name-$version
@@ -24,7 +25,9 @@ build() {
 
   install -d $PKG/{etc,var/{lib/libuuid,run/uuidd}}
   touch $PKG/etc/adjtime
+  cp -r $SRC/man $PKG/usr/share
 
+  rm -r $PKG/usr/share/{doc,bash-completion}
   rm -r $PKG/usr/share
   rm $PKG/sbin/{mkfs.bfs,mkfs.minix,fsck.minix}
 }
