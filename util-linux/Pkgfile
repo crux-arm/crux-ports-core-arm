@@ -5,13 +5,13 @@
 # Depends on: eudev ncurses zlib
 
 name=util-linux
-version=2.37.2
+version=2.37.3
 release=1
 source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
-
+  touch disk-utils/raw.8
   ./configure --prefix=/usr \
               --disable-nls \
               --disable-{login,su,sulogin,nologin,runuser} \
