@@ -9,7 +9,6 @@ drwxr-xr-x	root/root	bin/
 -rwsr-xr-x	root/root	bin/umount
 -rwxr-xr-x	root/root	bin/wdctl
 drwxr-xr-x	root/root	etc/
--rw-r--r--	root/root	etc/adjtime (EMPTY)
 drwxr-xr-x	root/root	lib/
 lrwxrwxrwx	root/root	lib/libblkid.so.1 -> libblkid.so.1.1.0
 -rwxr-xr-x	root/root	lib/libblkid.so.1.1.0
