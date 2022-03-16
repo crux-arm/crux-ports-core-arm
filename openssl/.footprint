@@ -668,6 +668,7 @@ lrwxrwxrwx	root/root	usr/share/man/man3/BN_mod_mul.3ssl.gz -> BN_add.3ssl.gz
 -rw-r--r--	root/root	usr/share/man/man3/BN_mod_mul_montgomery.3ssl.gz
 -rw-r--r--	root/root	usr/share/man/man3/BN_mod_mul_reciprocal.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/BN_mod_sqr.3ssl.gz -> BN_add.3ssl.gz
+lrwxrwxrwx	root/root	usr/share/man/man3/BN_mod_sqrt.3ssl.gz -> BN_add.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/BN_mod_sub.3ssl.gz -> BN_add.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/BN_mod_word.3ssl.gz -> BN_add_word.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/BN_mpi2bn.3ssl.gz -> BN_bn2bin.3ssl.gz
@@ -3488,6 +3489,7 @@ lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_init.3ssl.gz -> X509_STOR
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_lookup_certs_fn.3ssl.gz -> X509_STORE_set_verify_cb_func.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_lookup_crls_fn.3ssl.gz -> X509_STORE_set_verify_cb_func.3ssl.gz
 -rw-r--r--	root/root	usr/share/man/man3/X509_STORE_CTX_new.3ssl.gz
+lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_purpose_inherit.3ssl.gz -> X509_STORE_CTX_new.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_set0_crls.3ssl.gz -> X509_STORE_CTX_new.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_set0_param.3ssl.gz -> X509_STORE_CTX_new.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_set0_trusted_stack.3ssl.gz -> X509_STORE_CTX_new.3ssl.gz
@@ -3499,6 +3501,8 @@ lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_set_default.3ssl.gz -> X5
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_set_error.3ssl.gz -> X509_STORE_CTX_get_error.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_set_error_depth.3ssl.gz -> X509_STORE_CTX_get_error.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_set_ex_data.3ssl.gz -> BIO_get_ex_new_index.3ssl.gz
+lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_set_purpose.3ssl.gz -> X509_STORE_CTX_new.3ssl.gz
+lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_set_trust.3ssl.gz -> X509_STORE_CTX_new.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_set_verify.3ssl.gz -> X509_STORE_CTX_new.3ssl.gz
 -rw-r--r--	root/root	usr/share/man/man3/X509_STORE_CTX_set_verify_cb.3ssl.gz
 lrwxrwxrwx	root/root	usr/share/man/man3/X509_STORE_CTX_verify_cb.3ssl.gz -> X509_STORE_CTX_set_verify_cb.3ssl.gz
