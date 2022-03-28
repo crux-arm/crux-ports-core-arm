@@ -1844,7 +1844,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/ensurepip/_bundled/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/ensurepip/_bundled/__pycache__/__init__.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/ensurepip/_bundled/__pycache__/__init__.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/ensurepip/_bundled/__pycache__/__init__.cpython-39.pyc
--rw-r--r--	root/root	usr/lib/python3.9/ensurepip/_bundled/pip-21.2.4-py3-none-any.whl
+-rw-r--r--	root/root	usr/lib/python3.9/ensurepip/_bundled/pip-22.0.4-py3-none-any.whl
 -rw-r--r--	root/root	usr/lib/python3.9/ensurepip/_bundled/setuptools-58.1.0-py3-none-any.whl
 -rw-r--r--	root/root	usr/lib/python3.9/ensurepip/_uninstall.py
 -rw-r--r--	root/root	usr/lib/python3.9/enum.py
@@ -2088,6 +2088,9 @@ drwxr-xr-x	root/root	usr/lib/python3.9/idlelib/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/__pycache__/undo.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/__pycache__/undo.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/__pycache__/undo.cpython-39.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/idlelib/__pycache__/util.cpython-39.opt-1.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/idlelib/__pycache__/util.cpython-39.opt-2.pyc
+-rw-r--r--	root/root	usr/lib/python3.9/idlelib/__pycache__/util.cpython-39.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/__pycache__/window.cpython-39.opt-1.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/__pycache__/window.cpython-39.opt-2.pyc
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/__pycache__/window.cpython-39.pyc
@@ -2159,6 +2162,7 @@ drwxr-xr-x	root/root	usr/lib/python3.9/idlelib/__pycache__/
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/tooltip.py
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/tree.py
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/undo.py
+-rw-r--r--	root/root	usr/lib/python3.9/idlelib/util.py
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/window.py
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/zoomheight.py
 -rw-r--r--	root/root	usr/lib/python3.9/idlelib/zzdummy.py
@@ -2306,9 +2310,9 @@ drwxr-xr-x	root/root	usr/lib/python3.9/lib-dynload/
 -rwxr-xr-x	root/root	usr/lib/python3.9/lib-dynload/zlib.cpython-39-arm-linux-gnueabihf.so
 drwxr-xr-x	root/root	usr/lib/python3.9/lib2to3/
 -rw-r--r--	root/root	usr/lib/python3.9/lib2to3/Grammar.txt
--rw-r--r--	root/root	usr/lib/python3.9/lib2to3/Grammar3.9.10.final.0.pickle
+-rw-r--r--	root/root	usr/lib/python3.9/lib2to3/Grammar3.9.12.final.0.pickle
 -rw-r--r--	root/root	usr/lib/python3.9/lib2to3/PatternGrammar.txt
--rw-r--r--	root/root	usr/lib/python3.9/lib2to3/PatternGrammar3.9.10.final.0.pickle
+-rw-r--r--	root/root	usr/lib/python3.9/lib2to3/PatternGrammar3.9.12.final.0.pickle
 -rw-r--r--	root/root	usr/lib/python3.9/lib2to3/__init__.py
 -rw-r--r--	root/root	usr/lib/python3.9/lib2to3/__main__.py
 drwxr-xr-x	root/root	usr/lib/python3.9/lib2to3/__pycache__/
