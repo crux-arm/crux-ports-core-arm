@@ -2,17 +2,15 @@
 # URL: https://www.kernel.org/pub/linux/utils/util-linux/ 
 # Maintainer: CRUX System Team, core-ports at crux dot nu
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
-# Depends on: eudev ncurses zlib
+# Depends on: eudev file readline bzip2 xz
 
 name=util-linux
-version=2.37.4
+version=2.38
 release=1
-source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz
-        $name-man-$version.tar.xz)
+source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
-  touch disk-utils/raw.8
   ./configure --prefix=/usr \
               --disable-nls \
               --disable-{login,su,sulogin,nologin,runuser} \
@@ -24,9 +22,8 @@ build() {
   make DESTDIR=$PKG install
 
   install -d $PKG/{etc,var/{lib/libuuid,run/uuidd}}
-  cp -r $SRC/man $PKG/usr/share
+  touch $PKG/etc/adjtime
 
   rm -r $PKG/usr/share/{doc,bash-completion}
-  rm -r $PKG/usr/share
   rm $PKG/sbin/{mkfs.bfs,mkfs.minix,fsck.minix}
 }
