@@ -4,7 +4,7 @@ CRUX-ARM ports overlay for CRUX core collection
 
 To use these ports, download the `core-arm.httpup` file to `/etc/ports`:
 ```
-$ sudo wget -P /etc/ports https://raw.githubusercontent.com/crux-arm/crux-ports-core-arm/main/core-arm.httpup
+$ sudo wget -P /etc/ports https://raw.githubusercontent.com/crux-arm/crux-ports-core-arm/3.6/core-arm.httpup
 $ sudo ports -u core-arm
 ```
 
