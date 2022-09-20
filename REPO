@@ -17,7 +17,6 @@ f:af7c44cac5e15d4a2b45db11c9bb7434:gcc/Pkgfile
 f:ec3fb729d4c65db2650e3025c7d0de78:gcc/.footprint
 f:35760b4fa38987c4a84d3cc0e07abeb2:gcc/.signature
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
-f:d7e32103c7aa8c9a73f52cd11335804e:pkgutils/pkgmk.conf.patch
 f:a745121793f1dace8f81c80f498d4c80:pkgutils/Pkgfile
 f:0d3a6fed127ba555ba0c1a587130c6bc:pkgutils/.footprint
 f:bd61b49e5a913ed64c8134bd7c05f34d:pkgutils/.signature
@@ -54,6 +53,7 @@ f:5a84634e148e20b426d4d0ef0cddaf7d:openrdate/ntp.patch
 f:46a4beea2ccaacb579697f64b8de144f:libgmp/Pkgfile
 f:3676fa07d39385398a87c15dd9034453:libgmp/.footprint
 f:525eaffaa380ac47182a2fd610bc95ae:libgmp/.signature
+f:d32239bcb673463ab874e80d47fae504:COPYING
 f:c721f02844ae4ea0e0872cccd56c1423:openssl/Pkgfile
 f:97ccefb7324fb563eaeb80ffed4d69d3:openssl/.footprint
 f:91f85842d2118003ee465c34259047e6:openssl/mksslcert.sh
@@ -84,7 +84,9 @@ f:a12012a592e978f06dae8cc1eab75b50:prt-get/prt-get.conf
 f:4f6b710e4d2b18c70cfe5e4a593938b7:prt-get/prt-get.aliases
 f:d5220b1a8776fbcfb910a40b0a25c6cf:prt-get/.footprint
 f:aebd1328bba50f02ab251a6aebec4030:prt-get/.signature
+f:887258828a716501162c0f61b98b2fbd:ports/xorg-arm.httpup
 f:804bb419e539a70ad80e4c03df3c3411:ports/contrib.pub
+f:6664dcbca37a0f92661b81f8529a5d51:ports/core-arm.httpup
 f:5c94921bee9441abfd6d72869d8e3b69:ports/opt-arm.pub
 f:a2ecd86c4d7037fc250d1e84775b878c:ports/core.rsync
 f:ee9093b54411528e7a7a57c2cbd53cc8:ports/xorg.rsync
@@ -97,5 +99,6 @@ f:b8dd0aad383810cad920d6548cd1cb56:ports/core.pub
 f:af52e44631eb80d2c482faf051e97ff9:ports/.footprint
 f:0d1f1fde50a9bd743d9cac6b235f038c:ports/opt.pub
 f:5b1421aacb45c0e03d738ad8ae377065:ports/.md5sum
+f:5cce9f5cdfcbc3a68a51b6345f62d5a4:ports/opt-arm.httpup
 f:68f10113aa22fff640a20f198f7c8d2a:ports/.signature
 f:093976ed22eb0418721096175b2bd276:ports/xorg-arm.pub
