@@ -1,4 +1,7 @@
 README.md
-COPYING
-\.git
-*.httpup
+\.git*
+^core\-arm\.httpup
+*~
+\.*~
+*work
+*.pkg.*
