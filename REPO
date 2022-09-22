@@ -41,9 +41,9 @@ f:17174a3740dd8d8e62e1eaa85d46ae2b:binutils/.signature
 f:fa0ddb07d70b0bd4474a995b3c9990b7:util-linux/Pkgfile
 f:15e22224bf22f6ec0117deb9fa8a291f:util-linux/.footprint
 f:b7cbb5feb37984c627217813305ad60b:util-linux/.signature
-f:182b3918bdc34360273fce8240af0874:python3/Pkgfile
-f:302e20801e509e8b3014245d49cb6bde:python3/.footprint
-f:a7f217c435ebab8e50ac8a63ed4d9637:python3/.signature
+f:cacc3c4c8824c5e8b25da0e4944190db:python3/Pkgfile
+f:1f94015841f3d9b2f99423e246fe1ddd:python3/.footprint
+f:70fab3bf6c8e94583a1bc4a143f620da:python3/.signature
 f:c212d60bdabec86c27d82b1a19223aa0:openrdate/rdate
 f:60a7edda94008164a9aa0c36d0da79fe:openrdate/Pkgfile
 f:7bc21568b289abdd96e6d69c2d63da5a:openrdate/.footprint
