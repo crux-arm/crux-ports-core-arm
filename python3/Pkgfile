@@ -1,10 +1,11 @@
 # Description: Python interpreter, version 3.
-# URL:         https://www.python.org/
-# Maintainer:  CRUX System Team, core-ports at crux dot nu
-# Depends on:  bzip2 expat gdbm libffi libnsl libtirpc mpdecimal sqlite3 xz
+# URL: https://www.python.org/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
+# Depends on: bzip2 expat gdbm libffi libnsl libtirpc mpdecimal sqlite3 xz
 
 name=python3
-version=3.9.13
+version=3.9.14
 release=1
 source=(https://www.python.org/ftp/python/${version%rc*}/Python-$version.tar.xz)
 
