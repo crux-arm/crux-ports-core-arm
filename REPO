@@ -71,10 +71,10 @@ f:aebd1328bba50f02ab251a6aebec4030:prt-get/.signature
 f:4f6b710e4d2b18c70cfe5e4a593938b7:prt-get/prt-get.aliases
 f:cb96c46c2cf16e2a2f1f13f29f5faab3:prt-get/README
 f:d5220b1a8776fbcfb910a40b0a25c6cf:prt-get/.footprint
-f:c721f02844ae4ea0e0872cccd56c1423:openssl/Pkgfile
-f:e06476e32638475e2cb4def52cbce3d0:openssl/.signature
+f:8e630e56e212c622060f0c2998a61898:openssl/Pkgfile
+f:71b9d3ac05090034e9275d283d95310a:openssl/.signature
 f:91f85842d2118003ee465c34259047e6:openssl/mksslcert.sh
-f:97ccefb7324fb563eaeb80ffed4d69d3:openssl/.footprint
+f:2c8e1cbbcaaf97b65f48178b879ca2df:openssl/.footprint
 f:c212d60bdabec86c27d82b1a19223aa0:openrdate/rdate
 f:60a7edda94008164a9aa0c36d0da79fe:openrdate/Pkgfile
 f:11b8ff9d9904f3a6020334f86bbe2e5c:openrdate/.signature
