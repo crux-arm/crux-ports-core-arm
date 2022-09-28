@@ -51,8 +51,8 @@ f:acf9daad1ee85de5efd3543965596a63:glibc/resolv.conf
 f:75931315bf9bc9be15a5e25e4ddd5f0d:glibc/nsswitch.conf
 f:96156bec8e05de67384dc93e72bdc313:glibc/host.conf
 f:0f9986c58f682954ff5908208a703bf7:glibc/.footprint
-f:46a4beea2ccaacb579697f64b8de144f:libgmp/Pkgfile
-f:525eaffaa380ac47182a2fd610bc95ae:libgmp/.signature
+f:840ce2315386f3ec0c52cd6bf6670066:libgmp/Pkgfile
+f:717341ea27762ef47d578c5b81b6052c:libgmp/.signature
 f:3676fa07d39385398a87c15dd9034453:libgmp/.footprint
 f:a47ba380e5575c69784ca6a01888199d:linux-pam/other
 f:351decd813138a80a78f4f1bb3686162:linux-pam/common-session
