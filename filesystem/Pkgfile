@@ -1,11 +1,11 @@
 # Description: Root filesystem package
-# URL: http://crux.nu
+# URL: https://crux.nu
 # Maintainer: CRUX System Team, core-ports at crux dot nu
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=filesystem
-version=3.6
-release=2
+version=3.7
+release=3
 source=(issue motd shells group passwd shadow securetty fstab mime.types)
 
 build() {
@@ -35,8 +35,7 @@ build() {
   install -d $PKG/var/lib/pkg
   install -d $PKG/var/log
   install -d $PKG/var/log/old
-  install -d $PKG/var/run
-  touch $PKG/var/run/utmp
+  ln -s ../run/ $PKG/var/run
   install -d $PKG/var/spool
   install -d $PKG/var/ftp
   install -d $PKG/var/www

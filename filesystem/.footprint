@@ -57,8 +57,7 @@ drwxrwxrwt	root/root	var/lock/
 drwxr-xr-x	root/root	var/log/
 drwxr-xr-x	root/root	var/log/old/
 lrwxrwxrwx	root/root	var/mail -> spool/mail
-drwxr-xr-x	root/root	var/run/
--rw-r--r--	root/root	var/run/utmp (EMPTY)
+lrwxrwxrwx	root/root	var/run -> ../run/
 drwxr-xr-x	root/root	var/spool/
 drwxrwxrwt	root/root	var/spool/mail/
 drwxrwxrwt	root/root	var/tmp/
