@@ -1,6 +1,7 @@
 d:python3
 d:ports
 d:gcc
+d:procps
 d:glibc
 d:libgmp
 d:pkgutils
@@ -35,6 +36,10 @@ f:35760b4fa38987c4a84d3cc0e07abeb2:gcc/.signature
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
 f:ec3fb729d4c65db2650e3025c7d0de78:gcc/.footprint
+f:560278588395db372654e986441b605a:procps/Pkgfile
+f:261b18801eea3ec6f4c772c7be668222:procps/.signature
+f:7d94a87e508252de53ea8f8ca738c7cf:procps/.footprint
+f:e252a579938327e7c99c54620faa4146:procps/sysctl.conf
 f:d32239bcb673463ab874e80d47fae504:COPYING
 f:ac860c418cf311a61a9a9b217046557a:glibc/Pkgfile
 f:0d2d7f988d1756d693b262d46fee7d17:glibc/.nostrip
@@ -55,12 +60,12 @@ f:3676fa07d39385398a87c15dd9034453:libgmp/.footprint
 f:a745121793f1dace8f81c80f498d4c80:pkgutils/Pkgfile
 f:bd61b49e5a913ed64c8134bd7c05f34d:pkgutils/.signature
 f:0d3a6fed127ba555ba0c1a587130c6bc:pkgutils/.footprint
-f:1fdc67fa4a647a4516fddb55387b4a48:prt-get/Pkgfile
-f:a12012a592e978f06dae8cc1eab75b50:prt-get/prt-get.conf
-f:aebd1328bba50f02ab251a6aebec4030:prt-get/.signature
+f:fba3b19b1f9ef72c722360b8cfd73c3d:prt-get/Pkgfile
+f:6f7ff70931c155d6a850898f2d239e2c:prt-get/prt-get.conf
+f:561a4f62446b0fd3eefe0a85b3b04eee:prt-get/.signature
 f:4f6b710e4d2b18c70cfe5e4a593938b7:prt-get/prt-get.aliases
 f:cb96c46c2cf16e2a2f1f13f29f5faab3:prt-get/README
-f:d5220b1a8776fbcfb910a40b0a25c6cf:prt-get/.footprint
+f:077fea960d8a490412eed744ce9bcc40:prt-get/.footprint
 f:8e630e56e212c622060f0c2998a61898:openssl/Pkgfile
 f:71b9d3ac05090034e9275d283d95310a:openssl/.signature
 f:91f85842d2118003ee465c34259047e6:openssl/mksslcert.sh
