@@ -7,10 +7,12 @@ d:libgmp
 d:pkgutils
 d:prt-get
 d:openssl
+d:libarchive
 d:util-linux
 d:binutils
 d:kbd
 d:filesystem
+d:gettext
 f:cacc3c4c8824c5e8b25da0e4944190db:python3/Pkgfile
 f:70fab3bf6c8e94583a1bc4a143f620da:python3/.signature
 f:1f94015841f3d9b2f99423e246fe1ddd:python3/.footprint
@@ -57,9 +59,9 @@ f:2048f5227cfb9b52d5ba74cc0fac19a1:glibc/glibc-2.36-1.patch
 f:840ce2315386f3ec0c52cd6bf6670066:libgmp/Pkgfile
 f:717341ea27762ef47d578c5b81b6052c:libgmp/.signature
 f:3676fa07d39385398a87c15dd9034453:libgmp/.footprint
-f:a745121793f1dace8f81c80f498d4c80:pkgutils/Pkgfile
-f:bd61b49e5a913ed64c8134bd7c05f34d:pkgutils/.signature
-f:0d3a6fed127ba555ba0c1a587130c6bc:pkgutils/.footprint
+f:64347d3b13c1cbc1b082f9cbc0840f8f:pkgutils/Pkgfile
+f:6d5191c5b8e8fe2bcdedd528a81fb148:pkgutils/.signature
+f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
 f:fba3b19b1f9ef72c722360b8cfd73c3d:prt-get/Pkgfile
 f:6f7ff70931c155d6a850898f2d239e2c:prt-get/prt-get.conf
 f:561a4f62446b0fd3eefe0a85b3b04eee:prt-get/.signature
@@ -70,6 +72,9 @@ f:8e630e56e212c622060f0c2998a61898:openssl/Pkgfile
 f:71b9d3ac05090034e9275d283d95310a:openssl/.signature
 f:91f85842d2118003ee465c34259047e6:openssl/mksslcert.sh
 f:2c8e1cbbcaaf97b65f48178b879ca2df:openssl/.footprint
+f:dda9d4c738b67c259ed1f8d721a7efd3:libarchive/Pkgfile
+f:6e952a7cb02b2fab1783ab1bca9cc88d:libarchive/.signature
+f:214c8b8fde031017cdf0973573ffb43f:libarchive/.footprint
 f:fa0ddb07d70b0bd4474a995b3c9990b7:util-linux/Pkgfile
 f:b7cbb5feb37984c627217813305ad60b:util-linux/.signature
 f:15e22224bf22f6ec0117deb9fa8a291f:util-linux/.footprint
@@ -91,3 +96,6 @@ f:f05649d0184df6b4550efa3c513dde0e:filesystem/group
 f:d28f33603e09aaef8ed493340f6fcca1:filesystem/.footprint
 f:4faaa4e1ba24038f8638a0cae5046cfb:filesystem/securetty
 f:346ede8d637940e2898cd29c56a37d30:filesystem/mime.types
+f:bfba7d4e9dbdbef4914076eb0dd48685:gettext/Pkgfile
+f:99ab40c7c63dede2ad54a00b7924dafd:gettext/.signature
+f:f1c9daabfef8c3337868bad26f64398b:gettext/.footprint
