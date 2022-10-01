@@ -17,10 +17,10 @@ source=(https://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
 
 build() {
   # install kernel headersw
-	make -C $SRC/linux-$_kernel_version mrproper
-	make -C $SRC/linux-$_kernel_version headers_check
-	make -C $SRC/linux-$_kernel_version INSTALL_HDR_PATH=$PKG/usr headers_install
-	chown root:root $PKG/usr
+  make -C $SRC/linux-$_kernel_version mrproper
+  make -C $SRC/linux-$_kernel_version headers_check
+  make -C $SRC/linux-$_kernel_version INSTALL_HDR_PATH=$PKG/usr headers_install
+  chown root:root $PKG/usr
 
   patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-1.patch
 
@@ -53,23 +53,23 @@ build() {
   install -d $PKG/etc/ld.so.conf.d $PKG/usr/lib/locale
   touch $PKG/etc/ld.so.cache
 
-	install -Dm755 $SRC/locale-gen $PKG/usr/sbin/locale-gen
-	install -Dm644 $SRC/locale.gen.in $PKG/etc/locale.gen
-	sed -e '1,3d' -e 's|/| |g' -e 's|\\| |g' -e 's|^|#|g' \
-		$SRC/$name-$version/localedata/SUPPORTED >> $PKG/etc/locale.gen
+  install -Dm755 $SRC/locale-gen $PKG/usr/sbin/locale-gen
+  install -Dm644 $SRC/locale.gen.in $PKG/etc/locale.gen
+  sed -e '1,3d' -e 's|/| |g' -e 's|\\| |g' -e 's|^|#|g' \
+    $SRC/$name-$version/localedata/SUPPORTED >> $PKG/etc/locale.gen
 
-	LC_ALL=C ./elf/ld.so --library-path . $PKG/usr/bin/localedef \
-		--force --quiet \
-		--inputfile=$SRC/$name-$version/localedata/locales/C \
-		--charmap=$SRC/$name-$version/localedata/charmaps/UTF-8 \
-		$PKG/usr/lib/locale/C.UTF-8 || true
+  LC_ALL=C ./elf/ld.so --library-path . $PKG/usr/bin/localedef \
+    --force --quiet \
+    --inputfile=$SRC/$name-$version/localedata/locales/C \
+    --charmap=$SRC/$name-$version/localedata/charmaps/UTF-8 \
+    $PKG/usr/lib/locale/C.UTF-8 || true
 
-	rm -r $PKG/usr/share/locale \
-		$PKG/usr/bin/{tzselect,zdump} \
-		$PKG/usr/sbin/zic
+  rm -r $PKG/usr/share/locale \
+    $PKG/usr/bin/{tzselect,zdump} \
+    $PKG/usr/sbin/zic
 
-	install -Dm644 $SRC/$name-$version/intl/locale.alias \
-		$PKG/usr/share/locale/locale.alias
+  install -Dm644 $SRC/$name-$version/intl/locale.alias \
+    $PKG/usr/share/locale/locale.alias
 
   find $PKG -name "*install.cmd" -delete
   find $PKG -name ".\install" -delete
