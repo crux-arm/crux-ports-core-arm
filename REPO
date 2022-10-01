@@ -41,9 +41,9 @@ f:261b18801eea3ec6f4c772c7be668222:procps/.signature
 f:7d94a87e508252de53ea8f8ca738c7cf:procps/.footprint
 f:e252a579938327e7c99c54620faa4146:procps/sysctl.conf
 f:d32239bcb673463ab874e80d47fae504:COPYING
-f:ac860c418cf311a61a9a9b217046557a:glibc/Pkgfile
+f:f595251aba49ef0acc892fd3972897bd:glibc/Pkgfile
 f:0d2d7f988d1756d693b262d46fee7d17:glibc/.nostrip
-f:5efb713694b330d51a827596c6b3dbcf:glibc/.signature
+f:11cdff79b79af0743ae7248866fd60cd:glibc/.signature
 f:8ade3a1b3e11426f6c070daa3906c6f7:glibc/post-install
 f:fbbc215a9b15ba4846f326cc88108057:glibc/hosts
 f:58867be9286ece55adff1226216fdd9f:glibc/locale-gen
