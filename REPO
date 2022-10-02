@@ -33,11 +33,11 @@ f:d39f6279b5e125edb9f402b0e4d1865b:ports/contrib.rsync.inactive
 f:af52e44631eb80d2c482faf051e97ff9:ports/.footprint
 f:7b496be8827914a5583bee06aec07cbf:ports/xorg-arm.httpup
 f:0d1f1fde50a9bd743d9cac6b235f038c:ports/opt.pub
-f:af7c44cac5e15d4a2b45db11c9bb7434:gcc/Pkgfile
-f:35760b4fa38987c4a84d3cc0e07abeb2:gcc/.signature
+f:de3909abdddbec201ca0e698b1d0dcd3:gcc/Pkgfile
+f:4997820c5e0a66f456f1c90a660ddbe0:gcc/.signature
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
-f:ec3fb729d4c65db2650e3025c7d0de78:gcc/.footprint
+f:dd96b449f3af23f4c96acc053eeb9ab7:gcc/.footprint
 f:560278588395db372654e986441b605a:procps/Pkgfile
 f:261b18801eea3ec6f4c772c7be668222:procps/.signature
 f:7d94a87e508252de53ea8f8ca738c7cf:procps/.footprint
