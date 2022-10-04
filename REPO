@@ -34,8 +34,8 @@ f:d39f6279b5e125edb9f402b0e4d1865b:ports/contrib.rsync.inactive
 f:af52e44631eb80d2c482faf051e97ff9:ports/.footprint
 f:7b496be8827914a5583bee06aec07cbf:ports/xorg-arm.httpup
 f:0d1f1fde50a9bd743d9cac6b235f038c:ports/opt.pub
-f:de3909abdddbec201ca0e698b1d0dcd3:gcc/Pkgfile
-f:4997820c5e0a66f456f1c90a660ddbe0:gcc/.signature
+f:4165a9f9ff05fc879d30c4ebdbebfc30:gcc/Pkgfile
+f:f302300d2b35e6197d33136eb2fff29b:gcc/.signature
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
 f:dd96b449f3af23f4c96acc053eeb9ab7:gcc/.footprint
