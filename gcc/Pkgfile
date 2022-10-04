@@ -10,6 +10,18 @@ release=1
 source=(https://sourceware.org/pub/gcc/releases/gcc-$version/gcc-$version.tar.xz \
         $name-nocheck-fixincludes.patch)
 
+unpack_source() {
+  for file in ${source[@]}; do
+    case ${file##*/} in
+      $name-$version.tar.xz)
+        echo "Unpacking $(get_filename $file)"
+        bsdtar -p -o -C $SRC -xf $(get_filename $file) ;;
+      *)
+        cp $(get_filename $file) $SRC ;;
+    esac
+  done
+}
+
 build() {
   # fix libasan.a
   sed -e '/static.*SIGSTKSZ/d' \
