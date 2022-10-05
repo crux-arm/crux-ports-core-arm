@@ -14,9 +14,9 @@ d:kbd
 d:filesystem
 d:httpup
 d:gettext
-f:cacc3c4c8824c5e8b25da0e4944190db:python3/Pkgfile
-f:70fab3bf6c8e94583a1bc4a143f620da:python3/.signature
-f:1f94015841f3d9b2f99423e246fe1ddd:python3/.footprint
+f:3ac328599e9c9828f70ebcb484b6c4ed:python3/Pkgfile
+f:190a62a0d9dfc3ea9ca6fd4cc38ec3e4:python3/.signature
+f:3b9a9c5df800c01386308b7c86ae7903:python3/.footprint
 f:804bb419e539a70ad80e4c03df3c3411:ports/contrib.pub
 f:5f9505443510b3a133bcb0eb74ee6429:ports/opt-arm.httpup
 f:093976ed22eb0418721096175b2bd276:ports/xorg-arm.pub
