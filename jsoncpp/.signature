@@ -1,0 +1,5 @@
+untrusted comment: verify with /etc/ports/core-arm.pub
+RWTMGLGEHsm4df6efMHw1oFFjLiWiK+Dm/K4bHrn7yIx787CoMe4+mbFyJbrpm9vGZl9VI443im/7orPh+kJBuBE0m3ZzpGStAw=
+SHA256 (Pkgfile) = de389cf72b0815df104a3dc135f15d4616ffaeb587d7747892fcfc7f5538e647
+SHA256 (.footprint) = 4580fce6df8142de5a77f4e2aa3dae8e23efa67b6de4bfdae3d41afb16dd697e
+SHA256 (jsoncpp-1.9.5.tar.gz) = f409856e5920c18d0c2fb85276e24ee607d2a09b5e7d5f0a371368903c275da2
