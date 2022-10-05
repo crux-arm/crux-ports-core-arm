@@ -11,14 +11,17 @@ _kernel_version=5.15.55
 
 source=(https://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
   http://www.kernel.org/pub/linux/kernel/v5.x/linux-$_kernel_version.tar.xz \
+  linux-headers-cp-insteadof-rsync.patch \
   $name-$version-1.patch \
   hosts resolv.conf nsswitch.conf host.conf ld.so.conf \
   locale-gen locale.gen.in)
 
 build() {
-  # install kernel headersw
+  # avoid to use rsync as a buildtime dep
+  patch -p0 -i $SRC/linux-headers-cp-insteadof-rsync.patch
+
+  # install kernel headers
   make -C $SRC/linux-$_kernel_version mrproper
-  make -C $SRC/linux-$_kernel_version headers_check
   make -C $SRC/linux-$_kernel_version INSTALL_HDR_PATH=$PKG/usr headers_install
   chown root:root $PKG/usr
 
