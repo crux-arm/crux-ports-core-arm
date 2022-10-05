@@ -2,6 +2,7 @@ d:python3
 d:ports
 d:gcc
 d:procps
+d:pkgconf
 d:glibc
 d:libgmp
 d:pkgutils
@@ -43,6 +44,11 @@ f:560278588395db372654e986441b605a:procps/Pkgfile
 f:261b18801eea3ec6f4c772c7be668222:procps/.signature
 f:7d94a87e508252de53ea8f8ca738c7cf:procps/.footprint
 f:e252a579938327e7c99c54620faa4146:procps/sysctl.conf
+f:9a62c5d91dcb968c163cb6495c687df3:pkgconf/arm-unknown-linux-gnueabihf.personality
+f:f44aec599973765ee5ebd8c93876b9c2:pkgconf/Pkgfile
+f:0e5c5b34d4a7b8028b01beaad65bcbad:pkgconf/.signature
+f:6fec70b14f238ad94caf5dac367ee427:pkgconf/README
+f:dc76d8e1ed0fe7477d20f5cfc21a19de:pkgconf/.footprint
 f:d32239bcb673463ab874e80d47fae504:COPYING
 f:f595251aba49ef0acc892fd3972897bd:glibc/Pkgfile
 f:0d2d7f988d1756d693b262d46fee7d17:glibc/.nostrip
