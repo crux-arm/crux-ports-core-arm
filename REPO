@@ -6,6 +6,7 @@ d:pkgconf
 d:glibc
 d:libgmp
 d:pkgutils
+d:jsoncpp
 d:prt-get
 d:openssl
 d:libarchive
@@ -70,6 +71,9 @@ f:3676fa07d39385398a87c15dd9034453:libgmp/.footprint
 f:64347d3b13c1cbc1b082f9cbc0840f8f:pkgutils/Pkgfile
 f:6d5191c5b8e8fe2bcdedd528a81fb148:pkgutils/.signature
 f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
+f:b7ba705ab017399580170a714360381a:jsoncpp/Pkgfile
+f:9ed43bca0e4f7ff0e59925bcf9785ebe:jsoncpp/.signature
+f:d8678e6bc043011febfbb900f7580485:jsoncpp/.footprint
 f:fba3b19b1f9ef72c722360b8cfd73c3d:prt-get/Pkgfile
 f:6f7ff70931c155d6a850898f2d239e2c:prt-get/prt-get.conf
 f:561a4f62446b0fd3eefe0a85b3b04eee:prt-get/.signature
