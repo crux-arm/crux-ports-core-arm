@@ -50,9 +50,10 @@ f:0e5c5b34d4a7b8028b01beaad65bcbad:pkgconf/.signature
 f:6fec70b14f238ad94caf5dac367ee427:pkgconf/README
 f:dc76d8e1ed0fe7477d20f5cfc21a19de:pkgconf/.footprint
 f:d32239bcb673463ab874e80d47fae504:COPYING
-f:f595251aba49ef0acc892fd3972897bd:glibc/Pkgfile
+f:3c7c3fdd6ce96c41c6228f7032d4107f:glibc/linux-headers-cp-insteadof-rsync.patch
+f:70f9b3d0a93823527cb72c3a1f635ed3:glibc/Pkgfile
 f:0d2d7f988d1756d693b262d46fee7d17:glibc/.nostrip
-f:11cdff79b79af0743ae7248866fd60cd:glibc/.signature
+f:bf1b8b617c488886af81e45fbb9cf05c:glibc/.signature
 f:8ade3a1b3e11426f6c070daa3906c6f7:glibc/post-install
 f:fbbc215a9b15ba4846f326cc88108057:glibc/hosts
 f:58867be9286ece55adff1226216fdd9f:glibc/locale-gen
