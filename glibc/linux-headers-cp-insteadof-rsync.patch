@@ -1,14 +1,5 @@
-# diff linux-5.15.55/Makefile.orig linux-5.15.55/Makefile
-1309,1310c1309,1311
-< 	rsync -mrl --include='*/' --include='*\.h' --exclude='*' \
-< 	usr/include $(INSTALL_HDR_PATH)
----
-> 	cp -a usr/include $(INSTALL_HDR_PATH); \
-> 	find $(INSTALL_HDR_PATH) -type f ! -name '*.h' -delete; \
-> 	find $(INSTALL_HDR_PATH) -type d -empty -delete
-# diff -purN linux-5.15.55/Makefile.orig linux-5.15.55/Makefile
---- linux-5.15.55/Makefile.orig	2022-07-15 08:13:00.000000000 +0000
-+++ linux-5.15.55/Makefile	2022-10-05 21:02:41.202158145 +0000
+--- linux-5.15.55/Makefile.orig	2022-10-06 14:04:33.050164596 +0200
++++ linux-5.15.55/Makefile	2022-10-06 14:05:25.414164602 +0200
 @@ -1306,8 +1306,9 @@ export INSTALL_HDR_PATH = $(objtree)/usr
  quiet_cmd_headers_install = INSTALL $(INSTALL_HDR_PATH)/include
        cmd_headers_install = \
