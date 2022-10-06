@@ -51,10 +51,10 @@ f:0e5c5b34d4a7b8028b01beaad65bcbad:pkgconf/.signature
 f:6fec70b14f238ad94caf5dac367ee427:pkgconf/README
 f:dc76d8e1ed0fe7477d20f5cfc21a19de:pkgconf/.footprint
 f:d32239bcb673463ab874e80d47fae504:COPYING
-f:3c7c3fdd6ce96c41c6228f7032d4107f:glibc/linux-headers-cp-insteadof-rsync.patch
+f:0ff41d45087570954d1b7358bbfb1797:glibc/linux-headers-cp-insteadof-rsync.patch
 f:70f9b3d0a93823527cb72c3a1f635ed3:glibc/Pkgfile
 f:0d2d7f988d1756d693b262d46fee7d17:glibc/.nostrip
-f:bf1b8b617c488886af81e45fbb9cf05c:glibc/.signature
+f:feed84d237e8f2e76d6f7ca7cb72237c:glibc/.signature
 f:8ade3a1b3e11426f6c070daa3906c6f7:glibc/post-install
 f:fbbc215a9b15ba4846f326cc88108057:glibc/hosts
 f:58867be9286ece55adff1226216fdd9f:glibc/locale-gen
@@ -87,9 +87,9 @@ f:2c8e1cbbcaaf97b65f48178b879ca2df:openssl/.footprint
 f:dda9d4c738b67c259ed1f8d721a7efd3:libarchive/Pkgfile
 f:6e952a7cb02b2fab1783ab1bca9cc88d:libarchive/.signature
 f:214c8b8fde031017cdf0973573ffb43f:libarchive/.footprint
-f:fa0ddb07d70b0bd4474a995b3c9990b7:util-linux/Pkgfile
-f:b7cbb5feb37984c627217813305ad60b:util-linux/.signature
-f:15e22224bf22f6ec0117deb9fa8a291f:util-linux/.footprint
+f:d35613431e06de7b0cc210d856461226:util-linux/Pkgfile
+f:bb7b46c9ffc45fc226db452111dfdf90:util-linux/.signature
+f:3b4cf9aa23794c76f5f386c3298f3ba8:util-linux/.footprint
 f:4fb4313bc19ba90dddcff5de7f013b88:binutils/Pkgfile
 f:17174a3740dd8d8e62e1eaa85d46ae2b:binutils/.signature
 f:755f3fb52a72392d63a80cd7d5159748:binutils/.footprint
