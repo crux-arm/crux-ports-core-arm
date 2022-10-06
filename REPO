@@ -1,5 +1,6 @@
 d:python3
 d:ports
+d:eudev
 d:gcc
 d:procps
 d:pkgconf
@@ -36,6 +37,11 @@ f:d39f6279b5e125edb9f402b0e4d1865b:ports/contrib.rsync.inactive
 f:af52e44631eb80d2c482faf051e97ff9:ports/.footprint
 f:7b496be8827914a5583bee06aec07cbf:ports/xorg-arm.httpup
 f:0d1f1fde50a9bd743d9cac6b235f038c:ports/opt.pub
+f:dd075fb7b2fd3667ad2a182f55e8502e:eudev/Pkgfile
+f:7bce1ba274cdd0c17724596d32947c77:eudev/.signature
+f:ee21e150df6c804eef03a6cb2fc1cceb:eudev/81-crux.rules
+f:37f89303c042e965f396146ace43be24:eudev/start_udev
+f:472369fa110683418acaf99e27c21052:eudev/.footprint
 f:4165a9f9ff05fc879d30c4ebdbebfc30:gcc/Pkgfile
 f:f302300d2b35e6197d33136eb2fff29b:gcc/.signature
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
