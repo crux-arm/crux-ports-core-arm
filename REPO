@@ -41,9 +41,9 @@ f:f302300d2b35e6197d33136eb2fff29b:gcc/.signature
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
 f:dd96b449f3af23f4c96acc053eeb9ab7:gcc/.footprint
-f:560278588395db372654e986441b605a:procps/Pkgfile
-f:261b18801eea3ec6f4c772c7be668222:procps/.signature
-f:7d94a87e508252de53ea8f8ca738c7cf:procps/.footprint
+f:b713c49d32f02102986498e74141763b:procps/Pkgfile
+f:ca9f2de290ff48322650090f626916f8:procps/.signature
+f:27aad112825336345c199e2fda7d9e29:procps/.footprint
 f:e252a579938327e7c99c54620faa4146:procps/sysctl.conf
 f:9a62c5d91dcb968c163cb6495c687df3:pkgconf/arm-unknown-linux-gnueabihf.personality
 f:f44aec599973765ee5ebd8c93876b9c2:pkgconf/Pkgfile
