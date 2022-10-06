@@ -1,0 +1,24 @@
+# Description: A compression/decompression Library
+# URL: http://www.zlib.net/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
+# Depends on:
+
+name=zlib
+version=1.2.12
+release=1
+source=(https://www.zlib.net/$name-$version.tar.xz)
+
+build() {
+  cd $name-$version
+
+  ./configure \
+    --prefix=/usr \
+    --sharedlibdir=/lib
+
+  make
+  make DESTDIR=$PKG install
+
+  ln -sf ../../lib/libz.so.$version $PKG/usr/lib/libz.so
+  rm -f $PKG/lib/libz.so
+}
