@@ -37,6 +37,6 @@ build() {
   # workaround: those files are missing on 3.6 host compilation (no impact on 3.7)
   touch $PKG/usr/bin/pidwait
   chmod 0755 $PKG/usr/bin/pidwait
-  touch $PKG/usr/share/man/man1/pidwait.1.gz
-  chmod 0644 $PKG/usr/share/man/man1/pidwait.1.gz 
+  touch $PKG/usr/share/man/man1/pidwait.1
+  chmod 0644 $PKG/usr/share/man/man1/pidwait.1
 }
