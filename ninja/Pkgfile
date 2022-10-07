@@ -1,0 +1,24 @@
+# Description: Small build system with a focus on speed
+# URL: https://ninja-build.org/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
+# Depends on: cmake
+
+name=ninja
+version=1.11.1
+release=1
+source=(https://github.com/$name-build/$name/archive/v$version/$name-v$version.tar.gz)
+
+build() {
+	cmake -S $name-$version -B build \
+		-D CMAKE_INSTALL_PREFIX=/usr \
+		-D CMAKE_BUILD_TYPE=Release \
+		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+		-Wno-dev
+	cmake --build build
+	DESTDIR=$PKG cmake --install build
+
+	install -m644 -D $name-$version/misc/ninja.vim \
+		$PKG/usr/share/vim/vimfiles/syntax/ninja.vim
+}
