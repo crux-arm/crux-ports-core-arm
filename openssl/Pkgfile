@@ -4,9 +4,9 @@
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=openssl
-version=1.1.1q
+version=3.0.5
 release=1
-source=(http://www.openssl.org/source/$name-$version.tar.gz \
+source=(https://www.openssl.org/source/$name-$version.tar.gz \
         mksslcert.sh)
 
 build() {
@@ -14,17 +14,22 @@ build() {
 
   export MAKEFLAGS="$MAKEFLAGS -j1"
 
-  ./config --prefix=/usr \
-           --openssldir=/etc/ssl \
-           shared
+  ./config \
+    --prefix=/usr \
+    --openssldir=/etc/ssl \
+    enable-camellia \
+    enable-seed enable-rfc3779 \
+    no-mdc2 no-ec2m no-sm2 no-sm4 \
+    shared \
+    threads \
+    zlib
 
-  sed -e "s|-O3|$CFLAGS|" -e "s|\-mcpu=cortex-a7||" -e "s|-march=armv7-a||g" -i Makefile
+  sed -e "s|-O3|$CFLAGS|" -e "s|-march=armv7-a||g" -i Makefile
 
   make depend
   make
   make MANSUFFIX=ssl DESTDIR=$PKG install_sw install_ssldirs install_man_docs
 
   find $PKG -name "*fips*" -delete
-  chmod -R +w $PKG
   install -D -m 755 $SRC/mksslcert.sh $PKG/usr/bin/mksslcert
 }

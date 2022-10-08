@@ -1,0 +1,41 @@
+# Description: A cross-platform, open-source make system
+# URL: https://www.cmake.org/
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
+# Depends on: curl expat zlib libarchive ncurses
+
+name=cmake
+version=3.24.2
+release=1
+source=(https://cmake.org/files/v${version%.*}/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	sed -i Source/CMakeInstallDestinations.cmake \
+		-e 's|share/cmake-${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}|share/cmake|'
+
+	./bootstrap $PKGMK_CMAKE \
+		--prefix=/usr \
+		--datadir=/share/cmake \
+		--system-curl \
+		--system-expat \
+		--system-zlib \
+		--system-bzip2 \
+		--system-libarchive \
+                --system-nghttp2 \
+		--system-zstd \
+		--no-system-librhash \
+		--no-system-libuv \
+		--no-system-jsoncpp \
+		--parallel=${JOBS:-1} \
+		-- -D CMake_BUILD_LTO=ON \
+		-D BUILD_TESTING=OFF
+
+	make
+	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/{doc,share/cmake/Help}
+
+	ln -sf $name $PKG/usr/share/$name-${version%.*}
+	rm -rf $PKG/usr/share/emacs
+}

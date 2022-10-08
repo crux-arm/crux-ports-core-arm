@@ -43,7 +43,6 @@ drwxr-xr-x	root/root	sbin/
 -rwxr-xr-x	root/root	sbin/mkfs.cramfs
 -rwxr-xr-x	root/root	sbin/mkswap
 -rwxr-xr-x	root/root	sbin/pivot_root
--rwxr-xr-x	root/root	sbin/raw
 -rwxr-xr-x	root/root	sbin/sfdisk
 -rwxr-xr-x	root/root	sbin/swaplabel
 -rwxr-xr-x	root/root	sbin/swapoff
@@ -249,7 +248,6 @@ drwxr-xr-x	root/root	usr/share/man/man8/
 -rw-r--r--	root/root	usr/share/man/man8/findmnt.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/fsck.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/fsck.cramfs.8.gz
--rw-r--r--	root/root	usr/share/man/man8/fsck.minix.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/fsfreeze.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/fstrim.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/hwclock.8.gz
@@ -260,14 +258,11 @@ drwxr-xr-x	root/root	usr/share/man/man8/
 -rw-r--r--	root/root	usr/share/man/man8/lslocks.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/lsns.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/mkfs.8.gz
--rw-r--r--	root/root	usr/share/man/man8/mkfs.bfs.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/mkfs.cramfs.8.gz
--rw-r--r--	root/root	usr/share/man/man8/mkfs.minix.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/mkswap.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/mount.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/partx.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/pivot_root.8.gz
--rw-r--r--	root/root	usr/share/man/man8/raw.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/readprofile.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/resizepart.8.gz
 -rw-r--r--	root/root	usr/share/man/man8/rfkill.8.gz
@@ -286,5 +281,3 @@ drwxr-xr-x	root/root	usr/share/man/man8/
 drwxr-xr-x	root/root	var/
 drwxr-xr-x	root/root	var/lib/
 drwxr-xr-x	root/root	var/lib/libuuid/
-drwxr-xr-x	root/root	var/run/
-drwxr-xr-x	root/root	var/run/uuidd/

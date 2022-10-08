@@ -1,0 +1,14 @@
+--- linux-5.15.55/Makefile.orig	2022-10-06 14:04:33.050164596 +0200
++++ linux-5.15.55/Makefile	2022-10-06 14:05:25.414164602 +0200
+@@ -1306,8 +1306,9 @@ export INSTALL_HDR_PATH = $(objtree)/usr
+ quiet_cmd_headers_install = INSTALL $(INSTALL_HDR_PATH)/include
+       cmd_headers_install = \
+ 	mkdir -p $(INSTALL_HDR_PATH); \
+-	rsync -mrl --include='*/' --include='*\.h' --exclude='*' \
+-	usr/include $(INSTALL_HDR_PATH)
++	cp -a usr/include $(INSTALL_HDR_PATH); \
++	find $(INSTALL_HDR_PATH) -type f ! -name '*.h' -delete; \
++	find $(INSTALL_HDR_PATH) -type d -empty -delete
+ 
+ PHONY += headers_install
+ headers_install: headers

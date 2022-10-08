@@ -2,45 +2,70 @@
 # URL: http://gcc.gnu.org
 # Maintainer: CRUX System Team, core-ports at crux dot nu
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
-# Depends on: zlib libmpc
+# Depends on: libmpc zlib zstd
 
 name=gcc
-version=10.4.0
+version=12.2.0
 release=1
-source=(ftp://gcc.gnu.org/pub/gcc/releases/gcc-$version/$name-$version.tar.xz \
+source=(https://sourceware.org/pub/gcc/releases/gcc-$version/gcc-$version.tar.xz \
         $name-nocheck-fixincludes.patch)
 
+unpack_source() {
+  for file in ${source[@]}; do
+    case ${file##*/} in
+      $name-$version.tar.xz)
+        echo "Unpacking $(get_filename $file)"
+        bsdtar -p -o -C $SRC -xf $(get_filename $file) ;;
+      *)
+        cp $(get_filename $file) $SRC ;;
+    esac
+  done
+}
+
 build() {
+  # fix libasan.a
+  sed -e '/static.*SIGSTKSZ/d' \
+    -e 's/return kAltStackSize/return SIGSTKSZ * 4/' \
+    -i $name-$version/libsanitizer/sanitizer_common/sanitizer_posix_libcdep.cpp
+
   patch -d $name-$version -p1 -i $SRC/$name-nocheck-fixincludes.patch
+
+  # pipe fails tests
+  CFLAGS=${CFLAGS/-pipe/}
+  CXXFLAGS=${CXXFLAGS/-pipe/}
 
   mkdir build
   cd build
 
-  ../$name-$version/configure --prefix=/usr \
-                              --build=arm-unknown-linux-gnueabihf \
-                              --with-abi=aapcs-linux --with-mode=arm \
-                              --with-float=hard \
-                              --libexecdir=/usr/lib \
-                              --enable-languages=c,c++,objc \
-                              --enable-threads=posix \
-                              --enable-__cxa_atexit \
-                              --enable-clocale=gnu \
-                              --enable-shared \
-                              --disable-nls \
-                              --with-x=no \
-                              --with-system-zlib \
-                              --with-pkgversion="CRUX-ARM"
+  $SRC/$name-$version/configure \
+    --build=arm-unknown-linux-gnueabihf \
+    --prefix=/usr \
+    --libexecdir=/usr/lib \
+    --enable-languages=c,c++,lto \
+    --enable-threads=posix \
+    --enable-__cxa_atexit \
+    --enable-clocale=gnu \
+    --enable-shared \
+    --enable-lto \
+    --with-x=no \
+    --disable-multilib \
+    --enable-plugin \
+    --with-mode=arm \
+    --with-abi=aapcs-linux \
+    --with-float=hard \
+    --with-system-zlib \
+    --disable-nls \
+    --with-pkgversion="CRUX-ARM"
 
-  make
+  make bootstrap
   make -j1 DESTDIR=$PKG install
 
-  mkdir $PKG/lib
+  install -d $PKG/lib
   ln -sf ../usr/bin/cpp $PKG/lib/cpp
   ln -sf gcc $PKG/usr/bin/cc
   ln -sf g++ $PKG/usr/bin/c++
 
   mv $PKG/usr/lib/gcc/*/$version/include-fixed/{limits.h,syslimits.h} $PKG/usr/lib/gcc/*/$version/include/
-
   rm -r $PKG/usr/share/{info,$name-$version}
   rm -r $PKG/usr/bin/*-unknown-linux-*
   rm -r $PKG/usr/lib/gcc/*/$version/{install-tools,include-fixed}

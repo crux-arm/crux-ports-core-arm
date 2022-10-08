@@ -1,0 +1,42 @@
+# Description: The /proc file system utilities
+# URL: https://gitlab.com/procps-ng/procps
+# Maintainer: CRUX System Team, core-ports at crux dot nu
+# Depends on: ncurses
+
+name=procps
+version=4.0.0
+release=1
+source=(http://downloads.sourceforge.net/project/procps-ng/Production/$name-ng-$version.tar.xz
+  sysctl.conf)
+
+build() {
+  cd $name-ng-$version
+
+  export LINGUAS=' '
+
+  ./configure \
+    --prefix=/usr \
+    --sbindir=/sbin \
+    --libdir=/usr/lib \
+    --sysconfdir=/etc \
+    --disable-nls \
+    --disable-kill \
+    --disable-modern-top
+
+  make
+  make DESTDIR=$PKG install
+
+  install -d $PKG/{bin,lib,etc}
+  mv $PKG/usr/bin/{ps,pidof} $PKG/bin/
+  mv $PKG/usr/lib/libproc-2.so.* $PKG/lib
+  ln -sf ../../lib/$(readlink $PKG/lib/libproc-2.so.0) $PKG/usr/lib/libproc-2.so
+  install -m 0644 $SRC/sysctl.conf $PKG/etc/sysctl.conf
+
+  rm -r $PKG/usr/share/doc
+
+  # workaround: those files are missing on 3.6 host compilation (no impact on 3.7)
+  touch $PKG/usr/bin/pidwait
+  chmod 0755 $PKG/usr/bin/pidwait
+  touch $PKG/usr/share/man/man1/pidwait.1
+  chmod 0644 $PKG/usr/share/man/man1/pidwait.1
+}

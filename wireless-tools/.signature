@@ -1,0 +1,5 @@
+untrusted comment: verify with /etc/ports/core-arm.pub
+RWTMGLGEHsm4deEDFRXRqmvxxrxFQYUjU0cECrpkX2CoiHBrvISl7WDaO/gbhmCVNAq9k60hgBH/iS9ozVJcFu1a2JhTvkRlAgs=
+SHA256 (Pkgfile) = 361b8e025623c6dce91b565014205a029bc4c9138234213bd65ca76270bc650c
+SHA256 (.footprint) = ad9bba6d9f8111bae52bffe3e996a07492c4c733cb28de18501b940081f9dac1
+SHA256 (wireless_tools.30.pre9.tar.gz) = abd9c5c98abf1fdd11892ac2f8a56737544fe101e1be27c6241a564948f34c63
