@@ -52,7 +52,7 @@ lrwxrwxrwx	root/root	usr/bin/ld.so -> ../../lib/ld-linux-armhf.so.3
 -rwxr-xr-x	root/root	usr/bin/sotruss
 -rwxr-xr-x	root/root	usr/bin/sprof
 -rwxr-xr-x	root/root	usr/bin/xtrace
-drwxr-xr-x	root/root	usr/include/
+drwxrwxr-x	root/root	usr/include/
 -rw-r--r--	root/root	usr/include/a.out.h
 -rw-r--r--	root/root	usr/include/aio.h
 -rw-r--r--	root/root	usr/include/aliases.h
