@@ -5,16 +5,16 @@
 # Depends on:
 
 name=ports
-version=1.5
-release=17
+version=1.6
+release=1
 source=(http://crux.nu/files/tools/ports/$name-$version.tar.gz \
         core.rsync opt.rsync xorg.rsync contrib.rsync.inactive \
-        core-arm.rsync opt-arm.rsync xorg-arm.rsync)
+        core-arm.httpup opt-arm.httpup xorg-arm.httpup)
 
 build () {
     cd $name-$version
     make
     make DESTDIR=$PKG MANDIR=/usr/share/man install
 
-    install -m 0644 $SRC/*.rsync* $PKG/etc/ports
+    install -m 0644 $SRC/*.{httpup,rsync,inactive} $PKG/etc/ports
 }
