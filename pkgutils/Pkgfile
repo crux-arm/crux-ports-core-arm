@@ -6,12 +6,13 @@
 
 name=pkgutils
 version=5.36
-release=2
+release=3
 source=(http://crux.nu/files/$name-$version.tar.xz \
-        pkgmk.conf.patch)
+        pkgmk.conf)
 
 build () {
   cd $name-$version
-  patch -p0 -i $SRC/pkgmk.conf.patch
   make DESTDIR=$PKG install MANDIR=/usr/share/man
+
+  install -D -m 0644 $SRC/pkgmk.conf $PKG/etc/pkgmk.conf
 }
