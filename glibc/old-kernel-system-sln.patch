@@ -1,0 +1,19 @@
+--- a/Makerules	2021-12-21 19:44:18.526445531 +0000
++++ a/Makerules	2021-12-21 19:45:00.553661356 +0000
+@@ -1032,14 +1032,14 @@ 
+ 
+ ifeq (yes,$(build-shared))
+ ifeq (no,$(cross-compiling))
+-symbolic-link-prog := $(elf-objpfx)sln
++symbolic-link-prog := /sbin/sln
+ symbolic-link-list := $(elf-objpfx)symlink.list
+ define make-shlib-link
+ echo `$(..)scripts/rellns-sh -p $< $@` $@ >> $(symbolic-link-list)
+ endef
+ else # cross-compiling
+ # We need a definition that can be used by elf/Makefile's install rules.
+-symbolic-link-prog = $(LN_S)
++symbolic-link-prog = /sbin/sln
+ endif
+ endif
+ ifndef make-shlib-link
