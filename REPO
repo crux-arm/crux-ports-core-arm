@@ -13,6 +13,7 @@ d:filesystem
 d:bash
 d:ports
 d:openrdate
+d:ed
 d:libgmp
 f:e9655c514e944d3b9490b24c8305f4f5:libmpc/.md5sum
 f:935613d11a87bedf0b634bd013557278:libmpc/Pkgfile
@@ -95,6 +96,9 @@ f:c212d60bdabec86c27d82b1a19223aa0:openrdate/rdate
 f:1b40f28ff72297350725737dd6108994:openrdate/Pkgfile
 f:7bc21568b289abdd96e6d69c2d63da5a:openrdate/.footprint
 f:5a84634e148e20b426d4d0ef0cddaf7d:openrdate/ntp.patch
+f:044854ed03a7bd88b59ead6df37b1b8b:ed/.md5sum
+f:71d554cc9af8242448ce1f0ce974b1fc:ed/Pkgfile
+f:3e155d4a7adb32da44665179758ec66b:ed/.footprint
 f:b5fcca72e295923883d2c35ec193da58:libgmp/.md5sum
 f:1cc434107212f16b939fcdbe29141255:libgmp/Pkgfile
 f:4998f9774d7c05c708d6a3b65a6ddec1:libgmp/.footprint
