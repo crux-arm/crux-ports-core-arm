@@ -7,7 +7,7 @@ name=pkgconf
 version=1.9.3
 release=1
 source=(https://distfiles.dereferenced.org/pkgconf/$name-$version.tar.xz
-  arm-unknown-linux-gnueabihf.personality)
+ arm-unknown-linux-gnueabihf.personality)
 
 build() {
   cd $name-$version
@@ -18,11 +18,11 @@ build() {
   make
   make DESTDIR=$PKG install
 
-	install -Dt $PKG/usr/share/pkgconfig/personality.d -m644 \
-		$SRC/arm-unknown-linux-gnueabihf.personality
-	ln -s pkgconf $PKG/usr/bin/arm-unknown-linux-gnueabihf-pkg-config
-	ln -s pkgconf $PKG/usr/bin/pkg-config
-	ln -s pkgconf.1 $PKG/usr/share/man/man1/pkg-config.1
+  install -Dt $PKG/usr/share/pkgconfig/personality.d -m644 \
+    $SRC/arm-unknown-linux-gnueabihf.personality
+  ln -s pkgconf $PKG/usr/bin/arm-unknown-linux-gnueabihf-pkg-config
+  ln -s pkgconf $PKG/usr/bin/pkg-config
+  ln -s pkgconf.1 $PKG/usr/share/man/man1/pkg-config.1
 
-	rm -rf $PKG/usr/share/doc
+  rm -rf $PKG/usr/share/doc
 }
