@@ -65,8 +65,8 @@ f:1ab43fcd33c445200bd233e0d3efd422:libnl/.footprint
 f:d393d7de3d8e3ccb8141683d1ff395ff:ninja/.signature
 f:79db76605deb6585a512430c98a8c8f1:ninja/Pkgfile
 f:314c9a03efc77e6867619c85aa5e3194:ninja/.footprint
-f:110f29ac5d37e752098d81da6d034da0:kbd/.signature
-f:560cd12fcef9c45534a850f78b4af923:kbd/Pkgfile
+f:2505415535a79944b5aff5749438b3bb:kbd/.signature
+f:006e0df2fed0b8cfb21901bebd153554:kbd/Pkgfile
 f:e6d37048fd3de20cdd1d623eb0faa602:kbd/.footprint
 f:178f2314e432fee863b3f8f13e242e1f:cmake/.signature
 f:54cc66da320175b7255359a40accc546:cmake/Pkgfile
