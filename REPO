@@ -109,9 +109,9 @@ f:82968fb68d082cb35e09f7a97cc56604:gettext/.signature
 f:52ee686bc30e31777a90254e1673fb39:gettext/Pkgfile
 f:f1c9daabfef8c3337868bad26f64398b:gettext/.footprint
 f:6fec70b14f238ad94caf5dac367ee427:pkgconf/README
-f:0e5c5b34d4a7b8028b01beaad65bcbad:pkgconf/.signature
+f:ac2aa98f4fe9eedce663e911ae21567a:pkgconf/.signature
 f:9a62c5d91dcb968c163cb6495c687df3:pkgconf/arm-unknown-linux-gnueabihf.personality
-f:f44aec599973765ee5ebd8c93876b9c2:pkgconf/Pkgfile
+f:fdd6b0e53d46d0fef9050ec93bc4ccce:pkgconf/Pkgfile
 f:dc76d8e1ed0fe7477d20f5cfc21a19de:pkgconf/.footprint
 f:67492f89d1c8557e182f66ef64f0bb9e:ports/core-arm.httpup
 f:441330fe7eb6970873d287b0d38f83f6:ports/opt.rsync
