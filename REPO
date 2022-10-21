@@ -105,8 +105,8 @@ f:f05649d0184df6b4550efa3c513dde0e:filesystem/group
 f:e020ea1ffde201a72d1b04af1b6937f3:filesystem/issue
 f:d28f33603e09aaef8ed493340f6fcca1:filesystem/.footprint
 f:d32239bcb673463ab874e80d47fae504:COPYING
-f:99ab40c7c63dede2ad54a00b7924dafd:gettext/.signature
-f:bfba7d4e9dbdbef4914076eb0dd48685:gettext/Pkgfile
+f:82968fb68d082cb35e09f7a97cc56604:gettext/.signature
+f:52ee686bc30e31777a90254e1673fb39:gettext/Pkgfile
 f:f1c9daabfef8c3337868bad26f64398b:gettext/.footprint
 f:6fec70b14f238ad94caf5dac367ee427:pkgconf/README
 f:0e5c5b34d4a7b8028b01beaad65bcbad:pkgconf/.signature
