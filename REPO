@@ -17,7 +17,6 @@ d:python3
 d:filesystem
 d:pkgconf
 d:ports
-d:procps
 d:wireless-tools
 d:libgmp
 f:c21be6a3d274384847447a70aa8f42d4:meson/.signature
@@ -126,10 +125,6 @@ f:8cc84b5ed58114c20bf556774a9d4278:ports/core-arm.pub
 f:ba69f502d0bae37536e047d4069bc6e2:ports/Pkgfile
 f:d57279f5bd8b1b705b7be4f6866c9ced:ports/xorg.rsync
 f:af52e44631eb80d2c482faf051e97ff9:ports/.footprint
-f:c4db295e5de6d4fdaf4524bbdb504b91:procps/.signature
-f:e252a579938327e7c99c54620faa4146:procps/sysctl.conf
-f:064da2d8eac0bbe35182681959024546:procps/Pkgfile
-f:27aad112825336345c199e2fda7d9e29:procps/.footprint
 f:429a0d60efe37803595aaa4a7be92f51:wireless-tools/.signature
 f:37e84b810aec08c66c8317e1bbd85318:wireless-tools/Pkgfile
 f:0a4ff1a49b94567ca211ff8e78164cf4:wireless-tools/.footprint
