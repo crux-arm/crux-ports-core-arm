@@ -15,7 +15,6 @@ d:gcc
 d:dbus
 d:python3
 d:filesystem
-d:gettext
 d:pkgconf
 d:ports
 d:procps
@@ -105,9 +104,6 @@ f:f05649d0184df6b4550efa3c513dde0e:filesystem/group
 f:e020ea1ffde201a72d1b04af1b6937f3:filesystem/issue
 f:d28f33603e09aaef8ed493340f6fcca1:filesystem/.footprint
 f:d32239bcb673463ab874e80d47fae504:COPYING
-f:82968fb68d082cb35e09f7a97cc56604:gettext/.signature
-f:52ee686bc30e31777a90254e1673fb39:gettext/Pkgfile
-f:f1c9daabfef8c3337868bad26f64398b:gettext/.footprint
 f:6fec70b14f238ad94caf5dac367ee427:pkgconf/README
 f:ac2aa98f4fe9eedce663e911ae21567a:pkgconf/.signature
 f:9a62c5d91dcb968c163cb6495c687df3:pkgconf/arm-unknown-linux-gnueabihf.personality
