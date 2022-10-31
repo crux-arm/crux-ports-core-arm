@@ -1,0 +1,21 @@
+#!/usr/bin/nft -f
+
+## This is a basic workstation configuration based on
+## https://wiki.nftables.org/wiki-nftables/index.php/Simple_ruleset_for_a_workstation
+
+flush ruleset
+
+table ip filter {
+	chain input {
+	 	type filter hook input priority 0; policy drop;
+
+	 	# accept any localhost traffic
+	 	iif lo accept
+
+	 	# accept traffic originated from us
+	 	ct state established,related accept
+
+	 	# accept ssh logins via port 22
+	 	tcp dport 22 accept comment "Accept SSH on port 22"
+	}
+}

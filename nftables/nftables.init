@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+# /etc/rc.d/nftables: start/stop nftables
+#
+
+PROG=/usr/bin/nft
+CONF=/etc/nftables.nft
+LOADOPTS="-f"
+SHOWOPTS="-s list ruleset"
+RESETRULES="flush ruleset"
+
+_store() {
+	umask 022
+	NFTABLES_STORE=${1:-$CONF}
+	tmp_save="${NFTABLES_STORE}.tmp"
+	$PROG $SHOWOPTS > "$tmp_save"
+	retval=$?
+	if [ ${retval} ]; then
+		mv "${tmp_save}" "${NFTABLES_STORE}"
+	fi
+	unset NFTABLES_STORE tmp_save retval
+}
+
+case $1 in
+	start)
+		$PROG $LOADOPTS $CONF
+		;;
+	stop)
+		$PROG "$RESETRULES"
+		;;
+	restart)
+		$0 stop
+		$0 start
+		;;
+	status)
+		if [ "$($PROG $SHOWOPTS | head -c1 | wc -c )" -ne 0 ]; then 
+			printf '%s\n' \
+				"Some rules are loaded, view them with \"$PROG $SHOWOPTS\"."
+		else
+			printf '%s\n' "There are no rules loaded!"
+		fi
+		;;
+	show)
+		$PROG $SHOWOPTS
+		;;
+	store)
+		_store "$2"
+		;;
+	*)
+		echo "Usage: $0 [start|stop|restart|status|show|store]"
+		;;
+esac
+
+# End of file

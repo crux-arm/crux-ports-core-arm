@@ -1,0 +1,7 @@
+untrusted comment: verify with /etc/ports/core-arm.pub
+RWTMGLGEHsm4dVW3fWswoVc9L3Tq9bk3uu0Eu3NeDOYFN8R6pAkIGrUG7xH+/sx4u3VS0Xv3iKc7KsEX3xSfo4srjJRUjBHVrgA=
+SHA256 (Pkgfile) = 47b72090ea115b24b885becbf5a7d46876b25bbe6d7a229a28411d03a3e78e9b
+SHA256 (.footprint) = 3c2b6f356f26c357b1462014639eac1461846a7730a209fff3050aec28dfd091
+SHA256 (nftables-1.0.5.tar.bz2) = 8d1b4b18393af43698d10baa25d2b9b6397969beecac7816c35dd0714e4de50a
+SHA256 (nftables.nft) = 43436a5237a259378f6b712978db6e0d821d2be0528f9a2e93cfdc2fca504d7c
+SHA256 (nftables.init) = bfd1698c0f89b39ff3d0a5eceffe68d79bde0ac73c4e9eedcac8748274320f0c
