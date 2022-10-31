@@ -12,6 +12,7 @@ d:cmake
 d:openssl
 d:libarchive
 d:gcc
+d:nftables
 d:dbus
 d:python3
 d:filesystem
@@ -81,6 +82,11 @@ f:f302300d2b35e6197d33136eb2fff29b:gcc/.signature
 f:4165a9f9ff05fc879d30c4ebdbebfc30:gcc/Pkgfile
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
 f:dd96b449f3af23f4c96acc053eeb9ab7:gcc/.footprint
+f:372fd74ec4a70ccfcd55e31cb9880a0b:nftables/.signature
+f:38968f6619a93e9754691ff2e057033c:nftables/nftables.nft
+f:4770fcf13cb80b2832d7ddcbf1ddd968:nftables/nftables.init
+f:38107f9462693be417a4cc05ea093172:nftables/Pkgfile
+f:b571100bacb4e350c6924563cb042e04:nftables/.footprint
 f:fcff333486a4a71ec57bbe6581d8ab56:dbus/.signature
 f:23bc5ff22fe4f9a208d65fbbfd489ad9:dbus/30-dbus.launch
 f:3202f22d3334bc98b1d5244bdadbe2ca:dbus/rc.dbus
