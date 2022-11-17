@@ -2,9 +2,8 @@ name: deploy
 
 on:
   push:
-    # Run for all branches except the main branch
-    branches-ignore:
-      - main
+    branches:
+      - '*'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -28,3 +27,17 @@ jobs:
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
           bash -c "git commit -a -m '[auto] Update REPO file' && git push || exit 0" 
+      
+      # Prepare git log message to avoid extra blank lines
+      - name: Set env message
+        run: echo "MESSAGE=$(git log -1 --pretty=format:"%s")" >> $GITHUB_ENV      
+      
+      # Send IRC message by bot
+      - name: irc push
+        uses: rectalogic/notify-irc@v1
+        if: github.event_name == 'push'
+        with:
+          channel: "#crux-arm"
+          server: "irc.libera.chat"
+          nickname: crux-arm-bot
+          message: ${{ env.MESSAGE }}
