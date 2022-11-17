@@ -35,7 +35,7 @@ jobs:
       # Send IRC message by bot
       - name: irc push
         uses: rectalogic/notify-irc@v1
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && "! contains(github.event.head_commit.message, '[auto]')"
         with:
           channel: "#crux-arm"
           server: "irc.libera.chat"
