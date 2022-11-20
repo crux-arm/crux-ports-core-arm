@@ -15,6 +15,23 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE
       - uses: actions/checkout@v3
 
+      # Prepare git log message to avoid extra blank lines
+      - name: Set env message
+        run: |
+          GITREPO=`git remote show origin -n | grep h.URL | sed 's/Fetch URL: https:\/\/github.com\/crux-arm\///g'`
+          GITMSG=`git log -1 --pretty=format:"%s"`
+          echo "MESSAGE=$(echo "[$GITREPO  ]: $GITMSG")" >> $GITHUB_ENV 
+      
+      # Send IRC message by bot
+      - name: irc push
+        uses: rectalogic/notify-irc@v1
+        if: github.event_name == 'push' && !contains(github.event.head_commit.message, 'REPO')
+        with:
+          channel: "#crux-arm"
+          server: "irc.libera.chat"
+          nickname: crux-arm-bot
+          message: ${{ env.MESSAGE }}
+
       - name: Update REPO file
         run: |
           wget -P /tmp -q https://crux.nu/files/httpup-0.5.0.tar.xz
@@ -27,17 +44,3 @@ jobs:
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
           bash -c "git commit -a -m '[auto] Update REPO file' && git push || exit 0" 
-      
-      # Prepare git log message to avoid extra blank lines
-      - name: Set env message
-        run: echo "MESSAGE=$(git log -2 --pretty=format:"%s")" >> $GITHUB_ENV      
-      
-      # Send IRC message by bot
-      - name: irc push
-        uses: rectalogic/notify-irc@v1
-        if: github.event_name == 'push' && !contains(github.event.head_commit.message, 'REPO')
-        with:
-          channel: "#crux-arm"
-          server: "irc.libera.chat"
-          nickname: crux-arm-bot
-          message: ${{ env.MESSAGE }}
