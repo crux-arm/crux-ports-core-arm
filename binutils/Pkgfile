@@ -5,26 +5,34 @@
 # Depends on: zlib flex
 
 name=binutils
-version=2.35.2
+version=2.39
 release=1
 source=(http://ftpmirror.gnu.org/gnu/$name/$name-$version.tar.bz2)
 
 build() {
-  sed -i '/^SUBDIRS/s/doc//' $name-$version/bfd/Makefile.in
-
+  #sed -i '/^SUBDIRS/s/doc//' $name-$version/bfd/Makefile.in
   mkdir build
   cd build
 
   ../$name-$version/configure --prefix=/usr \
-                              --build=arm-unknown-linux-gnueabihf \
-                              --enable-shared \
-                              --disable-nls \
-                              --enable-ld=default \
-                              --enable-gold=yes \
-                              --enable-plugins \
-                              --enable-install-libiberty \
-                              --disable-werror \
-                              --with-system-zlib
+    --build=arm-unknown-linux-gnueabihf \
+    --enable-shared \
+    --enable-default-execstack=no \
+    --enable-ld=default \
+    --enable-gold=yes \
+    --enable-lto \
+    --enable-pgo-build=lto \
+    --enable-plugins \
+    --enable-install-libiberty \
+    --with-bugurl=https://crux-arm.nu/bugs/ \
+    --with-pic \
+    --with-system-zlib \
+    --without-stage1-ldflags \
+    --disable-jansson \
+    --disable-nls \
+    --disable-werror
+
+  sed -i -e '/^MAKEINFO/s:=.*:= true:' Makefile
 
   make tooldir=/usr
   make tooldir=/usr DESTDIR=$PKG install
