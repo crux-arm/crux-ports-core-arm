@@ -3,7 +3,6 @@ d:wpa_supplicant
 d:meson
 d:pkgutils
 d:wireless-tools
-d:nftables
 d:libgmp
 d:binutils
 d:libnl
@@ -37,11 +36,6 @@ f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
 f:37e84b810aec08c66c8317e1bbd85318:wireless-tools/Pkgfile
 f:429a0d60efe37803595aaa4a7be92f51:wireless-tools/.signature
 f:0a4ff1a49b94567ca211ff8e78164cf4:wireless-tools/.footprint
-f:38968f6619a93e9754691ff2e057033c:nftables/nftables.nft
-f:4770fcf13cb80b2832d7ddcbf1ddd968:nftables/nftables.init
-f:38107f9462693be417a4cc05ea093172:nftables/Pkgfile
-f:372fd74ec4a70ccfcd55e31cb9880a0b:nftables/.signature
-f:b571100bacb4e350c6924563cb042e04:nftables/.footprint
 f:840ce2315386f3ec0c52cd6bf6670066:libgmp/Pkgfile
 f:717341ea27762ef47d578c5b81b6052c:libgmp/.signature
 f:3676fa07d39385398a87c15dd9034453:libgmp/.footprint
