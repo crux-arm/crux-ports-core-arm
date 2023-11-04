@@ -8,7 +8,6 @@ d:binutils
 d:libnl
 d:gcc
 d:prt-get
-d:libarchive
 d:ports
 d:pkgconf
 d:openssl
@@ -56,9 +55,6 @@ f:fba3b19b1f9ef72c722360b8cfd73c3d:prt-get/Pkgfile
 f:561a4f62446b0fd3eefe0a85b3b04eee:prt-get/.signature
 f:077fea960d8a490412eed744ce9bcc40:prt-get/.footprint
 f:4f6b710e4d2b18c70cfe5e4a593938b7:prt-get/prt-get.aliases
-f:eefcd6a56646ccc309c5843808325e45:libarchive/Pkgfile
-f:ee091bacca770d7af965fa8631f54146:libarchive/.signature
-f:3b2430bf34bf2968b34b645625912095:libarchive/.footprint
 f:b8dd0aad383810cad920d6548cd1cb56:ports/core.pub
 f:67492f89d1c8557e182f66ef64f0bb9e:ports/core-arm.httpup
 f:5c94921bee9441abfd6d72869d8e3b69:ports/opt-arm.pub
