@@ -1,5 +1,0 @@
-untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4dfcGGysgYyjJS7pBohb8DO/zhHCxDy0/Kupa0KkqgydO8OB8tCbitdDa7itPNZ12xUNbTNpmgZ32tEkLeP+N/Qo=
-SHA256 (Pkgfile) = daa73dffd62606a7bf3b72913d8742e2486ba93dc0eeb3e87d942d55963e583c
-SHA256 (.footprint) = 998462f9f5019a8d8acc94c77e7649ec242cf3a76513ded9a830a443c062a7a2
-SHA256 (cmake-3.24.2.tar.gz) = 0d9020f06f3ddf17fb537dc228e1a56c927ee506b486f55fe2dc19f69bf0c8db
