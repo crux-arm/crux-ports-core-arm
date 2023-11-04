@@ -25,8 +25,8 @@ f:a804f8c2828b929446a928d02be98018:wpa_supplicant/wlan
 f:5e5504edbfd2316d5f677e8c46290391:wpa_supplicant/Pkgfile
 f:79e9ffddcbc7a7c6de156ccb32ff087a:wpa_supplicant/.signature
 f:f63c7f588bcc7afaf59e500464b7ccdb:wpa_supplicant/.footprint
-f:64347d3b13c1cbc1b082f9cbc0840f8f:pkgutils/Pkgfile
-f:6d5191c5b8e8fe2bcdedd528a81fb148:pkgutils/.signature
+f:16d89f894a71fe3c8a5793de7cf35de1:pkgutils/Pkgfile
+f:72cf2fa21cd353f4a1b1d19927ab403a:pkgutils/.signature
 f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
 f:37e84b810aec08c66c8317e1bbd85318:wireless-tools/Pkgfile
 f:429a0d60efe37803595aaa4a7be92f51:wireless-tools/.signature
