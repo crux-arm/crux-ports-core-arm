@@ -16,9 +16,9 @@ d:filesystem
 d:kbd
 d:dbus
 d:python3
-f:d35613431e06de7b0cc210d856461226:util-linux/Pkgfile
-f:bb7b46c9ffc45fc226db452111dfdf90:util-linux/.signature
-f:3b4cf9aa23794c76f5f386c3298f3ba8:util-linux/.footprint
+f:cf0629343c53baf0c8cb189f121354fc:util-linux/Pkgfile
+f:3fef9f05caa4233476617f52de498e57:util-linux/.signature
+f:b1202fe0c4ac985b8ecb0cc5a07a6c9c:util-linux/.footprint
 f:4f95de5f3ebddfac30cb9abcbe143633:wpa_supplicant/wpa_supplicant
 f:94eda9e510358f6fc9e6033048cc05de:wpa_supplicant/README
 f:a804f8c2828b929446a928d02be98018:wpa_supplicant/wlan
