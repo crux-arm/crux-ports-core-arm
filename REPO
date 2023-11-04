@@ -1,6 +1,5 @@
 d:util-linux
 d:wpa_supplicant
-d:meson
 d:pkgutils
 d:wireless-tools
 d:libgmp
@@ -26,9 +25,6 @@ f:a804f8c2828b929446a928d02be98018:wpa_supplicant/wlan
 f:5e5504edbfd2316d5f677e8c46290391:wpa_supplicant/Pkgfile
 f:79e9ffddcbc7a7c6de156ccb32ff087a:wpa_supplicant/.signature
 f:f63c7f588bcc7afaf59e500464b7ccdb:wpa_supplicant/.footprint
-f:70ae100fc59b364e8ecf597d202d8d7d:meson/Pkgfile
-f:c21be6a3d274384847447a70aa8f42d4:meson/.signature
-f:2d427e98bb34d8ff523470a565d4ed86:meson/.footprint
 f:64347d3b13c1cbc1b082f9cbc0840f8f:pkgutils/Pkgfile
 f:6d5191c5b8e8fe2bcdedd528a81fb148:pkgutils/.signature
 f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
