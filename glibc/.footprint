@@ -362,6 +362,7 @@ drwxr-xr-x	root/root	usr/include/bits/types/
 -rw-r--r--	root/root	usr/include/bits/waitstatus.h
 -rw-r--r--	root/root	usr/include/bits/wchar-ldbl.h
 -rw-r--r--	root/root	usr/include/bits/wchar.h
+-rw-r--r--	root/root	usr/include/bits/wchar2-decl.h
 -rw-r--r--	root/root	usr/include/bits/wchar2.h
 -rw-r--r--	root/root	usr/include/bits/wctype-wchar.h
 -rw-r--r--	root/root	usr/include/bits/wordsize.h
