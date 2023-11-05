@@ -14,7 +14,6 @@ d:ninja
 d:glibc
 d:filesystem
 d:kbd
-d:dbus
 d:python3
 f:cf0629343c53baf0c8cb189f121354fc:util-linux/Pkgfile
 f:3fef9f05caa4233476617f52de498e57:util-linux/.signature
@@ -110,12 +109,6 @@ f:d32239bcb673463ab874e80d47fae504:COPYING
 f:d874141f1676af5a6985f047261337e1:kbd/Pkgfile
 f:9f04236d6110832bdbbc2ec33483e2be:kbd/.signature
 f:cb16f26de91da8792221c4bb295a5329:kbd/.footprint
-f:23bc5ff22fe4f9a208d65fbbfd489ad9:dbus/30-dbus.launch
-f:450f980977eedc10009f54e1e6f695b7:dbus/Pkgfile
-f:3202f22d3334bc98b1d5244bdadbe2ca:dbus/rc.dbus
-f:fcff333486a4a71ec57bbe6581d8ab56:dbus/.signature
-f:95412978f8aa3c9fc667543107086479:dbus/post-install
-f:4f0297b7978f57bf7656ca83f6849d32:dbus/.footprint
 f:a990f36de372293e6f9a0e2c7b17011e:python3/Pkgfile
 f:790cb72e72ae49d0ba21cd6ebbd6c61f:python3/.signature
 f:59ff9e90a7e06131cc19732ccb51d83b:python3/.footprint
