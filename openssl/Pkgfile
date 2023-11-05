@@ -4,7 +4,7 @@
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=openssl
-version=3.0.5
+version=3.1.4
 release=1
 source=(https://www.openssl.org/source/$name-$version.tar.gz \
         mksslcert.sh)
@@ -16,7 +16,9 @@ build() {
 
   ./config \
     --prefix=/usr \
+    --libdir=lib \
     --openssldir=/etc/ssl \
+    disable-tests \
     enable-camellia \
     enable-seed enable-rfc3779 \
     no-mdc2 no-ec2m no-sm2 no-sm4 \
