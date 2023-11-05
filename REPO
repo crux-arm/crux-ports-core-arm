@@ -102,6 +102,6 @@ f:d32239bcb673463ab874e80d47fae504:COPYING
 f:d874141f1676af5a6985f047261337e1:kbd/Pkgfile
 f:9f04236d6110832bdbbc2ec33483e2be:kbd/.signature
 f:cb16f26de91da8792221c4bb295a5329:kbd/.footprint
-f:a990f36de372293e6f9a0e2c7b17011e:python3/Pkgfile
-f:790cb72e72ae49d0ba21cd6ebbd6c61f:python3/.signature
-f:59ff9e90a7e06131cc19732ccb51d83b:python3/.footprint
+f:21f51db0e1002f36a96a8dc5684fa440:python3/Pkgfile
+f:3d499818d534d907b5b7fdd72a7c2893:python3/.signature
+f:29f08db0ee3a8c46bd7896f81b3aed90:python3/.footprint
