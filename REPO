@@ -1,5 +1,4 @@
 d:util-linux
-d:wpa_supplicant
 d:pkgutils
 d:wireless-tools
 d:libgmp
@@ -18,12 +17,6 @@ d:python3
 f:cf0629343c53baf0c8cb189f121354fc:util-linux/Pkgfile
 f:3fef9f05caa4233476617f52de498e57:util-linux/.signature
 f:b1202fe0c4ac985b8ecb0cc5a07a6c9c:util-linux/.footprint
-f:4f95de5f3ebddfac30cb9abcbe143633:wpa_supplicant/wpa_supplicant
-f:94eda9e510358f6fc9e6033048cc05de:wpa_supplicant/README
-f:a804f8c2828b929446a928d02be98018:wpa_supplicant/wlan
-f:5e5504edbfd2316d5f677e8c46290391:wpa_supplicant/Pkgfile
-f:79e9ffddcbc7a7c6de156ccb32ff087a:wpa_supplicant/.signature
-f:f63c7f588bcc7afaf59e500464b7ccdb:wpa_supplicant/.footprint
 f:16d89f894a71fe3c8a5793de7cf35de1:pkgutils/Pkgfile
 f:72cf2fa21cd353f4a1b1d19927ab403a:pkgutils/.signature
 f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
