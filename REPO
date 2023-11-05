@@ -107,9 +107,9 @@ f:e020ea1ffde201a72d1b04af1b6937f3:filesystem/issue
 f:dc4ff0c96d8dcd2141febc8b766e9a6b:filesystem/shells
 f:d28f33603e09aaef8ed493340f6fcca1:filesystem/.footprint
 f:d32239bcb673463ab874e80d47fae504:COPYING
-f:006e0df2fed0b8cfb21901bebd153554:kbd/Pkgfile
-f:2505415535a79944b5aff5749438b3bb:kbd/.signature
-f:e6d37048fd3de20cdd1d623eb0faa602:kbd/.footprint
+f:d874141f1676af5a6985f047261337e1:kbd/Pkgfile
+f:9f04236d6110832bdbbc2ec33483e2be:kbd/.signature
+f:cb16f26de91da8792221c4bb295a5329:kbd/.footprint
 f:23bc5ff22fe4f9a208d65fbbfd489ad9:dbus/30-dbus.launch
 f:450f980977eedc10009f54e1e6f695b7:dbus/Pkgfile
 f:3202f22d3334bc98b1d5244bdadbe2ca:dbus/rc.dbus
