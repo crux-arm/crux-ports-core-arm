@@ -33,9 +33,9 @@ f:5b0a12a15c9cf38208598e06c45b50fe:libnl/Pkgfile
 f:2c193f66e994294676b27cc8582594d4:libnl/.signature
 f:1ab43fcd33c445200bd233e0d3efd422:libnl/.footprint
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
-f:4165a9f9ff05fc879d30c4ebdbebfc30:gcc/Pkgfile
-f:f302300d2b35e6197d33136eb2fff29b:gcc/.signature
-f:dd96b449f3af23f4c96acc053eeb9ab7:gcc/.footprint
+f:60d9725db63f50382daf72df84a46b84:gcc/Pkgfile
+f:13c5ef46d2678f4ebe9c53b326c326b1:gcc/.signature
+f:32c079ecf29eb9d8385fc62eda4fd4a2:gcc/.footprint
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
 f:cb96c46c2cf16e2a2f1f13f29f5faab3:prt-get/README
 f:6f7ff70931c155d6a850898f2d239e2c:prt-get/prt-get.conf
