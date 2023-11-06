@@ -3,7 +3,6 @@ d:pkgutils
 d:wireless-tools
 d:libgmp
 d:binutils
-d:libnl
 d:gcc
 d:prt-get
 d:ports
@@ -28,9 +27,6 @@ f:65632d841dc92bec22aa9354ad76ab5b:libgmp/.footprint
 f:0dcb449dee5cb4c667d976fcff5cddd0:binutils/Pkgfile
 f:a882de4d489fd67dd4a1c6d88e8be873:binutils/.signature
 f:08c2ee08f2dbad027d62999887249cf0:binutils/.footprint
-f:5b0a12a15c9cf38208598e06c45b50fe:libnl/Pkgfile
-f:2c193f66e994294676b27cc8582594d4:libnl/.signature
-f:1ab43fcd33c445200bd233e0d3efd422:libnl/.footprint
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
 f:60d9725db63f50382daf72df84a46b84:gcc/Pkgfile
 f:13c5ef46d2678f4ebe9c53b326c326b1:gcc/.signature
