@@ -7,7 +7,6 @@ d:libnl
 d:gcc
 d:prt-get
 d:ports
-d:pkgconf
 d:openssl
 d:ninja
 d:glibc
@@ -60,11 +59,6 @@ f:8cc84b5ed58114c20bf556774a9d4278:ports/core-arm.pub
 f:d57279f5bd8b1b705b7be4f6866c9ced:ports/xorg.rsync
 f:af52e44631eb80d2c482faf051e97ff9:ports/.footprint
 f:0d1f1fde50a9bd743d9cac6b235f038c:ports/opt.pub
-f:6fec70b14f238ad94caf5dac367ee427:pkgconf/README
-f:9a62c5d91dcb968c163cb6495c687df3:pkgconf/arm-unknown-linux-gnueabihf.personality
-f:fdd6b0e53d46d0fef9050ec93bc4ccce:pkgconf/Pkgfile
-f:ac2aa98f4fe9eedce663e911ae21567a:pkgconf/.signature
-f:dc76d8e1ed0fe7477d20f5cfc21a19de:pkgconf/.footprint
 f:91f85842d2118003ee465c34259047e6:openssl/mksslcert.sh
 f:9ed5d823fdc71d87898087c5cd415fb7:openssl/Pkgfile
 f:f946c79f7c9569ccda2cf4211cd2bfad:openssl/.signature
