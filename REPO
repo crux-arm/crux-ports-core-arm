@@ -30,6 +30,7 @@ f:08c2ee08f2dbad027d62999887249cf0:binutils/.footprint
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
 f:60d9725db63f50382daf72df84a46b84:gcc/Pkgfile
 f:13c5ef46d2678f4ebe9c53b326c326b1:gcc/.signature
+f:507c1780a370500cdb233be39cc2c772:gcc/fix-nested-generic-lambda.patch
 f:32c079ecf29eb9d8385fc62eda4fd4a2:gcc/.footprint
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
 f:cb96c46c2cf16e2a2f1f13f29f5faab3:prt-get/README
