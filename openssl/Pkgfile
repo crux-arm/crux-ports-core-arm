@@ -4,7 +4,7 @@
 # Arch Maintainer: CRUX-ARM System Team, devel at crux-arm dot nu
 
 name=openssl
-version=3.1.4
+version=3.2.0
 release=1
 source=(https://www.openssl.org/source/$name-$version.tar.gz \
         mksslcert.sh)
