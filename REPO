@@ -78,9 +78,9 @@ f:d874141f1676af5a6985f047261337e1:kbd/Pkgfile
 f:72cf2fa21cd353f4a1b1d19927ab403a:pkgutils/.signature
 f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
 f:16d89f894a71fe3c8a5793de7cf35de1:pkgutils/Pkgfile
-f:3fef9f05caa4233476617f52de498e57:util-linux/.signature
+f:27ddc859426e9380343fda0a372a766e:util-linux/.signature
 f:b1202fe0c4ac985b8ecb0cc5a07a6c9c:util-linux/.footprint
-f:cf0629343c53baf0c8cb189f121354fc:util-linux/Pkgfile
+f:ec8d87a440ff8583026d9cef9135fa7f:util-linux/Pkgfile
 f:d393d7de3d8e3ccb8141683d1ff395ff:ninja/.signature
 f:314c9a03efc77e6867619c85aa5e3194:ninja/.footprint
 f:79db76605deb6585a512430c98a8c8f1:ninja/Pkgfile
