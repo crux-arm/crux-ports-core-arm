@@ -6,13 +6,13 @@
 
 name=glibc
 version=2.36
-release=8
+release=9
 _kernel_version=5.15.55
 
 source=(https://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
   http://www.kernel.org/pub/linux/kernel/v5.x/linux-$_kernel_version.tar.xz \
   linux-headers-cp-insteadof-rsync.patch \
-  $name-$version-8.patch \
+  $name-$version-9.patch \
   hosts resolv.conf nsswitch.conf host.conf ld.so.conf \
   locale-gen locale.gen.in)
 
@@ -25,7 +25,7 @@ build() {
   make -C $SRC/linux-$_kernel_version INSTALL_HDR_PATH=$PKG/usr headers_install
   chown root:root $PKG/usr
 
-  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-8.patch
+  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-9.patch
 
   export ASFLAGS="$CFLAGS"
 
