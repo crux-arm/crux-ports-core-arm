@@ -5,7 +5,7 @@
 # Depends on: bzip2 expat gdbm libffi libnsl libtirpc mpdecimal sqlite3 xz
 
 name=python3
-version=3.10.13
+version=3.10.14
 release=1
 source=(https://www.python.org/ftp/python/${version%rc*}/Python-$version.tar.xz)
 
