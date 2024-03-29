@@ -30,9 +30,9 @@ f:d32239bcb673463ab874e80d47fae504:COPYING
 f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
 f:72cf2fa21cd353f4a1b1d19927ab403a:pkgutils/.signature
 f:16d89f894a71fe3c8a5793de7cf35de1:pkgutils/Pkgfile
-f:b1202fe0c4ac985b8ecb0cc5a07a6c9c:util-linux/.footprint
-f:27ddc859426e9380343fda0a372a766e:util-linux/.signature
-f:ec8d87a440ff8583026d9cef9135fa7f:util-linux/Pkgfile
+f:f5cca60ba0ca8a04d7c977a3f827b099:util-linux/.footprint
+f:c2f1ff26c599dff0a0a61fe1c6ccacce:util-linux/.signature
+f:131b715d4690f49a5130976a04a65f14:util-linux/Pkgfile
 f:6f7ff70931c155d6a850898f2d239e2c:prt-get/prt-get.conf
 f:077fea960d8a490412eed744ce9bcc40:prt-get/.footprint
 f:cb96c46c2cf16e2a2f1f13f29f5faab3:prt-get/README
