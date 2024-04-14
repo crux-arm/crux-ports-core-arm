@@ -62,9 +62,9 @@ f:0d1f1fde50a9bd743d9cac6b235f038c:ports/opt.pub
 f:429a0d60efe37803595aaa4a7be92f51:wireless-tools/.signature
 f:0a4ff1a49b94567ca211ff8e78164cf4:wireless-tools/.footprint
 f:37e84b810aec08c66c8317e1bbd85318:wireless-tools/Pkgfile
-f:d393d7de3d8e3ccb8141683d1ff395ff:ninja/.signature
-f:314c9a03efc77e6867619c85aa5e3194:ninja/.footprint
-f:79db76605deb6585a512430c98a8c8f1:ninja/Pkgfile
+f:2b248287d230fd2b223d2e9f5ec3fb74:ninja/.signature
+f:b72a2ccd7a370a4097d7c4830f926455:ninja/.footprint
+f:24a762fe1b239edc508dfc1eef70f914:ninja/Pkgfile
 f:a882de4d489fd67dd4a1c6d88e8be873:binutils/.signature
 f:08c2ee08f2dbad027d62999887249cf0:binutils/.footprint
 f:0dcb449dee5cb4c667d976fcff5cddd0:binutils/Pkgfile
