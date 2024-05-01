@@ -6,53 +6,33 @@
 
 name=util-linux
 version=2.40
-release=1
-source=(https://github.com/util-linux/util-linux/archive/refs/tags/v$version/$name-$version.tar.gz)
+release=2
+source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz
+    pam_lastlog2.patch)
 
 build() {
-  meson setup $name-$version build \
+  cd $name-$version
+
+  patch -p1 -i $SRC/pam_lastlog2.patch
+
+  ./configure \
     --prefix=/usr \
-    --bindir=/usr/bin \
-    --sbindir=/sbin \
-    --libdir=/lib \
-    --buildtype=plain \
-    --wrap-mode=nodownload \
-    -D b_lto=true \
-    -D b_pie=true \
-    -D nls=disabled \
-    -D pamlibdir=/lib/security \
-    -D cryptsetup=disabled \
-    -D build-chfn-chsh=disabled \
-    -D build-login=disabled \
-    -D build-su=disabled \
-    -D build-sulogin=disabled \
-    -D build-nologin=disabled \
-    -D build-runuser=disabled \
-    -D build-vipw=disabled \
-    -D build-raw=disabled \
-    -D build-newgrp=disabled \
-    -D build-bfs=disabled \
-    -D build-minix=disabled
+    --enable-{write,kill} \
+    --disable-nls \
+    --disable-asciidoc \
+    --disable-{login,su,sulogin,nologin,runuser,raw} \
+    --disable-chfn-chsh \
+    --without-python
 
+  make
+  make DESTDIR=$PKG install
 
-  meson compile -C build -j ${JOBS:-1}
-  DESTDIR=$PKG meson install -C build
+  install -d $PKG/{etc,var/lib/libuuid}
+  touch $PKG/etc/adjtime
 
-  rm -r $PKG/usr/share/{doc,locale}
+  prt-get isinst bash-completion || rm -r $PKG/usr/share/bash-completion
+  rm -r $PKG/usr/share/doc
+  rm $PKG/sbin/{mkfs.bfs,mkfs.minix,fsck.minix}
+  rm $PKG/usr/share/man/man8/{fsck.minix,mkfs.bfs,mkfs.minix}.8
 
-  install -d $PKG/{bin,usr/sbin,usr/lib}
-
-  mv $PKG/usr/bin/{dmesg,findmnt,kill,lsblk,lsfd,more} $PKG/bin
-  mv $PKG/usr/bin/{mount,mountpoint,pipesz,umount,wdctl} $PKG/bin
-  mv $PKG/sbin/{addpart,delpart,ldattach,partx,readprofile} $PKG/usr/sbin
-  mv $PKG/sbin/{resizepart,rfkill,rtcwake,uuidd} $PKG/usr/sbin
-
-  mv $PKG/lib/pkgconfig $PKG/usr/lib
-
-  mv $PKG/lib/*.a $PKG/usr/lib
-  cd $PKG/lib
-  local LIB
-  for LIB in lib*.so; do
-    ln -s ../../lib/$(readlink $LIB) $PKG/usr/lib/$LIB && rm $LIB
-  done
 }
