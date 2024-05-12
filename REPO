@@ -42,9 +42,9 @@ f:093976ed22eb0418721096175b2bd276:ports/xorg-arm.pub
 f:ba69f502d0bae37536e047d4069bc6e2:ports/Pkgfile
 f:804bb419e539a70ad80e4c03df3c3411:ports/contrib.pub
 f:04de52bffa8397ebdd387320c7e37dfd:ports/.signature
-f:b72a2ccd7a370a4097d7c4830f926455:ninja/.footprint
-f:24a762fe1b239edc508dfc1eef70f914:ninja/Pkgfile
-f:2b248287d230fd2b223d2e9f5ec3fb74:ninja/.signature
+f:314c9a03efc77e6867619c85aa5e3194:ninja/.footprint
+f:6da8206dfe4ae3ce97cbddabe92c6459:ninja/Pkgfile
+f:8e5157f0c5a65b4d505b4e5e5c389852:ninja/.signature
 f:507c1780a370500cdb233be39cc2c772:gcc/fix-nested-generic-lambda.patch
 f:32c079ecf29eb9d8385fc62eda4fd4a2:gcc/.footprint
 f:60d9725db63f50382daf72df84a46b84:gcc/Pkgfile
