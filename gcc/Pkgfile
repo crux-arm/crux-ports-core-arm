@@ -5,11 +5,10 @@
 # Depends on: libmpc zlib zstd
 
 name=gcc
-version=12.3.0
-release=2
+version=12.4.0
+release=1
 source=(https://sourceware.org/pub/gcc/releases/gcc-$version/gcc-$version.tar.xz \
-        $name-nocheck-fixincludes.patch
-        fix-nested-generic-lambda.patch)
+        $name-nocheck-fixincludes.patch)
 
 build() {
   # fix libasan.a
@@ -18,7 +17,6 @@ build() {
     -i $name-$version/libsanitizer/sanitizer_common/sanitizer_posix_libcdep.cpp
 
   patch -d $name-$version -p1 -i $SRC/$name-nocheck-fixincludes.patch
-  patch -d $name-$version -p1 -i $SRC/fix-nested-generic-lambda.patch
 
   # pipe fails tests
   CFLAGS=${CFLAGS/-pipe/}

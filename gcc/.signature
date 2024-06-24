@@ -1,7 +1,5 @@
-untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4dRCXPLsMWIoji3CqHwLFvFcFrGFQ059BpT3TH9MuCjJMki1ppzAqFrUohOBdDcsHmzY3yWzA/3nELe0Y8zNCPw0=
-SHA256 (Pkgfile) = e34d1e5f7279f83d3bc894f2155c46cd2fa2793cff24c803b22f93066200eeb1
-SHA256 (.footprint) = f9014d61300887ef4c8e4ce5f30beb6c15f12cd076306030a58fda9a6ef2408e
-SHA256 (gcc-12.3.0.tar.xz) = 949a5d4f99e786421a93b532b22ffab5578de7321369975b91aec97adfda8c3b
+untrusted comment: verify with /etc/ports/opt-arm.pub
+RWQh9Dk2FlLauNTfNf0LQfIqemNFpWVUOuipo58rFnnWUxJDyAWLqpGh3ta2KN4+jelmwtpAotOscy/r/bfpJj8x+1m/Iyw/vws=
+SHA256 (Pkgfile) = 1d25b89ca5a199c28f719a093e01ddd67aff2b2f1f6378637c1d660ec981e208
+SHA256 (gcc-12.4.0.tar.xz) = 704f652604ccbccb14bdabf3478c9511c89788b12cb3bbffded37341916a9175
 SHA256 (gcc-nocheck-fixincludes.patch) = 97f78d8c57e28cb8cc5c38f637783187b52ee66709c0cd22d083270aa7e5c05c
-SHA256 (fix-nested-generic-lambda.patch) = f28f71ea934097372907c322f991f7747cbcc3ec777f8dbd2286be1c49c2c81d
