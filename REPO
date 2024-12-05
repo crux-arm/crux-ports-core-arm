@@ -18,9 +18,9 @@ f:561a4f62446b0fd3eefe0a85b3b04eee:prt-get/.signature
 f:fba3b19b1f9ef72c722360b8cfd73c3d:prt-get/Pkgfile
 f:4f6b710e4d2b18c70cfe5e4a593938b7:prt-get/prt-get.aliases
 f:6f7ff70931c155d6a850898f2d239e2c:prt-get/prt-get.conf
-f:9decc5797a4babe75759f0d36b2f5619:python3/.footprint
-f:3dca48a25d14a311966dd97d5d772290:python3/.signature
-f:fd6524d1539b1148b0bd54488e91107c:python3/Pkgfile
+f:fd774558a475d49114cf4ded4537b7f1:python3/.footprint
+f:7899bd9d2ae29bf69d9c8aa9521d3e1b:python3/.signature
+f:d5fe045017111fed392d9ce61e9a5502:python3/Pkgfile
 f:314c9a03efc77e6867619c85aa5e3194:ninja/.footprint
 f:8e5157f0c5a65b4d505b4e5e5c389852:ninja/.signature
 f:6da8206dfe4ae3ce97cbddabe92c6459:ninja/Pkgfile
