@@ -24,9 +24,9 @@ f:d5fe045017111fed392d9ce61e9a5502:python3/Pkgfile
 f:314c9a03efc77e6867619c85aa5e3194:ninja/.footprint
 f:8e5157f0c5a65b4d505b4e5e5c389852:ninja/.signature
 f:6da8206dfe4ae3ce97cbddabe92c6459:ninja/Pkgfile
-f:cb16f26de91da8792221c4bb295a5329:kbd/.footprint
-f:e6f05c68014879ddeb344a3fbc0eba59:kbd/.signature
-f:0203c197804c95c70af096da66c719ee:kbd/Pkgfile
+f:cedc5025aefdb42a0f4713fce634831d:kbd/.footprint
+f:4bf021a563584b84f7b7e1a475f163ac:kbd/.signature
+f:007e25b267ac5e080c724e3abd60fc38:kbd/Pkgfile
 f:202afd2c190c552bbe89523e23284694:openssl/.footprint
 f:92a2e3c1f4eb3ed298f3a5e7b884094c:openssl/.signature
 f:b1a54c626529fce35bfe221dde00be91:openssl/Pkgfile
