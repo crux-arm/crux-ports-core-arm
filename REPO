@@ -47,9 +47,9 @@ f:7899bd9d2ae29bf69d9c8aa9521d3e1b:python3/.signature
 f:314c9a03efc77e6867619c85aa5e3194:ninja/.footprint
 f:6da8206dfe4ae3ce97cbddabe92c6459:ninja/Pkgfile
 f:8e5157f0c5a65b4d505b4e5e5c389852:ninja/.signature
-f:b4be86099efa3d27de19c66f6df79262:gcc/.footprint
-f:331d1bc88a4622c0797c4cc1cf4c974f:gcc/Pkgfile
-f:d11c498d503a725b1b4e89a27cf28f01:gcc/.signature
+f:084f8f96225f30ffcc1d03714cd37f6d:gcc/.footprint
+f:75a9f0000643eb98eb1f5dba15075781:gcc/Pkgfile
+f:99112dc7468ff3bc4afe2763fe785c5d:gcc/.signature
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
 f:077fea960d8a490412eed744ce9bcc40:prt-get/.footprint
