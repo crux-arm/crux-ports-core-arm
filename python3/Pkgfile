@@ -5,66 +5,66 @@
 # Depends on: bzip2 expat gdbm libffi libnsl libtirpc mpdecimal sqlite3 xz
 
 name=python3
-version=3.10.7
+version=3.10.16
 release=1
 source=(https://www.python.org/ftp/python/${version%rc*}/Python-$version.tar.xz)
 
 build() {
-	cd Python-$version
+  cd Python-$version
 
-	sed -i -e "s|^#.* /usr/local/bin/python|#!/usr/bin/python3|" Lib/cgi.py
+  sed -i -e "s|^#.* /usr/local/bin/python|#!/usr/bin/python3|" Lib/cgi.py
 
   # PGO should be done with -O3
-	CFLAGS="${CFLAGS/-O2/-O3}"
+  CFLAGS="${CFLAGS/-O2/-O3}"
 
-	# Ensure that we are using the system copy of various libraries
-	rm -r Modules/expat
-	rm -r Modules/_ctypes/{darwin,libffi}*
-	rm -r Modules/_decimal/libmpdec
+  # Ensure that we are using the system copy of various libraries
+  rm -r Modules/expat
+  rm -r Modules/_ctypes/{darwin,libffi}*
+  rm -r Modules/_decimal/libmpdec
 
-	# Remove tests
-	rm -r Lib/{test,{ctypes,sqlite3,tkinter,unittest}/test}
-	rm -r Lib/{{distutils,lib2to3}/tests,idlelib/idle_test}
+  # Remove tests
+  rm -r Lib/{test,{ctypes,sqlite3,tkinter,unittest}/test}
+  rm -r Lib/{{distutils,lib2to3}/tests,idlelib/idle_test}
 
-	./configure \
-		--prefix=/usr \
-		--enable-shared \
-		--enable-ipv6 \
-		--enable-loadable-sqlite-extensions \
-		--with-computed-gotos \
-		--with-dbmliborder=gdbm:ndbm \
-		--without-lto \
-		--with-system-expat \
-		--with-system-ffi \
-		--with-system-libmpdec \
-		--with-tzpath=/usr/share/zoneinfo \
-		--without-ensurepip
+  ./configure \
+    --prefix=/usr \
+    --enable-shared \
+    --enable-ipv6 \
+    --enable-loadable-sqlite-extensions \
+    --with-computed-gotos \
+    --with-dbmliborder=gdbm:ndbm \
+    --without-lto \
+    --with-system-expat \
+    --with-system-ffi \
+    --with-system-libmpdec \
+    --with-tzpath=/usr/share/zoneinfo \
+    --without-ensurepip
 
-	make EXTRA_CFLAGS="$CFLAGS"
-	make -j1 EXTRA_CFLAGS="$CFLAGS" DESTDIR=$PKG altinstall maninstall
+  make EXTRA_CFLAGS="$CFLAGS"
+  make -j1 EXTRA_CFLAGS="$CFLAGS" DESTDIR=$PKG altinstall maninstall
 
-	ln -s 2to3-${version%.*}            $PKG/usr/bin/2to3
-	ln -s python${version%.*}           $PKG/usr/bin/python3
-	ln -s python${version%.*}-config    $PKG/usr/bin/python3-config
-	ln -s idle${version%.*}             $PKG/usr/bin/idle3
-	ln -s pydoc${version%.*}            $PKG/usr/bin/pydoc3
-	ln -s python${version%.*}           $PKG/usr/lib/$name
-	ln -s python-${version%.*}.pc       $PKG/usr/lib/pkgconfig/python3.pc
-	ln -s python-${version%.*}-embed.pc $PKG/usr/lib/pkgconfig/python3-embed.pc
+  ln -s 2to3-${version%.*}            $PKG/usr/bin/2to3
+  ln -s python${version%.*}           $PKG/usr/bin/python3
+  ln -s python${version%.*}-config    $PKG/usr/bin/python3-config
+  ln -s idle${version%.*}             $PKG/usr/bin/idle3
+  ln -s pydoc${version%.*}            $PKG/usr/bin/pydoc3
+  ln -s python${version%.*}           $PKG/usr/lib/$name
+  ln -s python-${version%.*}.pc       $PKG/usr/lib/pkgconfig/python3.pc
+  ln -s python-${version%.*}-embed.pc $PKG/usr/lib/pkgconfig/python3-embed.pc
 
-	_pybasever=${version%.*}
-	install -dm755 $PKG/usr/lib/python${_pybasever}/Tools/{i18n,scripts}
-	install -m755 Tools/i18n/{msgfmt,pygettext}.py \
-		$PKG/usr/lib/python${_pybasever}/Tools/i18n/
-	install -m755 Tools/scripts/{README,*py} \
-		$PKG/usr/lib/python${_pybasever}/Tools/scripts/
+  _pybasever=${version%.*}
+  install -dm755 $PKG/usr/lib/python${_pybasever}/Tools/{i18n,scripts}
+  install -m755 Tools/i18n/{msgfmt,pygettext}.py \
+    $PKG/usr/lib/python${_pybasever}/Tools/i18n/
+  install -m755 Tools/scripts/{README,*py} \
+    $PKG/usr/lib/python${_pybasever}/Tools/scripts/
 
-	find $PKG/usr/lib/python${version%.*} \( \
-		-iname "*README*" -o \
-		-iname "*ChangeLog*" -o \
-		-iname "*NEWS*" -o \
-		-iname "*TODO*" -o \
-		-iname "*CREDITS*" -o \
-		-iname "*HISTORY*" \) \
-		-type f -delete
+  find $PKG/usr/lib/python${version%.*} \( \
+    -iname "*README*" -o \
+    -iname "*ChangeLog*" -o \
+    -iname "*NEWS*" -o \
+    -iname "*TODO*" -o \
+    -iname "*CREDITS*" -o \
+    -iname "*HISTORY*" \) \
+    -type f -delete
 }

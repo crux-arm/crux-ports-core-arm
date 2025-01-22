@@ -5,20 +5,20 @@
 # Depends on: cmake
 
 name=ninja
-version=1.11.1
+version=1.12.1
 release=1
 source=(https://github.com/$name-build/$name/archive/v$version/$name-v$version.tar.gz)
 
 build() {
-	cmake -S $name-$version -B build \
-		-D CMAKE_INSTALL_PREFIX=/usr \
-		-D CMAKE_BUILD_TYPE=Release \
-		-D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-		-D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
-		-Wno-dev
-	cmake --build build
-	DESTDIR=$PKG cmake --install build
+  cmake -S $name-$version -B build \
+    -D CMAKE_INSTALL_PREFIX=/usr \
+    -D CMAKE_BUILD_TYPE=Release \
+    -D CMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+    -D CMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
+    -Wno-dev
+  cmake --build build
+  DESTDIR=$PKG cmake --install build
 
-	install -m644 -D $name-$version/misc/ninja.vim \
-		$PKG/usr/share/vim/vimfiles/syntax/ninja.vim
+  install -m644 -D $name-$version/misc/ninja.vim \
+    $PKG/usr/share/vim/vimfiles/syntax/ninja.vim
 }

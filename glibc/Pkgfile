@@ -5,27 +5,25 @@
 # Depends on:
 
 name=glibc
-version=2.36
+version=2.40
 release=1
-_kernel_version=5.15.55
+_kernel_version=6.6.30
 
 source=(https://ftp.gnu.org/gnu/glibc/glibc-$version.tar.xz \
-  http://www.kernel.org/pub/linux/kernel/v5.x/linux-$_kernel_version.tar.xz \
-  linux-headers-cp-insteadof-rsync.patch \
-  $name-$version-1.patch \
+  http://www.kernel.org/pub/linux/kernel/v6.x/linux-$_kernel_version.tar.xz \
+  glibc-2.39-fhs-1.patch \
   hosts resolv.conf nsswitch.conf host.conf ld.so.conf \
   locale-gen locale.gen.in)
 
 build() {
-  # avoid to use rsync as a buildtime dep
-  patch -p0 -i $SRC/linux-headers-cp-insteadof-rsync.patch
-
   # install kernel headers
   make -C $SRC/linux-$_kernel_version mrproper
   make -C $SRC/linux-$_kernel_version INSTALL_HDR_PATH=$PKG/usr headers_install
   chown root:root $PKG/usr
 
-  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/$name-$version-1.patch
+  patch -p1 -d $SRC/$name-${version:0:4} -i $SRC/glibc-2.39-fhs-1.patch
+
+  export ASFLAGS="$CFLAGS"
 
   mkdir $SRC/build
   cd $SRC/build
@@ -35,12 +33,12 @@ build() {
     --libexecdir=/usr/lib \
     --with-headers=$PKG/usr/include \
     --enable-kernel=3.2 \
-    --enable-add-ons \
     --enable-stack-protector=strong \
+    --enable-bind-now \
+    --disable-multi-arch \
     --disable-profile \
     --disable-werror \
-    --without-gd \
-    --disable-multi-arch
+    --without-gd
 
   make
   #make check

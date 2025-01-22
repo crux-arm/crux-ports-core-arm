@@ -1,11 +1,10 @@
 untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4dfKLwkjc+cqDPpowKraa/h4ZGXukJoMPlfToRbXFFc/pcWM3JIDXoFC5dTOOrdVQVAKTR2SntnMZ1NLml21+mg0=
-SHA256 (Pkgfile) = 8dd2a4a872db7e2c3418e6001c1ab3742d79d1ccf83a77cb35761ecf8625e7a2
-SHA256 (.footprint) = dae8ef18677a05c56719d1afcbc55bf4076d6bebd0c3d969051549df4263a5ce
-SHA256 (glibc-2.36.tar.xz) = 1c959fea240906226062cb4b1e7ebce71a9f0e3c0836c09e7e3423d434fcfe75
-SHA256 (linux-5.15.55.tar.xz) = 1ef6bd508b6c3af3bef2d5b337e4477254dba284c79e329aa38f9763ae3bfdcc
-SHA256 (linux-headers-cp-insteadof-rsync.patch) = 17fe54769120a7fde06aa7e3c27c7557189580581025faf9bd25582fbde01c3a
-SHA256 (glibc-2.36-1.patch) = 6245087ab20402836cbd32b52ba944d31aeafc961ba597bcec0fa3727db79eee
+RWTMGLGEHsm4dVqSyJabvVtu/YFIos3p3kcBBdLFgfwbEGpyFwgkNJi1kwjhc5lM3XtH0uFj1/F2UG+6P4gqEtETkBjJOrIVRAc=
+SHA256 (Pkgfile) = b694992d35f3fe1592b18af3c8e513e4a58c4ccfe5c636b154843a5b9c2cb118
+SHA256 (.footprint) = eddadc257708c3be7d32ac39f1fbf3ae4721fe1cde4ce5a4d5f113507a6ad0d0
+SHA256 (glibc-2.40.tar.xz) = 19a890175e9263d748f627993de6f4b1af9cd21e03f080e4bfb3a1fac10205a2
+SHA256 (linux-6.6.30.tar.xz) = b66a5b863b0f8669448b74ca83bd641a856f164b29956e539bbcb5fdeeab9cc6
+SHA256 (glibc-2.39-fhs-1.patch) = cbcece806ae8469fa3693fd181290b57045722b304cd2dd2a1cf3e160554f203
 SHA256 (hosts) = 5c02b256c105f1d4a12fb738d71c1bab9eb126533074d7a0c8a14b92670c9431
 SHA256 (resolv.conf) = 72ccb58768a72a771ec37142bc361a18478a07ec9de6e925a20760794389bf51
 SHA256 (nsswitch.conf) = 859b8984e5e90aff3cce8f9779996ae4033b280d2122840e9411e2f44a1c2e61
