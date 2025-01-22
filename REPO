@@ -81,11 +81,11 @@ f:fbbc215a9b15ba4846f326cc88108057:glibc/hosts
 f:0ff41d45087570954d1b7358bbfb1797:glibc/linux-headers-cp-insteadof-rsync.patch
 f:8ade3a1b3e11426f6c070daa3906c6f7:glibc/post-install
 f:518de5e52f9166e58ed613a0d636e774:glibc/locale.gen.in
-f:ffd8458afb76d62561d4f7ad8e874ccd:glibc/.footprint
-f:09005b99097ffa05992392be13afa427:glibc/Pkgfile
-f:e64a5fe41d162b822a32ffe66c716460:glibc/.signature
+f:ffd59b0f7c8b5d66cdc3a5f33fa50e57:glibc/glibc-2.39-fhs-1.patch
+f:b2a86bb21d023bab8b2b64d25be99f8c:glibc/.footprint
+f:47646da773425a83c07f88b5a1786de7:glibc/Pkgfile
+f:19f91906a0f2ccde0efef024606559d3:glibc/.signature
 f:75931315bf9bc9be15a5e25e4ddd5f0d:glibc/nsswitch.conf
-f:d0716a8f4d12804bb0ada5826c89b2c4:glibc/glibc-2.36-10.patch
 f:58867be9286ece55adff1226216fdd9f:glibc/locale-gen
 f:96156bec8e05de67384dc93e72bdc313:glibc/host.conf
 f:acf9daad1ee85de5efd3543965596a63:glibc/resolv.conf
