@@ -68,8 +68,8 @@ f:429a0d60efe37803595aaa4a7be92f51:wireless-tools/.signature
 f:e020ea1ffde201a72d1b04af1b6937f3:filesystem/issue
 f:ffc2de139f14da9ceef98cf48acb76e5:filesystem/fstab
 f:d28f33603e09aaef8ed493340f6fcca1:filesystem/.footprint
-f:821fe644dc3094d4bebf2025bd343270:filesystem/Pkgfile
-f:267d4372d11ed6d993957e8503c5b184:filesystem/.signature
+f:010e5b16c5337391818de8dd21cc4035:filesystem/Pkgfile
+f:50510c85fa26c791aa772299114bc13f:filesystem/.signature
 f:93464384634f815bf46a995f74823c5e:filesystem/passwd
 f:f05649d0184df6b4550efa3c513dde0e:filesystem/group
 f:4faaa4e1ba24038f8638a0cae5046cfb:filesystem/securetty
