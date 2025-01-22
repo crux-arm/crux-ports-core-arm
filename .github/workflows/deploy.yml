@@ -38,7 +38,6 @@ jobs:
           tar -C /tmp -xf /tmp/httpup-0.5.0.tar.xz httpup-0.5.0/httpup-repgen
           /tmp/httpup-0.5.0/httpup-repgen
           git add REPO
-
       - name: Push to remote
         run: |
           git config user.name "$(git log -n 1 --pretty=format:%an)"
