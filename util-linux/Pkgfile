@@ -7,7 +7,6 @@
 name=util-linux
 version=2.40.3
 release=1
-#source=(https://github.com/util-linux/util-linux/archive/refs/tags/v$version/$name-$version.tar.gz)
 source=(https://www.kernel.org/pub/linux/utils/$name/v${version:0:4}/$name-$version.tar.xz)
 
 build() {
