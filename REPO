@@ -66,12 +66,12 @@ f:0a4ff1a49b94567ca211ff8e78164cf4:wireless-tools/.footprint
 f:37e84b810aec08c66c8317e1bbd85318:wireless-tools/Pkgfile
 f:429a0d60efe37803595aaa4a7be92f51:wireless-tools/.signature
 f:e020ea1ffde201a72d1b04af1b6937f3:filesystem/issue
-f:ffc2de139f14da9ceef98cf48acb76e5:filesystem/fstab
+f:915cf64e2ab613887db6ce2e2c41eeb4:filesystem/fstab
 f:d28f33603e09aaef8ed493340f6fcca1:filesystem/.footprint
 f:010e5b16c5337391818de8dd21cc4035:filesystem/Pkgfile
 f:50510c85fa26c791aa772299114bc13f:filesystem/.signature
 f:93464384634f815bf46a995f74823c5e:filesystem/passwd
-f:f05649d0184df6b4550efa3c513dde0e:filesystem/group
+f:a0bb1d24d8d1728a4d9d4bbdbba4237d:filesystem/group
 f:4faaa4e1ba24038f8638a0cae5046cfb:filesystem/securetty
 f:a79aae150aa240b06d52cc22d41bd3b6:filesystem/shadow
 f:346ede8d637940e2898cd29c56a37d30:filesystem/mime.types
