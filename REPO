@@ -21,8 +21,8 @@ f:16d89f894a71fe3c8a5793de7cf35de1:pkgutils/Pkgfile
 f:429a0d60efe37803595aaa4a7be92f51:wireless-tools/.signature
 f:0a4ff1a49b94567ca211ff8e78164cf4:wireless-tools/.footprint
 f:37e84b810aec08c66c8317e1bbd85318:wireless-tools/Pkgfile
-f:e0dd418332cabc8f522b48a4f685d1ae:util-linux/.signature
-f:4c848ff1c2d2a47ded479534981bf29c:util-linux/.footprint
+f:383005e9e9819778ada8ebce126892d6:util-linux/.signature
+f:ecc5330bfaa782c7d7f094fcd8a47103:util-linux/.footprint
 f:8cc2ea6fdfef68dc271d4d9e437f66dd:util-linux/Pkgfile
 f:dec9708bb9797af5670bbfb4da6543d5:libgmp/.signature
 f:65632d841dc92bec22aa9354ad76ab5b:libgmp/.footprint
