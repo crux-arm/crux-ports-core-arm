@@ -31,7 +31,7 @@ f:8e5157f0c5a65b4d505b4e5e5c389852:ninja/.signature
 f:314c9a03efc77e6867619c85aa5e3194:ninja/.footprint
 f:6da8206dfe4ae3ce97cbddabe92c6459:ninja/Pkgfile
 f:915cf64e2ab613887db6ce2e2c41eeb4:filesystem/fstab
-f:50510c85fa26c791aa772299114bc13f:filesystem/.signature
+f:aee9c5913f95c24623cd464b16468622:filesystem/.signature
 f:93464384634f815bf46a995f74823c5e:filesystem/passwd
 f:a79aae150aa240b06d52cc22d41bd3b6:filesystem/shadow
 f:d41d8cd98f00b204e9800998ecf8427e:filesystem/motd
