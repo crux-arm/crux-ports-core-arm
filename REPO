@@ -56,8 +56,8 @@ f:b4be86099efa3d27de19c66f6df79262:gcc/.footprint
 f:4bf021a563584b84f7b7e1a475f163ac:kbd/.signature
 f:007e25b267ac5e080c724e3abd60fc38:kbd/Pkgfile
 f:cedc5025aefdb42a0f4713fce634831d:kbd/.footprint
-f:72cf2fa21cd353f4a1b1d19927ab403a:pkgutils/.signature
-f:16d89f894a71fe3c8a5793de7cf35de1:pkgutils/Pkgfile
+f:a46418f596098b37cfda535d756a7b0c:pkgutils/.signature
+f:9693592850d40079557552217619265b:pkgutils/Pkgfile
 f:0e1717fd1eeb62d8fce0c23682e9b337:pkgutils/.footprint
 f:0d2d7f988d1756d693b262d46fee7d17:glibc/.nostrip
 f:58867be9286ece55adff1226216fdd9f:glibc/locale-gen
