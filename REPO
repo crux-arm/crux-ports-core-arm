@@ -50,7 +50,7 @@ f:8cc2ea6fdfef68dc271d4d9e437f66dd:util-linux/Pkgfile
 f:b8dd0aad383810cad920d6548cd1cb56:ports/core.pub
 f:5c94921bee9441abfd6d72869d8e3b69:ports/opt-arm.pub
 f:af52e44631eb80d2c482faf051e97ff9:ports/.footprint
-f:04de52bffa8397ebdd387320c7e37dfd:ports/.signature
+f:70e87c211a108858143f4d3bf4259454:ports/.signature
 f:0d1f1fde50a9bd743d9cac6b235f038c:ports/opt.pub
 f:804bb419e539a70ad80e4c03df3c3411:ports/contrib.pub
 f:ffcfbdbd1979f51825fa796a6296d1ab:ports/contrib.rsync.inactive
@@ -60,7 +60,7 @@ f:92891482d508900cd6208bdad41f549d:ports/opt.rsync
 f:093976ed22eb0418721096175b2bd276:ports/xorg-arm.pub
 f:4e4498a2ba771a30257a9d447329bca8:ports/xorg-arm.httpup
 f:939e6f38e938a2ba615e76f40b504c79:ports/xorg.rsync
-f:ba69f502d0bae37536e047d4069bc6e2:ports/Pkgfile
+f:2d59fdb40babae99f1d8b74740e610c5:ports/Pkgfile
 f:9a7ec7bdf5155fbedb02b35e50420cfa:ports/core.rsync
 f:ab5005cb2b4e9d0b783da1d6e59b680b:ports/opt-arm.httpup
 f:8cc84b5ed58114c20bf556774a9d4278:ports/core-arm.pub
