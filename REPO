@@ -92,6 +92,6 @@ f:5c94921bee9441abfd6d72869d8e3b69:ports/opt-arm.pub
 f:92891482d508900cd6208bdad41f549d:ports/opt.rsync
 f:084f8f96225f30ffcc1d03714cd37f6d:gcc/.footprint
 f:a617c4d3fa11e0c9410ac213eb061677:gcc/gcc-nocheck-fixincludes.patch
-f:99112dc7468ff3bc4afe2763fe785c5d:gcc/.signature
+f:5d1fbd1cb5ccc6ad3316ff543939790c:gcc/.signature
 f:37173a681c2cd6621c436639de5f3f73:gcc/README
-f:75a9f0000643eb98eb1f5dba15075781:gcc/Pkgfile
+f:9be75e3f9beea60d5213dc9abd4da14c:gcc/Pkgfile
