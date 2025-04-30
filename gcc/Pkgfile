@@ -38,13 +38,11 @@ build() {
     --enable-languages=c,c++,lto \
     --enable-stage1-languages=c,lto \
     --enable-link-serialization=1 \
-    --with-build-config=bootstrap-lto \
-    --with-build-config=bootstrap-lto \
+    --enable-linker-build-id \
     --enable-__cxa_atexit \
     --enable-clocale=gnu \
     --enable-shared \
     --enable-lto \
-    --with-x=no \
     --disable-multilib \
     --enable-plugin \
     --with-mode=arm \
