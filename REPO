@@ -15,9 +15,9 @@ d:pkgutils
 f:6da8206dfe4ae3ce97cbddabe92c6459:ninja/Pkgfile
 f:8e5157f0c5a65b4d505b4e5e5c389852:ninja/.signature
 f:314c9a03efc77e6867619c85aa5e3194:ninja/.footprint
-f:d5fe045017111fed392d9ce61e9a5502:python3/Pkgfile
-f:7899bd9d2ae29bf69d9c8aa9521d3e1b:python3/.signature
-f:fd774558a475d49114cf4ded4537b7f1:python3/.footprint
+f:736532f0225382b0da3d0c58d06bb48a:python3/Pkgfile
+f:23c69fb0fee9091053d5eb5600b4b9f2:python3/.signature
+f:d2734e5b3d880360c6342cdfecc086b1:python3/.footprint
 f:007e25b267ac5e080c724e3abd60fc38:kbd/Pkgfile
 f:4bf021a563584b84f7b7e1a475f163ac:kbd/.signature
 f:cedc5025aefdb42a0f4713fce634831d:kbd/.footprint
