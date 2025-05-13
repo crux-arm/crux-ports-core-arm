@@ -38,8 +38,8 @@ f:0d1f1fde50a9bd743d9cac6b235f038c:ports/opt.pub
 f:8cc84b5ed58114c20bf556774a9d4278:ports/core-arm.pub
 f:093976ed22eb0418721096175b2bd276:ports/xorg-arm.pub
 f:804bb419e539a70ad80e4c03df3c3411:ports/contrib.pub
-f:1bad9a27555e14c3af23e1ed05187b0c:util-linux/Pkgfile
-f:f73021ecdaf44de71c221ea77515e3e7:util-linux/.signature
+f:636e6518eda69ed931f5fe58178ab672:util-linux/Pkgfile
+f:7a5d33925fce69276cd1f95c737313e9:util-linux/.signature
 f:d5dcaa4e87d6223b198bd82ad19cc7ff:util-linux/.footprint
 f:fba3b19b1f9ef72c722360b8cfd73c3d:prt-get/Pkgfile
 f:561a4f62446b0fd3eefe0a85b3b04eee:prt-get/.signature
