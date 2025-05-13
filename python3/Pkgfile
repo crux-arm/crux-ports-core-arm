@@ -5,7 +5,7 @@
 # Depends on: bzip2 expat gdbm libffi libnsl libtirpc mpdecimal sqlite3 xz
 
 name=python3
-version=3.12.8
+version=3.12.10
 release=1
 source=(https://www.python.org/ftp/python/${version%rc*}/Python-$version.tar.xz)
 
@@ -22,12 +22,12 @@ build() {
   export PROFILE_TASK="-m test -j${_pgojobs} --pgo-extended -x test_gdb -u-network"
   PROFILE_TASK+=" -x test_socket -x test_asyncio -x test_httpservers -x test_logging -x test_multiprocessing_fork -x test_xmlrpc"
   local -x LC_ALL=C.UTF-8
+  export SETUPTOOLS_USE_DISTUTILS=stdlib
   local -x COLUMNS=80
   local -x PYTHONDONTWRITEBYTECODE=
 
-  ## Remove tests
-  #rm -r Lib/{test,{ctypes,tkinter,unittest}/test}
-  #rm -r Lib/{{distutils,lib2to3}/tests,idlelib/idle_test}
+  autoconf
+  autoheader
 
   ./configure \
     --prefix=/usr \
@@ -38,6 +38,7 @@ build() {
     --with-computed-gotos \
     --with-dbmliborder=gdbm:ndbm \
     --with-lto \
+    --with-pkg-config=yes \
     --with-system-expat \
     --with-system-ffi \
     --with-system-libmpdec \
