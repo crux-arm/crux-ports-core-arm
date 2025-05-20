@@ -1,6 +1,6 @@
 untrusted comment: verify with /etc/ports/core-arm.pub
-RWTMGLGEHsm4dYHVh9fGhskbvp0Tj5Ld7eT1KOzl6ipfQePlIE0EK493npjTvRrb3UTfvxMlTlOtmJII1Y3TSMCtca53k9aKBwU=
-SHA256 (Pkgfile) = 2ec4a98eeeaac2390a1241760344b982e4842fa1bbab1b15102ce7515f1df386
+RWTMGLGEHsm4dYLf2VnCNCDx8j0KBiEbTOg/3DhcK1cNUd3UnzQAn73nyZZwKG+nKrzLtMjvnTuCigMfoxmxoCMBFpptUd/AfgU=
+SHA256 (Pkgfile) = def07be96d74a4f5d2df54acd0a0f0c48f5c25b4845196abffd1d886337bc59d
 SHA256 (.footprint) = 7d143f18f63bba5569d729eefd0d0f04ae4b0539f8bd71f9cfd6955b9e7c639d
-SHA256 (pkgutils-5.40.10.tar.xz) = 2d86335be3d0452dcc7ae5f568e7296cd7ea80117f57646d15420a6dc192f174
-SHA256 (pkgmk.conf) = 45549a327d5c3754c646fb337a60e291cde91be5f63c6ff72f4c3a87bf818cd1
+SHA256 (pkgutils-5.40.11.tar.xz) = 926f98704e72d9dbfae156f60ea26d97a1c7d703a36f3db2f57e553b2bdfacb6
+SHA256 (pkgmk.conf) = 6a17b974c123388312c8ef7bd4587396da6db48a5190934dcf1eec5c09defcdd
